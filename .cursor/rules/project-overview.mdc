@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Color Scheme 项目概述
+
+AI Color Scheme 是一个基于AI的配色方案生成工具，主要功能是：
+
+1. 用户输入一个颜色的Hex值
+2. 系统使用AI生成多种配色方案，包括Complementary、Analogous、Triadic、Monochromatic、Split-Complementary等
+3. 为每种配色方案生成示例HTML页面，并支持在线预览
+
+项目文档：
+- [documents/技术文档.md](mdc:documents/技术文档.md) - 包含技术实现细节
+- [documents/需求文档.md](mdc:documents/需求文档.md) - 包含需求描述和功能规格
+
+## 目标用户
+- 独立的全栈开发者
+- 寻求灵感的UI设计师
+- 无UI设计师的小型团队
+

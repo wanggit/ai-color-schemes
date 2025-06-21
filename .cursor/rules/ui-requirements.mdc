@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Color Scheme UI需求
+
+## 登录页面
+- 提供Google、Facebook、X登录选项
+- 默认高亮Google登录选项
+- 包含标题"AI Color Schemes"和应用图标
+- 背景使用渐变色
+
+## 用户管理页面
+- 列表形式显示用户，每页100条记录
+- 服务器端渲染页面
+- 提供用户禁用功能
+- 仅管理员(wanggyxfmail@gmail.com)可访问
+
+## 配色方案管理页面
+- 具有动画效果
+- 初始显示：页面居中位置显示颜色输入框(@melloware/coloris控件)和Generate按钮
+- 生成配色方案时：输入框通过动画移动到屏幕上方，下方以多页签形式展示配色方案
+- AI流式返回：显示在第一个页签中
+- 配色方案展示：每个方案在各自页签中，以web浏览器或移动端视角预览
+- 重新生成功能：每个页签内提供重新生成按钮
+

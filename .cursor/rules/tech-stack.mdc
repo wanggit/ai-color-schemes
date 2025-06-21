@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Color Scheme 技术栈
+
+项目使用以下技术栈开发：
+
+## 前端
+- Next.js - React框架，使用App Router
+- TypeScript - 静态类型检查
+- React - UI库
+- TailwindCSS - CSS框架
+- HeroUI - UI组件库
+- @melloware/coloris - 颜色选择控件
+
+## 后端
+- Next.js API Routes - API实现
+- Prisma - ORM工具
+- NextAuth - 身份验证
+- Postgres.js - PostgreSQL数据库连接
+
+## 第三方服务
+- Vercel OSS - 存储HTML示例文件
+- Google, Facebook, X (Twitter) - OAuth登录提供商
+- Paypal - 支付处理
+

@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Color Scheme 数据库架构
+
+## 主要表结构
+
+### AiColor 表
+存储颜色方案和示例HTML链接
+```
+列1：hex，数据类型text，值唯一，索引
+列2: aiJson，数据类型text，用于存储AI响应颜色分析的大JSON文本
+列3：exampleComp，数据类型text，用于存储AI响应的Complementary配色方案示例HTML文本地址
+列4：exampleAnal，数据类型text，用于存储AI响应的Analogous配色方案示例HTML文本地址
+列5：exampleTria，数据类型text，用于存储AI响应的Triadic配色方案示例HTML文本地址
+列6：exampleMono，数据类型text，用于存储AI响应的Monochromatic配色方案示例HTML文本地址
+列7：exampleSpCo，数据类型text，用于存储AI响应的Split-Complementary配色方案示例HTML文本地址
+列8：userId，数据类型为text，用于关联到User表的外键，可做过查询索引
+```
+
+### User 表
+存储用户信息
+```
+由NextAuth.js自动创建和管理的表，存储用户登录信息
+添加自定义字段：
+- isAdmin: 是否是管理员
+- usageCount: 使用生成配色方案功能的次数
+- isMember: 是否是会员
+- memberExpireDate: 会员过期日期
+- isDisabled: 用户是否被禁用
+```
+
+## 数据关系
+- 一个User可以有多个AiColor记录
+- 每个AiColor记录只属于一个User
+

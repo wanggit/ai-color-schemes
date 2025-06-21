@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Color Scheme 配色方案生成流程
+
+## 流程概述
+1. 用户输入颜色Hex值
+2. 判断用户是否登录（未登录提示登录）
+3. 请求API接口，判断用户权限（非会员使用次数限制，会员是否过期）
+4. 流式请求AI，生成配色方案JSON数据
+5. 保存配色方案JSON数据到数据库
+6. 用户使用次数加1
+7. 为每种配色方案并发请求AI，生成示例HTML代码
+8. 将HTML代码上传到Vercel OSS
+9. 更新数据库中的HTML示例URL
+10. 在页面预览示例HTML
+11. 支持重新生成特定配色方案的示例HTML
+
+## 配色方案类型
+- Complementary (互补色)
+- Analogous (类似色)
+- Triadic (三色组)
+- Monochromatic (单色调)
+- Split-Complementary (分裂互补色)
+
