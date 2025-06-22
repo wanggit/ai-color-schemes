@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
@@ -29,22 +29,39 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user }: { user: any }) {
-      // 检查用户是否被禁用
+      // 检查用户是否有邮箱
       if (user.email) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email },
         });
         
-        // 如果用户存在并且被禁用，拒绝登录
-        if (dbUser && dbUser.isDisabled) {
-          return false;
-        }
-        
-        // 如果是首次登录且是管理员邮箱，设置为管理员
-        if (!dbUser && user.email === ADMIN_EMAIL) {
+        if (dbUser) {
+          // 用户已存在，更新用户信息
+          if (dbUser.isDisabled) {
+            // 如果用户被禁用，拒绝登录
+            return false;
+          }
+          
+          // 更新用户信息
           await prisma.user.update({
             where: { email: user.email },
-            data: { isAdmin: true },
+            data: {
+              name: user.name,
+              image: user.image,
+            }
+          });
+        } else {
+          // 用户不存在，创建新用户
+          await prisma.user.create({
+            data: {
+              email: user.email,
+              name: user.name,
+              image: user.image,
+              isAdmin: user.email === ADMIN_EMAIL, // 如果是管理员邮箱，设置为管理员
+              isMember: false,
+              usageCount: 0,
+              isDisabled: false,
+            }
           });
         }
       }
@@ -84,6 +101,6 @@ export const authOptions = {
   },
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions as NextAuthOptions);
 
 export { handler as GET, handler as POST }; 
