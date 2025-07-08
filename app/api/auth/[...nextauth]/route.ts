@@ -152,16 +152,54 @@ export const authOptions: NextAuthOptions = {
         return true;
       }
     },
-    async session({ session, token }) {
-      // 当使用JWT策略时，token对象包含了所有我们自定义的用户信息
-      // 我们将这些信息从token同步到session.user对象
-      if (token && session.user) {
-        session.user.id = token.id as string;
-        session.user.isAdmin = token.isAdmin as boolean;
-        session.user.isDisabled = token.isDisabled as boolean;
-        session.user.membershipType = token.membershipType as MembershipType;
-        session.user.membershipExpiresAt = token.membershipExpiresAt as Date;
-        session.user.credits = token.credits as number;
+    async session({ session, token, user }) {
+      // 在database策略下，user参数包含数据库中的用户信息
+      // 在jwt策略下，token参数包含JWT中的用户信息
+      if (process.env.NODE_ENV === "development") {
+        // 开发环境使用JWT策略，从token获取信息
+        if (token && session.user) {
+          session.user.id = token.id as string;
+          session.user.isAdmin = token.isAdmin as boolean;
+          session.user.isDisabled = token.isDisabled as boolean;
+          session.user.membershipType = token.membershipType as MembershipType;
+          session.user.membershipExpiresAt = token.membershipExpiresAt as Date;
+          session.user.credits = token.credits as number;
+        }
+      } else {
+        // 生产环境使用database策略，从user参数获取信息
+        if (user && session.user) {
+          session.user.id = user.id;
+          session.user.isAdmin = user.isAdmin;
+          session.user.isDisabled = user.isDisabled;
+          session.user.membershipType = user.membershipType;
+          session.user.membershipExpiresAt = user.membershipExpiresAt;
+          session.user.credits = user.credits;
+        } else if (session.user?.email) {
+          // 如果user参数为空，尝试从数据库查询用户信息
+          try {
+            const dbUser = await prisma.user.findUnique({
+              where: { email: session.user.email },
+              select: {
+                id: true,
+                isAdmin: true,
+                isDisabled: true,
+                membershipType: true,
+                membershipExpiresAt: true,
+                credits: true
+              }
+            });
+            if (dbUser) {
+              session.user.id = dbUser.id;
+              session.user.isAdmin = dbUser.isAdmin;
+              session.user.isDisabled = dbUser.isDisabled;
+              session.user.membershipType = dbUser.membershipType;
+              session.user.membershipExpiresAt = dbUser.membershipExpiresAt;
+              session.user.credits = dbUser.credits;
+            }
+          } catch (error) {
+            console.error("Error fetching user data in session callback:", error);
+          }
+        }
       }
       return session;
     },

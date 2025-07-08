@@ -3,12 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { ApiI18nHandler } from "@/lib/api-i18n";
 import { getUser } from "./db";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function authenticateAndValidateUser(
     prisma: PrismaClient,
     i18n: ApiI18nHandler
 ) {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user) {
         return { error: NextResponse.json({ error: i18n.error("unauthorized") }, { status: 401 }) };
     }
