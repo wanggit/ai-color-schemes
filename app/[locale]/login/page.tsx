@@ -15,9 +15,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 使用构建时环境变量，完全避免hydration错误
-  // 如果需要在生产环境也启用邮箱登录，可以将此设为 true
-  const isDevelopment = true; // 在开发环境中显示邮箱登录
+  // 根据NODE_ENV环境变量判断是否为开发环境
+  // 只有在开发环境中才显示邮箱密码登录
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   const handleSignIn = (provider: string) => {
     setSelectedProvider(provider);
