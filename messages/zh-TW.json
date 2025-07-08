@@ -1,0 +1,462 @@
+{
+    "HomePage": {
+        "title": "專業項目的AI配色方案",
+        "subtitle": "使用我們的AI配色生成器，即刻創建美觀、易訪問的配色方案。完美適用於設計師、開發者和創意工作者。",
+        "cta": "開始創建色彩",
+        "features": {
+            "title": "功能特色",
+            "subtitle": "完美配色方案所需的一切",
+            "description": "我們的AI配色生成器提供創建令人驚豔、專業配色方案所需的所有工具。",
+            "analyze": {
+                "name": "色彩分析",
+                "description": "深入分析色彩心理學、可訪問性和視覺和諧性，為您的項目提供專業指導。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "使用先進的AI算法生成多種配色方案，滿足您的具體需求。"
+            },
+            "preview": {
+                "name": "實時預覽",
+                "description": "在真實的UI組件和設計示例中查看您的色彩效果。"
+            },
+            "export": {
+                "name": "導出選項",
+                "description": "將您的配色方案導出為多種格式：CSS、JSON、Adobe等。"
+            },
+            "download": {
+                "name": "下載資源",
+                "description": "將配色方案下載為圖片、PDF或代碼片段，用於您的項目。"
+            }
+        },
+        "credits": {
+            "title": "靈活的積分系統",
+            "description": "使用我們靈活的積分系統，生成所需的任意數量配色方案。完美適用於個人項目和團隊工作流程。",
+            "cta": "查看定價計劃"
+        },
+        "showcase": {
+            "title": "色彩靈感",
+            "subtitle": "熱門配色方案",
+            "description": "探索流行的色彩搭配，從我們社區喜愛的配色方案中獲得靈感。"
+        }
+    },
+    "seo": {
+        "title": "AI Colors - 專業配色方案的免費AI色彩生成器",
+        "description": "使用我們的AI工具即時生成美觀且易於訪問的配色方案。完美適用於設計師、開發者和創意工作者。立即獲得您的完美配色方案！"
+    },
+    "generate_page": {
+        "seo_title": "AI配色方案生成器 - 創建和可視化配色方案",
+        "seo_description": "使用我們的免費AI工具生成令人驚豔、易於訪問的配色方案。輸入顏色，即時獲得補色、三色及其他配色方案。完美適用於UI/UX設計師和開發者。",
+        "h1": "AI配色方案生成器",
+        "intro": "讓您的色彩創意變為現實。輸入一個顏色，讓我們的AI為您的項目創建獨特而專業的調色板。您可以從下面的熱門顏色中選擇一個開始，或者輸入您自己的十六進制代碼。"
+    },
+    "common": {
+        "loading": "載入中...",
+        "error": "錯誤",
+        "success": "成功",
+        "cancel": "取消",
+        "confirm": "確認",
+        "save": "儲存",
+        "delete": "刪除",
+        "edit": "編輯",
+        "close": "關閉",
+        "back": "返回",
+        "next": "下一步",
+        "previous": "上一步",
+        "submit": "提交"
+    },
+    "header": {
+        "title": "AI Colors",
+        "subtitle": "您的專業AI配色助手",
+        "nav": {
+            "generate": "生成",
+            "example": "示例",
+            "pricing": "定價",
+            "mySchemes": "我的配色",
+            "billing": "帳單",
+            "login": "登入",
+            "logout": "登出"
+        },
+        "credits": "積分",
+        "discord": "加入我們的 Discord 社群"
+    },
+    "home": {
+        "hero": {
+            "title": "AI 配色方案生成器",
+            "titleZh": "AI 配色方案生成器",
+            "description": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
+            "descriptionZh": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
+            "cta": "開始創建色彩 →"
+        },
+        "features": {
+            "title": "強大的AI色彩工具",
+            "subtitle": "創建完美配色方案所需的一切",
+            "aiPowered": {
+                "title": "AI驅動生成",
+                "titleZh": "AI驅動生成",
+                "description": "先進的AI算法即時創建完美的配色方案",
+                "descriptionZh": "先進的AI算法即時創建完美的配色方案"
+            },
+            "designerFriendly": {
+                "title": "設計師友好",
+                "titleZh": "設計師友好",
+                "description": "為網頁、UI/UX和平面設計提供專業的配色板",
+                "descriptionZh": "為網頁、UI/UX和平面設計提供專業的配色板"
+            },
+            "multipleSchemes": {
+                "title": "多種方案",
+                "titleZh": "多種方案",
+                "description": "生成互補、三色、類似及自定義配色方案",
+                "descriptionZh": "生成互補、三色、類似及自定義配色方案"
+            },
+            "developerTools": {
+                "title": "開發者工具",
+                "titleZh": "開發者工具",
+                "description": "導出CSS、HTML示例並整合到您的工作流程中",
+                "descriptionZh": "導出CSS、HTML示例並整合到您的工作流程中"
+            }
+        },
+        "cta": {
+            "title": "準備好創造驚豔的色彩了嗎？",
+            "subtitle": "加入成千上萬使用我們AI色彩生成器的設計師和開發者",
+            "tryFree": "立即免費試用",
+            "viewPricing": "查看定價"
+        }
+    },
+    "generate": {
+        "title": "AI 配色方案生成器",
+        "inputHex": "輸入十六進制顏色值",
+        "generate": "生成配色方案",
+        "regenerate": "重新生成",
+        "analyzing": "正在分析顏色...",
+        "generating": "正在生成配色方案...",
+        "progress": {
+            "preparing": "準備中...",
+            "analyzing": "分析顏色屬性...",
+            "generating": "生成配色方案...",
+            "complete": "生成完成"
+        },
+        "tabs": {
+            "analysis": "顏色分析",
+            "schemes": "配色方案",
+            "preview": "預覽"
+        },
+        "popularColors": "熱門顏色",
+        "colorPicker": "顏色選擇器",
+        "errors": {
+            "invalidColor": "請輸入有效的十六進制顏色值",
+            "loginRequired": "請先登入",
+            "limitReached": "已達到免費使用次數上限",
+            "accountDisabled": "您的帳號已被停用，請聯繫管理員",
+            "networkError": "網路錯誤，請稍後重試"
+        }
+    },
+    "pricing": {
+        "title": "選擇您的方案",
+        "subtitle": "解鎖所有功能，開啟您的無限色彩創作之旅",
+        "monthly": {
+            "name": "月度方案",
+            "price": "/月",
+            "features": [
+                "每月300積分",
+                "優先使用新功能",
+                "專屬社群訪問權限"
+            ],
+            "button": "選擇月度方案"
+        },
+        "annually": {
+            "name": "年度方案",
+            "price": "/月",
+            "originalPrice": "/年",
+            "discount": "節省38%",
+            "features": [
+                "每月300積分",
+                "優先使用新功能",
+                "專屬社群訪問權限",
+                "年度帳單，無憂續訂"
+            ],
+            "button": "選擇年度方案"
+        },
+        "credits": {
+            "title": "購買積分",
+            "description": "每消費 $1 可獲得 {count} 積分。",
+            "placeholder": "輸入美元金額",
+            "button": "立即購買",
+            "purchaseText": "購買 {times} 積分",
+            "buyNow": "立即購買"
+        },
+        "note": "當會員額度用盡時，您可以購買額外積分。每消費 $1 可獲得 {count} 積分。"
+    },
+    "login": {
+        "title": "登入您的帳戶",
+        "subtitle": "使用以下任一方式登入，以繼續使用AI色彩助手",
+        "google": "使用 Google 登入",
+        "terms": "登入即表示您同意我們的服務條款和隱私政策"
+    },
+    "auth": {
+        "signIn": "登入",
+        "signOut": "登出",
+        "signUp": "註冊",
+        "emailLabel": "電子郵件",
+        "passwordLabel": "密碼"
+    },
+    "mySchemes": {
+        "title": "我的配色方案",
+        "schemesList": "配色方案列表",
+        "generateNew": "生成新配色方案",
+        "noSchemes": "您還沒有創建任何配色方案。",
+        "goGenerate": "去生成",
+        "fetchError": "獲取配色方案失敗",
+        "schemeDetailsTitle": "{hexValue} 配色方案詳情",
+        "table": {
+            "color": "顏色",
+            "hex": "十六進制",
+            "complementary": "互補色方案",
+            "analogous": "鄰近色方案",
+            "triadic": "三色方案",
+            "monochromatic": "單色方案",
+            "splitComplementary": "分裂互補色方案",
+            "updateTime": "更新時間",
+            "actions": "操作",
+            "viewExample": "查看示例",
+            "notGenerated": "未生成",
+            "regenerate": "重新生成配色方案",
+            "viewDetails": "查看詳情"
+        },
+        "pagination": {
+            "previous": "上一頁",
+            "next": "下一頁",
+            "pageInfo": "第 {current} 頁，共 {total} 頁"
+        }
+    },
+    "generatePage": {
+        "h1": "AI 配色方案生成器",
+        "intro": "讓您的色彩創意變為現實。輸入一個顏色，我們的人工智能將為您的項目創建獨特而專業的調色板。您可以從下面的流行顏色中選擇一個開始，或者輸入您自己的十六進制代碼。",
+        "preparing": "正在準備您的色彩傑作...",
+        "generating": "正在生成您的配色方案...",
+        "analyzing": "正在分析色彩心理...",
+        "designing": "正在設計 UI 範例...",
+        "finalizing": "正在完成...",
+        "generateFailed": "生成失敗：{error}",
+        "upgradeButton": "升級計劃",
+        "regenerateExample": "重新生成範例",
+        "generatingExample": "正在生成範例...",
+        "viewOnGithub": "在 GitHub 上查看",
+        "accountDisabled": "您的帳戶已被禁用，請聯繫管理員。",
+        "limitReached": "已達到免費使用次數上限，請升級為會員以繼續使用。",
+        "accessDenied": "存取被拒絕：{error}",
+        "requestError": "請求錯誤：{error}",
+        "mySchemes": {
+            "table": {
+                "complementary": "互補色方案",
+                "analogous": "鄰近色方案",
+                "triadic": "三色方案",
+                "monochromatic": "單色方案",
+                "splitcomplementary": "分裂互補色方案",
+                "split-complementary": "分裂互補色方案",
+                "tetradic": "四色方案",
+                "compound": "複合方案",
+                "square": "正方形方案"
+            }
+        }
+    },
+    "components": {
+        "userAvatar": {
+            "avatarAlt": "用戶頭像",
+            "mySchemes": "我的配色方案",
+            "billing": "我的帳單",
+            "logout": "登出",
+            "login": "登入"
+        },
+        "payment": {
+            "createOrderFailed": "創建訂單失敗，請稍後重試。",
+            "paymentFailed": "支付驗證失敗。",
+            "paymentError": "支付處理失敗，請聯繫支援。",
+            "paypalError": "支付過程中發生錯誤，請重試。",
+            "paymentCancelled": "支付已取消。",
+            "creditsPurchaseSuccess": "積分購買成功！",
+            "paymentSuccess": "支付成功！您的會員資格已啟動。",
+            "completePayment": "完成支付：{planName}",
+            "paymentInstructions": "您將被重定向到 PayPal 以完成支付過程。",
+            "processing": "處理中...",
+            "membershipPurchaseSuccess": "會員購買成功！"
+        },
+        "colorInput": {
+            "title": "AI 配色方案生成器",
+            "colorPickerTip": "選擇顏色後，請點選'生成配色方案'按鈕",
+            "generating": "生成中...",
+            "generateScheme": "生成配色方案",
+            "colorInput": "顏色輸入",
+            "popularColors": "熱門顏色",
+            "colorPicker": "顏色選擇器",
+            "generate": "生成",
+            "analyzing": "分析中...",
+            "coralRed": "珊瑚紅",
+            "mintGreen": "薄荷綠",
+            "navy": "海軍藍",
+            "lavenderPurple": "薰衣草紫",
+            "sunsetOrange": "夕陽橙",
+            "oceanBlue": "海洋藍",
+            "forestGreen": "森林綠",
+            "roseGold": "玫瑰金",
+            "midnightBlue": "午夜藍",
+            "warmGray": "暖灰色"
+        },
+        "popularColors": {
+            "coral": "珊瑚色",
+            "paleGreen": "淡綠色",
+            "navy": "海軍藍",
+            "darkViolet": "深紫色",
+            "darkOliveGreen": "深橄欖綠",
+            "deepBlue": "深藍色",
+            "forest": "森林綠",
+            "wine": "酒紅色",
+            "graphite": "石墨色",
+            "midnightBlue": "午夜藍"
+        },
+        "billing": {
+            "remainingCredits": "剩餘積分：{credits}",
+            "upgradeMember": "升級會員",
+            "loading": "載入中...",
+            "noRecords": "找不到帳單記錄。",
+            "amount": "金額",
+            "currency": "幣別",
+            "provider": "供應商",
+            "status": "狀態",
+            "purchaseType": "購買類型",
+            "membershipType": "會員類型",
+            "creditsPurchased": "已購買積分",
+            "createdAt": "建立時間",
+            "previous": "上一頁",
+            "next": "下一頁",
+            "pageInfo": "第 {current} 頁，共 {total} 頁",
+            "title": "帳單歷史記錄",
+            "date": "日期",
+            "type": "類型",
+            "actions": "操作",
+            "noData": "無資料",
+            "error": "載入錯誤",
+            "page": "第 {current} 頁，共 {total} 頁",
+            "successful": "成功",
+            "failed": "失敗",
+            "pending": "處理中",
+            "cancelled": "已取消",
+            "viewReceipt": "查看收據",
+            "download": "下載"
+        }
+    },
+    "examplePage": {
+        "title": "配色方案示例",
+        "fetchError": "獲取配色方案示例失敗",
+        "basedOn": "基於",
+        "prevButton": "上一個方案",
+        "nextButton": "下一個方案",
+        "description": "描述",
+        "uiApplication": "UI應用",
+        "strengths": "優勢",
+        "recommendedRatio": "推薦比例",
+        "bestFor": "最適合",
+        "nextColorButton": "下一個顏色",
+        "noExamples": "目前沒有可用的配色方案示例。"
+    },
+    "UserCredits": {
+        "credits": "積分",
+        "remaining": "剩餘",
+        "buyMore": "購買更多"
+    },
+    "exampleColorSchemes": {
+        "loading": "載入示例中...",
+        "error": "載入示例失敗。請稍後重試。",
+        "tryAnother": "嘗試其他"
+    },
+    "HomePage": {
+        "title": "AI配色方案生成器",
+        "subtitle": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
+        "cta": "開始使用 →",
+        "features": {
+            "title": "強大的AI色彩工具",
+            "subtitle": "創建完美配色方案所需的一切",
+            "description": "我們的AI驅動工具會分析您的基礎顏色，並為您的項目生成各種和諧美觀的配色方案。",
+            "analyze": {
+                "name": "色彩分析",
+                "description": "深入分析色彩屬性，包括和諧性、對比度和可訪問性。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "生成各種類型的配色方案，如互補色、鄰近色、三色等。"
+            },
+            "preview": {
+                "name": "即時預覽",
+                "description": "立即在各種UI組件和版面上預覽您的配色方案。"
+            },
+            "export": {
+                "name": "導出格式",
+                "description": "將您的配色方案導出為多種格式，如CSS、SASS和Tailwind CSS。"
+            },
+            "download": {
+                "name": "下載方案",
+                "description": "將您的配色方案下載為檔案，輕鬆整合到您的工作流程中。"
+            }
+        },
+        "credits": {
+            "title": "永不枯竭的靈感",
+            "description": "購買額外積分，繼續生成令人驚豔的配色方案而不受任何中斷。",
+            "cta": "購買積分"
+        },
+        "showcase": {
+            "title": "展示",
+            "subtitle": "看看可能的成果",
+            "description": "探索我們社群創建的配色方案，為您的下一個項目獲得靈感。"
+        }
+    },
+    "pages": {
+        "billing": {
+            "title": "帳單歷史記錄"
+        },
+        "home": {
+            "hero": {
+                "title": "使用AI創建令人驚豔的配色方案"
+            },
+            "startGenerate": "開始生成",
+            "startGenerating": "開始生成色彩",
+            "viewPricing": "查看定價"
+        },
+        "notFound": {
+            "title": "找不到頁面",
+            "heading": "404 - 找不到頁面",
+            "description": "抱歉，您所尋找的頁面不存在或已被移動。",
+            "message": "抱歉，您所尋找的頁面不存在或已被移動。",
+            "backToHome": "回到首頁",
+            "backHome": "回到首頁"
+        },
+        "login": {
+            "title": "用戶登入",
+            "heading": "登入您的帳戶",
+            "description": "選擇您的登入方式",
+            "instructions": "使用以下任一方式登入，以繼續使用AI色彩助手",
+            "email": "電子郵件",
+            "password": "密碼",
+            "devPassword": "密碼（開發模式下任意值）",
+            "emailPlaceholder": "your.email@example.com",
+            "passwordPlaceholder": "••••••••",
+            "emailRequired": "請輸入您的電子郵件",
+            "loginFailed": "登入失敗，請重試",
+            "loggingIn": "正在登入...",
+            "emailLogin": "使用電子郵件登入",
+            "orSocialLogin": "或使用社交帳戶登入",
+            "googleLogin": "使用Google登入",
+            "githubLogin": "使用GitHub登入",
+            "facebookLogin": "使用Facebook登入",
+            "twitterLogin": "使用X登入",
+            "loginButton": "登入",
+            "loginError": "登入失敗，請檢查您的憑證",
+            "terms": "登入即表示您同意我們的服務條款和隱私政策"
+        }
+    },
+    "schemeInfo": {
+        "description": "描述",
+        "uiApplication": "UI應用",
+        "strengths": "優勢",
+        "recommendedRatio": "推薦比例",
+        "bestFor": "最適合"
+    }
+}

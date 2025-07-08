@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "启动Next.js开发服务器",
+            "type": "npm",
+            "script": "dev:debug",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^ready",
+                    "endsPattern": "started server on .+, url:"
+                }
+            }
+        },
+        {
+            "label": "等待服务器启动",
+            "type": "shell",
+            "command": "timeout /t 5",
+            "windows": {
+                "command": "timeout /t 5"
+            },
+            "linux": {
+                "command": "sleep 5"
+            },
+            "osx": {
+                "command": "sleep 5"
+            }
+        }
+    ]
+}

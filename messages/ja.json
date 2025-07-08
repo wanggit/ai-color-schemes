@@ -1,0 +1,616 @@
+{
+    "HomePage": {
+        "title": "プロジェクト向けAIカラースキーム",
+        "subtitle": "AIパワードジェネレーターで美しく、アクセシブルなカラーパレットを瞬時に作成。デザイナー、開発者、クリエイターに最適。",
+        "cta": "カラー作成を開始",
+        "features": {
+            "title": "機能",
+            "subtitle": "完璧なカラースキームに必要なすべて",
+            "description": "AIパワードカラージェネレーターは、素晴らしいプロフェッショナルなカラーパレットを作成するために必要なすべてのツールを提供します。",
+            "analyze": {
+                "name": "カラー分析",
+                "description": "プロジェクトの色彩心理学、アクセシビリティ、視覚的調和を深く分析します。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "あなたのニーズに合わせて高度なAIアルゴリズムを使用して複数のカラースキームを生成します。"
+            },
+            "preview": {
+                "name": "ライブプレビュー",
+                "description": "実際のUIコンポーネントとデザイン例で色がどのように機能するかを確認できます。"
+            },
+            "export": {
+                "name": "エクスポートオプション",
+                "description": "カラースキームを複数の形式でエクスポート：CSS、JSON、Adobe など。"
+            },
+            "download": {
+                "name": "アセットダウンロード",
+                "description": "プロジェクト用に画像、PDF、またはコードスニペットとしてカラーパレットをダウンロードします。"
+            }
+        },
+        "credits": {
+            "title": "柔軟なクレジットシステム",
+            "description": "柔軟なクレジットシステムを使用して、必要なだけカラースキームを生成できます。個人プロジェクトとチームワークフローの両方に最適です。",
+            "cta": "価格プランを見る"
+        },
+        "showcase": {
+            "title": "インスピレーション",
+            "subtitle": "人気のカラースキーム",
+            "description": "トレンドのカラー組み合わせを探索し、コミュニティお気に入りのパレットからインスピレーションを得ましょう。"
+        }
+    },
+    "seo": {
+        "title": "AI Colors - 完璧なスキームのための無料AIカラーパレットジェネレーター",
+        "description": "AIパワードツールで美しくアクセシブルなカラーパレットを瞬時に生成。デザイナー、開発者、クリエイターに最適。今すぐ完璧なカラースキームを手に入れよう！"
+    },
+    "generate_page": {
+        "seo_title": "AIカラーパレットジェネレーター - カラースキームの作成と可視化",
+        "seo_description": "無料のAIツールで美しくアクセシブルなカラースキームを生成。色を入力すると、補色、トライアドなどのパレットを瞬時に取得。UI/UXデザイナーと開発者に最適。",
+        "h1": "AIカラーパレットジェネレーター",
+        "intro": "あなたのカラーアイデアを現実にしましょう。色を入力すると、私たちのAIがあなたのプロジェクトのためにユニークでプロフェッショナルなパレットを作成します。下の人気の色から選んで始めるか、独自の16進コードを入力してください。"
+    },
+    "common": {
+        "loading": "読み込み中...",
+        "error": "エラー",
+        "success": "成功",
+        "cancel": "キャンセル",
+        "confirm": "確認",
+        "save": "保存",
+        "delete": "削除",
+        "edit": "編集",
+        "close": "閉じる",
+        "back": "戻る",
+        "next": "次へ",
+        "previous": "前へ",
+        "submit": "送信"
+    },
+    "header": {
+        "title": "AI Colors",
+        "subtitle": "あなたのプロフェッショナルAIカラーアシスタント",
+        "nav": {
+            "generate": "生成",
+            "example": "例",
+            "pricing": "料金",
+            "mySchemes": "マイスキーム",
+            "billing": "請求",
+            "login": "ログイン",
+            "logout": "ログアウト"
+        },
+        "credits": "クレジット",
+        "discord": "Discordコミュニティに参加"
+    },
+    "home": {
+        "hero": {
+            "title": "AIカラースキームジェネレーター",
+            "titleZh": "AIカラースキームジェネレーター",
+            "description": "AIで美しいカラーパレットを作成。デザイナー、開発者、クリエイティブプロフェッショナルに最適。",
+            "descriptionZh": "AIで美しいカラーパレットを作成。デザイナー、開発者、クリエイティブプロフェッショナルに最適。",
+            "cta": "カラー作成を開始 →"
+        },
+        "features": {
+            "title": "強力なAIカラーツール",
+            "subtitle": "完璧なカラースキームを作成するために必要なすべて",
+            "aiPowered": {
+                "title": "AIによる生成",
+                "titleZh": "AIによる生成",
+                "description": "高度なAIアルゴリズムが完璧なカラースキームを瞬時に作成",
+                "descriptionZh": "高度なAIアルゴリズムが完璧なカラースキームを瞬時に作成"
+            },
+            "designerFriendly": {
+                "title": "デザイナーフレンドリー",
+                "titleZh": "デザイナーフレンドリー",
+                "description": "Web、UI/UX、グラフィックデザイン向けのプロフェッショナルカラーパレット",
+                "descriptionZh": "Web、UI/UX、グラフィックデザイン向けのプロフェッショナルカラーパレット"
+            },
+            "multipleSchemes": {
+                "title": "複数のスキーム",
+                "titleZh": "複数のスキーム",
+                "description": "補色、トライアド、類似色、カスタム配色を生成します",
+                "descriptionZh": "補色、トライアド、類似色、カスタム配色を生成します"
+            },
+            "developerTools": {
+                "title": "開発者ツール",
+                "titleZh": "開発者ツール",
+                "description": "CSS、HTMLサンプルをエクスポートし、ワークフローに統合します",
+                "descriptionZh": "CSS、HTMLサンプルをエクスポートし、ワークフローに統合します"
+            }
+        },
+        "cta": {
+            "title": "素晴らしいカラーを作成する準備はできましたか？",
+            "subtitle": "AIカラージェネレーターを使用している何千人ものデザイナーや開発者に加わりましょう",
+            "tryFree": "今すぐ無料で試す",
+            "viewPricing": "料金を見る"
+        }
+    },
+    "generate": {
+        "title": "AIカラースキームジェネレーター",
+        "inputHex": "16進数のカラー値を入力",
+        "generate": "カラースキームを生成",
+        "regenerate": "再生成",
+        "analyzing": "カラーを分析中...",
+        "generating": "カラースキームを生成中...",
+        "progress": {
+            "preparing": "準備中...",
+            "analyzing": "カラープロパティを分析中...",
+            "generating": "カラースキームを生成中...",
+            "complete": "生成完了"
+        },
+        "tabs": {
+            "analysis": "カラー分析",
+            "schemes": "カラースキーム",
+            "preview": "プレビュー"
+        },
+        "popularColors": "人気のカラー",
+        "colorPicker": "カラーピッカー",
+        "errors": {
+            "invalidColor": "有効な16進数のカラー値を入力してください",
+            "loginRequired": "まずログインしてください",
+            "limitReached": "無料使用回数の上限に達しました",
+            "accountDisabled": "アカウントが無効になっています。管理者にお問い合わせください",
+            "networkError": "ネットワークエラーです。後でもう一度お試しください"
+        }
+    },
+    "pricing": {
+        "title": "プランを選択してください",
+        "subtitle": "すべての機能のロックを解除し、無限のカラークリエイティビティの旅を始めましょう",
+        "monthly": {
+            "name": "月額プラン",
+            "price": "/月",
+            "features": [
+                "毎月300クレジット",
+                "新機能への優先アクセス",
+                "限定コミュニティへのアクセス"
+            ],
+            "button": "月額プランを選択"
+        },
+        "annually": {
+            "name": "年間プラン",
+            "price": "/月",
+            "originalPrice": "/年",
+            "discount": "38%割引",
+            "features": [
+                "毎月300クレジット",
+                "新機能への優先アクセス",
+                "限定コミュニティへのアクセス",
+                "年間請求、安心の更新"
+            ],
+            "button": "年間プランを選択"
+        },
+        "credits": {
+            "title": "クレジットを購入",
+            "description": "$1ごとに{count}クレジットが付与されます。",
+            "placeholder": "USD金額を入力",
+            "button": "今すぐ購入",
+            "purchaseText": "{times}クレジットを購入",
+            "buyNow": "今すぐ購入"
+        },
+        "note": "会員クォータがなくなった場合は、追加のクレジットを購入できます。$1ごとに{count}クレジットが付与されます。"
+    },
+    "login": {
+        "title": "アカウントにサインイン",
+        "subtitle": "AIカラーアシスタントを引き続き使用するには、次のいずれかの方法でサインインしてください",
+        "google": "Googleでサインイン",
+        "terms": "サインインすることにより、利用規約とプライバシーポリシーに同意したことになります"
+    },
+    "auth": {
+        "signIn": "サインイン",
+        "signOut": "サインアウト",
+        "signUp": "サインアップ",
+        "emailLabel": "メールアドレス",
+        "passwordLabel": "パスワード"
+    },
+    "mySchemes": {
+        "title": "マイカラースキーム",
+        "schemesList": "カラースキーム一覧",
+        "generateNew": "新しいカラースキームを生成",
+        "noSchemes": "まだカラースキームを作成していません。",
+        "goGenerate": "生成に移動",
+        "fetchError": "カラースキームの取得に失敗しました",
+        "schemeDetailsTitle": "{hexValue} カラースキームの詳細",
+        "table": {
+            "color": "色",
+            "hex": "HEX",
+            "complementary": "補色スキーム",
+            "analogous": "類似色スキーム",
+            "triadic": "トライアドスキーム",
+            "monochromatic": "単色スキーム",
+            "splitComplementary": "分割補色スキーム",
+            "updateTime": "更新日時",
+            "actions": "アクション",
+            "viewExample": "例を見る",
+            "notGenerated": "生成されていません",
+            "regenerate": "カラースキームを再生成",
+            "viewDetails": "詳細を見る"
+        },
+        "pagination": {
+            "previous": "前へ",
+            "next": "次へ",
+            "pageInfo": "ページ {current} / {total}"
+        }
+    },
+    "generatePage": {
+        "h1": "AIカラーパレットジェネレーター",
+        "intro": "あなたの色のアイデアを実現しましょう。色を入力すると、私たちのAIがあなたのプロジェクトのためにユニークでプロフェッショナルなパレットを作成します。人気の色から始めるか、独自のhexコードを入力することができます。",
+        "preparing": "あなたの色の傑作を準備しています...",
+        "generating": "カラースキームを生成しています...",
+        "analyzing": "色彩心理を分析しています...",
+        "designing": "UIサンプルをデザインしています...",
+        "finalizing": "完了しています...",
+        "generateFailed": "生成に失敗しました: {error}",
+        "upgradeButton": "プランをアップグレード",
+        "regenerateExample": "サンプルを再生成",
+        "generatingExample": "サンプルを生成しています...",
+        "viewOnGithub": "GitHubで表示",
+        "accountDisabled": "アカウントが無効化されました。管理者にお問い合わせください。",
+        "limitReached": "無料利用制限に達しました。継続するにはメンバーにアップグレードしてください。",
+        "accessDenied": "アクセスが拒否されました: {error}",
+        "requestError": "リクエストエラー: {error}",
+        "mySchemes": {
+            "table": {
+                "complementary": "補色",
+                "analogous": "類似色",
+                "triadic": "三角配色",
+                "monochromatic": "単色",
+                "splitcomplementary": "分裂補色",
+                "split-complementary": "分裂補色",
+                "tetradic": "四角配色",
+                "compound": "複合",
+                "square": "正方形"
+            }
+        }
+    },
+    "components": {
+        "userAvatar": {
+            "avatarAlt": "ユーザーアバター",
+            "mySchemes": "マイカラースキーム",
+            "billing": "マイ請求",
+            "logout": "ログアウト",
+            "login": "ログイン"
+        },
+        "payment": {
+            "createOrderFailed": "注文の作成に失敗しました。後でもう一度お試しください。",
+            "paymentFailed": "支払いの確認に失敗しました。",
+            "paymentError": "支払処理に失敗しました。サポートにお問い合わせください。",
+            "paypalError": "支払い中にエラーが発生しました。もう一度お試しください。",
+            "paymentCancelled": "支払いがキャンセルされました。",
+            "creditsPurchaseSuccess": "クレジットの購入が成功しました！",
+            "paymentSuccess": "支払いが成功しました！メンバーシップが有効になりました。",
+            "completePayment": "支払いを完了: {planName}",
+            "paymentInstructions": "支払いプロセスを完了するためにPayPalにリダイレクトされます。",
+            "processing": "処理中...",
+            "membershipPurchaseSuccess": "メンバーシップの購入に成功しました！"
+        },
+        "colorInput": {
+            "title": "AIカラースキームジェネレーター",
+            "colorPickerTip": "色を選択した後、「カラースキームを生成」ボタンをクリックしてください",
+            "generating": "生成中...",
+            "generateScheme": "カラースキームを生成",
+            "colorInput": "カラー入力",
+            "popularColors": "人気のカラー",
+            "colorPicker": "カラーピッカー",
+            "generate": "生成",
+            "analyzing": "分析中...",
+            "coralRed": "コーラルレッド",
+            "mintGreen": "ミントグリーン",
+            "navy": "ネイビー",
+            "lavenderPurple": "ラベンダーパープル",
+            "sunsetOrange": "サンセットオレンジ",
+            "oceanBlue": "オーシャンブルー",
+            "forestGreen": "フォレストグリーン",
+            "roseGold": "ローズゴールド",
+            "midnightBlue": "ミッドナイトブルー",
+            "warmGray": "ウォームグレー"
+        },
+        "popularColors": {
+            "coral": "コーラル",
+            "paleGreen": "ペールグリーン",
+            "navy": "ネイビー",
+            "darkViolet": "ダークバイオレット",
+            "darkOliveGreen": "ダークオリーブグリーン",
+            "deepBlue": "ディープブルー",
+            "forest": "フォレストグリーン",
+            "wine": "ワイン",
+            "graphite": "グラファイト",
+            "midnightBlue": "ミッドナイトブルー"
+        },
+        "tabNavigation": {
+            "colorAnalysis": "カラー分析"
+        },
+        "billing": {
+            "remainingCredits": "残りのクレジット: {credits}",
+            "upgradeMember": "メンバーシップをアップグレード",
+            "loading": "読み込み中...",
+            "noRecords": "請求記録が見つかりません。",
+            "amount": "金額",
+            "currency": "通貨",
+            "provider": "プロバイダー",
+            "status": "ステータス",
+            "purchaseType": "購入タイプ",
+            "membershipType": "メンバーシップタイプ",
+            "creditsPurchased": "購入したクレジット",
+            "createdAt": "作成日",
+            "previous": "前へ",
+            "next": "次へ",
+            "pageInfo": "ページ {current} / {total}",
+            "title": "請求履歴",
+            "date": "日付",
+            "type": "タイプ",
+            "actions": "アクション",
+            "noData": "データなし",
+            "error": "読み込みエラー",
+            "page": "ページ {current} / {total}",
+            "successful": "成功",
+            "failed": "失敗",
+            "pending": "保留中",
+            "cancelled": "キャンセル済み",
+            "viewReceipt": "領収書を表示",
+            "download": "ダウンロード"
+        },
+        "schemePreview": {
+            "title": "プレビュー",
+            "desktopView": "デスクトップビュー",
+            "mobileView": "モバイルビュー",
+            "regenerateExample": "例を再生成",
+            "loadFailed": "プレビューの読み込みに失敗しました。再生成してみてください。",
+            "downloadHtml": "HTMLファイルをダウンロード"
+        },
+        "colorAnalysis": {
+            "colorMeaning": "色の意味",
+            "emotionalSummary": "感情の概要",
+            "culturalBackground": "文化的背景",
+            "western": "西洋",
+            "eastern": "東洋",
+            "uiApplication": "UIアプリケーション",
+            "cautions": "注意点",
+            "title": "カラー分析",
+            "basicInfo": "基本情報",
+            "colorSpace": "色空間",
+            "temperature": "色温度",
+            "brightness": "明るさ",
+            "saturation": "彩度",
+            "contrast": "コントラスト",
+            "accessibility": "アクセシビリティ",
+            "warm": "暖色",
+            "cool": "寒色",
+            "neutral": "中間色",
+            "high": "高い",
+            "medium": "中程度",
+            "low": "低い",
+            "excellent": "非常に良い",
+            "good": "良い",
+            "fair": "普通",
+            "poor": "悪い"
+        },
+        "tab": {
+            "colorAnalysis": "カラー分析"
+        },
+        "auth": {
+            "accessDenied": "アクセスが拒否されました",
+            "noPermission": "このページにアクセスする権限がありません"
+        },
+        "codeSnippet": {
+            "copy": "クリップボードにコピー",
+            "download": "ファイルをダウンロード",
+            "regenerate": "再生成"
+        },
+        "exampleColorSchemes": {
+            "loading": "サンプルを読み込んでいます...",
+            "error": "サンプルの読み込みに失敗しました。後でもう一度お試しください。",
+            "tryAnother": "別のものを試す"
+        }
+    },
+    "pages": {
+        "billing": {
+            "title": "請求履歴"
+        },
+        "home": {
+            "hero": {
+                "title": "AIで素晴らしいカラースキームを作成"
+            },
+            "startGenerate": "生成を開始",
+            "startGenerating": "カラーの生成を開始",
+            "viewPricing": "料金を見る"
+        },
+        "notFound": {
+            "title": "ページが見つかりません",
+            "heading": "404 - ページが見つかりません",
+            "description": "申し訳ありませんが、お探しのページは存在しないか、移動されました。",
+            "message": "申し訳ありませんが、お探しのページは存在しないか、移動されました。",
+            "backToHome": "ホームに戻る",
+            "backHome": "ホームに戻る"
+        },
+        "login": {
+            "title": "ユーザーログイン",
+            "heading": "アカウントにサインイン",
+            "description": "ログイン方法を選択してください",
+            "instructions": "AIカラーアシスタントを引き続き使用するには、次のいずれかの方法でログインしてください",
+            "email": "メールアドレス",
+            "password": "パスワード",
+            "devPassword": "パスワード（開発モードでは任意の値）",
+            "emailPlaceholder": "あなたのメール@example.com",
+            "passwordPlaceholder": "••••••••",
+            "emailRequired": "メールアドレスを入力してください",
+            "loginFailed": "ログインに失敗しました。もう一度お試しください",
+            "loggingIn": "ログイン中...",
+            "emailLogin": "メールでサインイン",
+            "orSocialLogin": "またはソーシャルアカウントでサインイン",
+            "googleLogin": "Googleでサインイン",
+            "githubLogin": "GitHubでサインイン",
+            "facebookLogin": "Facebookでサインイン",
+            "twitterLogin": "Xでサインイン",
+            "loginButton": "サインイン",
+            "loginError": "ログインに失敗しました。資格情報を確認してください",
+            "terms": "ログインすることにより、利用規約とプライバシーポリシーに同意したことになります"
+        }
+    },
+    "admin": {
+        "userManagement": "ユーザー管理",
+        "loading": "読み込み中...",
+        "id": "ID",
+        "name": "名前",
+        "email": "メールアドレス",
+        "registrationTime": "登録日時",
+        "usageCount": "使用回数",
+        "membershipStatus": "会員ステータス",
+        "memberExpiration": "会員有効期限",
+        "status": "ステータス",
+        "actions": "アクション",
+        "noName": "名前なし",
+        "noEmail": "メールアドレスなし",
+        "member": "会員",
+        "nonMember": "非会員",
+        "normal": "通常",
+        "disabled": "無効",
+        "enable": "有効にする",
+        "disable": "無効にする",
+        "previousPage": "前のページ",
+        "nextPage": "次のページ",
+        "fetchUsersError": "ユーザーリストの取得に失敗しました",
+        "updateUserError": "ユーザーステータスの更新に失敗しました"
+    },
+    "schemeInfo": {
+        "description": "説明",
+        "uiApplication": "UIアプリケーション",
+        "strengths": "長所",
+        "recommendedRatio": "推奨比率",
+        "bestFor": "最適な用途"
+    },
+    "api": {
+        "errors": {
+            "unauthorized": "未承認",
+            "invalidUser": "無効なユーザーID",
+            "userNotFound": "ユーザーが見つかりません",
+            "accountDisabled": "アカウントが無効になっています",
+            "insufficientCredits": "クレジットが不足しています。チャージしてください",
+            "invalidColorValue": "無効なカラー値",
+            "invalidColorFormat": "無効なカラー形式",
+            "cannotDetermineUser": "ユーザーIDを特定できません",
+            "missingParameters": "必須パラメータがありません",
+            "invalidPageNumber": "無効なページ番号",
+            "internalServerError": "内部サーバーエラー",
+            "databaseError": "データベース操作に失敗しました",
+            "generateFailed": "HTMLサンプルの生成に失敗しました",
+            "updateFailed": "データベースの更新に失敗しました",
+            "missingField": "必須フィールドがありません",
+            "cannotModifyAdmin": "管理者ユーザーは変更できません"
+        },
+        "logs": {
+            "startGenerating": "hex: {hex}のカラースキームを生成中{regenerate}",
+            "forceRegenerate": " (強制的に再生成)",
+            "schemeRetry": "{theory}を再試行中...",
+            "startAiRequest": "AIカラー分析リクエストを開始...",
+            "aiRequestSuccess": "AIリクエスト成功、応答コンテンツを取得中...",
+            "aiResponseValid": "AI応答の検証に成功",
+            "generateHtmlPath": "generateHtmlExampleパス: {path}",
+            "savingToDatabase": "データベースへの保存に失敗しました:",
+            "generateColorFailed": "カラースキームの生成に失敗しました:",
+            "fetchUsersFailed": "カラースキームの取得に失敗しました:",
+            "fetchUsersListFailed": "ユーザーリストの取得に失敗しました:",
+            "updateUserStatusFailed": "ユーザーステータスの更新に失敗しました:",
+            "createExampleFailed": "サンプルの作成に必要なパラメータが不完全です:",
+            "uploadExampleFailed": "{theory}サンプルのHTMLのアップロードに失敗しました:",
+            "createExampleGeneralFailed": "{theory}サンプルの作成に失敗しました:",
+            "generateDefaultHtmlFailed": "デフォルトHTMLの生成に失敗しました:",
+            "startAnalyzing": "カラー分析を開始",
+            "requestingAi": "AIカラー分析をリクエスト中...",
+            "parsingAiResponse": "AI応答データを解析中...",
+            "basicAnalysisComplete": "基本的なカラー分析が完了しました",
+            "generatingExamples": "カラースキームのサンプルを生成中...",
+            "sendStreamUpdateFailed": "ストリーム更新の送信に失敗しました:",
+            "unknownError": "不明なエラー",
+            "openaiUrlNotConfigured": "OPENAI_URL環境変数が設定されていません",
+            "aiRequestFailed": "AIリクエストに失敗しました ({status}): {error}",
+            "aiEmptyChoices": "AIが空のchoices配列を返しました",
+            "aiIncorrectFormat": "AIが不正な形式のコンテンツを返しました",
+            "aiInvalidJson": "AIが返したコンテンツは有効なJSONではありません",
+            "aiRequestError": "AIリクエスト中にエラーが発生しました",
+            "aiResponsePreview": "応答コンテンツのプレビュー:",
+            "aiDataFormatError": "AIが返したデータ形式がエラーです。JSONを解析できません",
+            "aiResponseError": "AIリクエストがエラーを返しました:",
+            "aiStructureIncorrect": "AIが返したデータ構造が正しくありません",
+            "aiParseJsonFailed": "AIが返したコンテンツをJSONとして解析できません",
+            "aiMissingColorSchemes": "AIが返したデータに必要なカラースキーム情報がありません",
+            "aiAnalysisFailed": "AI分析に失敗しました。ユーザーに直接通知します:",
+            "aiGeneralError": "AIで問題が発生しました。後でもう一度お試しください",
+            "previewProxyError": "プレビュープロキシエラー:",
+            "uploadToStorageFailed": "ストレージへのアップロードに失敗しました:",
+            "downloadContentError": "コンテンツのダウンロードエラー:",
+            "loginProcessError": "ログイン処理中にエラーが発生しました:",
+            "defaultColorScheme": "配色",
+            "defaultSchemeExample": "これは配色例です",
+            "defaultColorDisplay": "カラー表示",
+            "defaultApplicationScene": "様々なUIデザインシーンに適しています",
+            "defaultAdvantages": "良好な視覚体験を提供します",
+            "defaultExampleButton": "サンプルボタン"
+        },
+        "success": {
+            "schemeGenerated": "カラースキームが正常に生成されました",
+            "exampleGenerated": "サンプルが正常に生成されました",
+            "dataUpdated": "データが正常に更新されました"
+        }
+    },
+    "examplePage": {
+        "title": "カラースキームの例",
+        "fetchError": "カラースキームの例の取得に失敗しました",
+        "basedOn": "基づく",
+        "prevButton": "前のスキーム",
+        "nextButton": "次のスキーム",
+        "description": "説明",
+        "uiApplication": "UIアプリケーション",
+        "strengths": "長所",
+        "recommendedRatio": "推奨比率",
+        "bestFor": "最適な用途",
+        "nextColorButton": "次の色",
+        "noExamples": "現在利用可能なカラースキームの例はありません。"
+    },
+    "UserCredits": {
+        "credits": "クレジット",
+        "remaining": "残り",
+        "buyMore": "追加購入"
+    },
+    "exampleColorSchemes": {
+        "loading": "例を読み込み中...",
+        "error": "例の読み込みに失敗しました。後でもう一度お試しください。",
+        "tryAnother": "別のものを試す"
+    },
+    "HomePage": {
+        "title": "AIカラースキームジェネレーター",
+        "subtitle": "AIで美しいカラーパレットを作成。デザイナー、開発者、クリエイティブプロフェッショナルに最適。",
+        "cta": "始める →",
+        "features": {
+            "title": "強力なAIカラーツール",
+            "subtitle": "完璧なカラースキームを作成するために必要なすべて",
+            "description": "私たちのAIパワードツールは、基本色を分析し、プロジェクトで使用する調和の取れた美しいカラーパレットを生成します。",
+            "analyze": {
+                "name": "カラー分析",
+                "description": "調和、コントラスト、アクセシビリティを含む色の特性の詳細な分析。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "補色、類似色、トライアドなど、さまざまなタイプのカラースキームを生成。"
+            },
+            "preview": {
+                "name": "リアルタイムプレビュー",
+                "description": "さまざまなUIコンポーネントやレイアウトで、カラースキームを瞬時にプレビュー。"
+            },
+            "export": {
+                "name": "エクスポート形式",
+                "description": "CSS、SASS、Tailwind CSSなどの複数の形式でカラーパレットをエクスポート。"
+            },
+            "download": {
+                "name": "スキームダウンロード",
+                "description": "ワークフローに簡単に統合できるよう、ファイルとしてカラースキームをダウンロード。"
+            }
+        },
+        "credits": {
+            "title": "インスピレーションを枯渇させない",
+            "description": "追加クレジットを購入して、中断することなく素晴らしいカラースキームを生成し続けましょう。",
+            "cta": "クレジットを購入"
+        },
+        "showcase": {
+            "title": "ショーケース",
+            "subtitle": "可能性を見る",
+            "description": "コミュニティが作成したカラースキームを探索し、次のプロジェクトのインスピレーションを得ましょう。"
+        }
+    }
+}

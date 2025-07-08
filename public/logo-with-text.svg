@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 大脑主渐变 -->
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#0091EA;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#1976D2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D47A1;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 调色板渐变们 -->
+    <linearGradient id="palette1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00BCD4;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="palette2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="palette3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="palette4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#424242;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#212121;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 文字渐变 -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E3F2FD;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#BBDEFB;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 发光效果 -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="400" height="300" fill="#0F172A"/>
+  
+  <!-- logo图标部分 -->
+  <g transform="translate(100, 30)">
+    <!-- 深色背景圆形 -->
+    <circle cx="100" cy="100" r="90" fill="#1E293B" stroke="none"/>
+    
+    <!-- 左侧大脑图标 - 重新设计更精致 -->
+    <g transform="translate(50, 60)">
+      <!-- 大脑主体轮廓 -->
+      <path d="M 0 20 
+               C 0 10, 8 0, 20 0
+               C 25 0, 30 2, 35 5
+               C 40 2, 45 0, 50 0
+               C 62 0, 70 10, 70 20
+               C 70 25, 68 30, 65 34
+               C 68 40, 70 46, 70 52
+               C 70 65, 62 75, 50 75
+               C 45 75, 40 73, 35 70
+               C 30 73, 25 75, 20 75
+               C 8 75, 0 65, 0 52
+               C 0 46, 2 40, 5 34
+               C 2 30, 0 25, 0 20 Z" 
+            fill="none" 
+            stroke="url(#brainGradient)" 
+            stroke-width="2.5"
+            filter="url(#glow)"/>
+      
+      <!-- 大脑中央分割 -->
+      <path d="M 35 5 Q 35 25 35 45 Q 35 65 35 70" 
+            fill="none" 
+            stroke="url(#brainGradient)" 
+            stroke-width="2"/>
+      
+      <!-- 大脑纹理细节 -->
+      <path d="M 15 25 Q 25 22 35 25" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M 35 25 Q 45 22 55 25" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M 12 40 Q 22 37 32 40" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M 38 40 Q 48 37 58 40" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M 15 55 Q 25 52 35 55" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M 35 55 Q 45 52 55 55" fill="none" stroke="url(#brainGradient)" stroke-width="1.5" opacity="0.8"/>
+      
+      <!-- 神经节点 -->
+      <circle cx="20" cy="30" r="1.5" fill="url(#brainGradient)" opacity="0.9"/>
+      <circle cx="50" cy="35" r="1.5" fill="url(#brainGradient)" opacity="0.9"/>
+      <circle cx="25" cy="50" r="1.5" fill="url(#brainGradient)" opacity="0.9"/>
+      <circle cx="45" cy="45" r="1.5" fill="url(#brainGradient)" opacity="0.9"/>
+    </g>
+    
+    <!-- 右侧调色板扇形 - 重新设计更精致 -->
+    <g transform="translate(100, 100)">
+      <!-- 第一个扇形 - 青色 -->
+      <path d="M 0 0 L 50 -30 A 58 58 0 0 1 65 0 Z" 
+            fill="url(#palette1)" 
+            stroke="#000" 
+            stroke-width="1"
+            filter="url(#glow)"/>
+      
+      <!-- 第二个扇形 - 蓝色 -->
+      <path d="M 0 0 L 65 0 A 58 58 0 0 1 50 30 Z" 
+            fill="url(#palette2)" 
+            stroke="#000" 
+            stroke-width="1"
+            filter="url(#glow)"/>
+      
+      <!-- 第三个扇形 - 紫色 -->
+      <path d="M 0 0 L 50 30 A 58 58 0 0 1 15 55 Z" 
+            fill="url(#palette3)" 
+            stroke="#000" 
+            stroke-width="1"
+            filter="url(#glow)"/>
+      
+      <!-- 第四个扇形 - 灰色 -->
+      <path d="M 0 0 L 15 55 A 58 58 0 0 1 -25 50 Z" 
+            fill="url(#palette4)" 
+            stroke="#000" 
+            stroke-width="1"
+            filter="url(#glow)"/>
+      
+      <!-- 中心圆形装饰 -->
+      <circle cx="0" cy="0" r="8" fill="#1E293B" stroke="url(#brainGradient)" stroke-width="2"/>
+      <circle cx="0" cy="0" r="3" fill="url(#brainGradient)"/>
+    </g>
+    
+    <!-- 外层装饰圆环 -->
+    <circle cx="100" cy="100" r="85" fill="none" stroke="url(#brainGradient)" stroke-width="1" opacity="0.3"/>
+  </g>
+  
+  <!-- 文字部分 -->
+  <g transform="translate(200, 220)">
+    <!-- AI COLOR -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="42" font-weight="900" fill="url(#textGradient)" text-anchor="middle" filter="url(#glow)">
+      AI COLOR
+    </text>
+    <!-- SCHEMES -->
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="18" font-weight="300" fill="url(#textGradient)" text-anchor="middle" letter-spacing="4px" opacity="0.9">
+      SCHEMES
+    </text>
+  </g>
+</svg> 

@@ -1,0 +1,79 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "启动Next.js开发服务器",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev:debug"
+            ],
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "附加到Next.js",
+            "type": "node",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "port": 9239
+        },
+        {
+            "name": "调试浏览器端代码",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "preLaunchTask": "等待服务器启动"
+        },
+        {
+            "name": "调试API路由",
+            "type": "node",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "port": 9239,
+            "restart": true
+        },
+        {
+            "name": "启动并调试Next.js（一键启动）",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev:debug"
+            ],
+            "console": "integratedTerminal",
+            "serverReadyAction": {
+                "pattern": "started server on .+, url: (https?://.+)",
+                "uriFormat": "%s",
+                "action": "debugWithChrome"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "全栈调试：服务器 + 浏览器",
+            "configurations": [
+                "启动Next.js开发服务器",
+                "调试浏览器端代码"
+            ],
+            "stopAll": true
+        }
+    ]
+}

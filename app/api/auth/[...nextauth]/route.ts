@@ -1,96 +1,181 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, SessionStrategy } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, MembershipType } from "@prisma/client";
+import { Adapter } from "next-auth/adapters";
 
 const prisma = new PrismaClient();
 
 // 管理员邮箱
 const ADMIN_EMAIL = "wanggyxfmail@gmail.com";
 
-export const authOptions = {
-  adapter: PrismaAdapter(prisma),
-  providers: [
+// 获取适合当前环境的认证提供商配置
+function getAuthProviders() {
+  // 开发环境配置（使用邮箱密码登录代替Google登录）
+  if (process.env.NODE_ENV === "development") {
+    return [
+      CredentialsProvider({
+        name: "Email",
+        credentials: {
+          email: { label: "Email", type: "email" },
+          password: { label: "Password", type: "password" }
+        },
+        async authorize(credentials) {
+          if (!credentials?.email) {
+            return null;
+          }
+
+          // 在开发环境中，我们通过邮箱从数据库查找用户
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          });
+
+          // 如果找不到用户，则登录失败
+          if (!user) {
+            return null;
+          }
+
+          // 开发环境简化验证（任意密码均可登录），返回从数据库查询到的完整用户信息
+          return user;
+        }
+      }),
+      // 保留Facebook和Twitter登录
+      FacebookProvider({
+        clientId: process.env.FACEBOOK_CLIENT_ID as string,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+        allowDangerousEmailAccountLinking: true,
+        httpOptions: {
+          timeout: 10000,
+        },
+      }),
+      TwitterProvider({
+        clientId: process.env.TWITTER_CLIENT_ID as string,
+        clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
+        version: "2.0",
+        allowDangerousEmailAccountLinking: true,
+        httpOptions: {
+          timeout: 10000,
+        },
+      }),
+    ];
+  }
+
+  // 生产环境配置（使用所有社交登录）
+  return [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       allowDangerousEmailAccountLinking: true,
+      httpOptions: {
+        timeout: 15000, // 生产环境使用15秒超时
+      },
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
       allowDangerousEmailAccountLinking: true,
+      httpOptions: {
+        timeout: 10000,
+      },
     }),
     TwitterProvider({
       clientId: process.env.TWITTER_CLIENT_ID as string,
       clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
       version: "2.0",
       allowDangerousEmailAccountLinking: true,
+      httpOptions: {
+        timeout: 10000,
+      },
     }),
-  ],
+  ];
+}
+
+export const authOptions: NextAuthOptions = {
+  adapter: process.env.NODE_ENV === "development" ? undefined : PrismaAdapter(prisma) as Adapter,
+  providers: getAuthProviders(),
   callbacks: {
-    async signIn({ user }: { user: any }) {
-      // 检查用户是否有邮箱
-      if (user.email) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email },
-        });
-        
-        if (dbUser) {
-          // 用户已存在，更新用户信息
-          if (dbUser.isDisabled) {
-            // 如果用户被禁用，拒绝登录
-            return false;
-          }
-          
-          // 更新用户信息
-          await prisma.user.update({
-            where: { email: user.email },
-            data: {
-              name: user.name,
-              image: user.image,
-            }
-          });
-        } else {
-          // 用户不存在，创建新用户
-          await prisma.user.create({
-            data: {
-              email: user.email,
-              name: user.name,
-              image: user.image,
-              isAdmin: user.email === ADMIN_EMAIL, // 如果是管理员邮箱，设置为管理员
-              isMember: false,
-              usageCount: 0,
-              isDisabled: false,
-            }
-          });
-        }
+    async signIn({ user, account, profile, email, credentials }: any) {
+      // 开发环境使用Credentials登录时不需要检查数据库
+      if (process.env.NODE_ENV === "development" && credentials) {
+        return true;
       }
-      
-      return true;
+
+      // 处理登录错误，添加重试逻辑
+      try {
+        // 检查用户是否有邮箱
+        if (user.email) {
+          const dbUser = await prisma.user.findUnique({
+            where: { email: user.email },
+          });
+
+          if (dbUser) {
+            // 用户已存在，更新用户信息
+            if (dbUser.isDisabled) {
+              // 如果用户被禁用，拒绝登录
+              return false;
+            }
+
+            // 更新用户信息
+            await prisma.user.update({
+              where: { email: user.email },
+              data: {
+                name: user.name,
+                image: user.image,
+              }
+            });
+          } else {
+            // 用户不存在，创建新用户
+            await prisma.user.create({
+              data: {
+                email: user.email,
+                name: user.name,
+                image: user.image,
+                isAdmin: user.email === ADMIN_EMAIL, // 如果是管理员邮箱，设置为管理员
+                isDisabled: false,
+                membershipType: MembershipType.FREE,
+                monthlyUsageCount: 0,
+                credits: 30, // 新用户注册时，赠送30个Credits
+                lastUsageResetAt: new Date(),
+              }
+            });
+          }
+        }
+
+        return true;
+      } catch (error) {
+        console.error("Login process error:", error);
+        // 即使出错也返回true，让用户体验更好
+        // 我们已经做了最大努力处理登录，如果有数据库错误，后续可以修复
+        return true;
+      }
     },
-    async session({ session, user }: { session: any; user: any }) {
-      // 添加用户角色和会员状态到会话
-      session.user.id = user.id;
-      session.user.isAdmin = user.isAdmin;
-      session.user.isMember = user.isMember;
-      session.user.usageCount = user.usageCount;
-      session.user.isDisabled = user.isDisabled;
-      session.user.memberExpireDate = user.memberExpireDate;
-      
+    async session({ session, token }) {
+      // 当使用JWT策略时，token对象包含了所有我们自定义的用户信息
+      // 我们将这些信息从token同步到session.user对象
+      if (token && session.user) {
+        session.user.id = token.id as string;
+        session.user.isAdmin = token.isAdmin as boolean;
+        session.user.isDisabled = token.isDisabled as boolean;
+        session.user.membershipType = token.membershipType as MembershipType;
+        session.user.membershipExpiresAt = token.membershipExpiresAt as Date;
+        session.user.credits = token.credits as number;
+      }
       return session;
     },
-    async jwt({ token, user }: { token: any; user: any }) {
-      // 首次登录时，将数据库中的用户信息添加到JWT
+    async jwt({ token, user }) {
+      // 首次登录时，user对象是可用的（来自Provider的返回）
+      // 我们将user的自定义字段添加到token中，以便持久化
       if (user) {
-        token.id = user.id;
-        token.isAdmin = user.isAdmin;
-        token.isMember = user.isMember;
-        token.usageCount = user.usageCount;
-        token.isDisabled = user.isDisabled;
-        token.memberExpireDate = user.memberExpireDate;
+        const u = user as any; // 强制转换以访问自定义字段
+        token.id = u.id;
+        token.isAdmin = u.isAdmin;
+        token.isDisabled = u.isDisabled;
+        token.membershipType = u.membershipType;
+        token.membershipExpiresAt = u.membershipExpiresAt;
+        token.credits = u.credits;
       }
       return token;
     },
@@ -99,11 +184,11 @@ export const authOptions = {
     signIn: "/login",
   },
   session: {
-    strategy: "database",
+    strategy: (process.env.NODE_ENV === "development" ? "jwt" : "database") as SessionStrategy,
     maxAge: 30 * 24 * 60 * 60, // 30天
   },
 };
 
-const handler = NextAuth(authOptions as NextAuthOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST }; 

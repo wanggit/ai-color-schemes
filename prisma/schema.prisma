@@ -10,22 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum MembershipType {
+  FREE
+  MONTHLY
+  ANNUAL
+  CREDITS
+}
+
 model User {
-  id               String    @id @default(cuid())
-  name             String?
-  email            String?   @unique
-  emailVerified    DateTime?
-  image            String?
-  accounts         Account[]
-  sessions         Session[]
-  isAdmin          Boolean   @default(false)
-  usageCount       Int       @default(0)
-  isMember         Boolean   @default(false)
-  memberExpireDate DateTime?
-  isDisabled       Boolean   @default(false)
-  aiColors         AiColor[]
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  isAdmin       Boolean   @default(false)
+
+  membershipType       MembershipType @default(FREE)
+  membershipExpiresAt  DateTime?
+  monthlyUsageCount    Int            @default(0)
+  lastUsageResetAt     DateTime?
+  credits              Int            @default(0) // For pay-as-you-go credits
+  paypalSubscriptionId String?        @unique
+
+  isDisabled Boolean   @default(false)
+  aiColors   AiColor[]
+  payments   Payment[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Account {
@@ -63,9 +76,30 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Payment {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  amount            Float
+  currency          String // e.g., "USD"
+  provider          String // e.g., "paypal"
+  providerPaymentId String @unique
+  status            String // e.g., "COMPLETED", "PENDING"
+
+  // Could be 'subscription', 'credits'
+  purchaseType     String
+  // For subscriptions, which plan
+  membershipType   MembershipType?
+  // For one-time purchases
+  creditsPurchased Int?
+
+  createdAt DateTime @default(now())
+}
+
 model AiColor {
   id          String   @id @default(cuid())
-  hex         String   @unique
+  hex         String
   aiJson      String   @db.Text
   exampleComp String?
   exampleAnal String?
@@ -77,5 +111,16 @@ model AiColor {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // 创建用户ID和hex组合的唯一索引，确保每个用户的每个颜色值只有一条记录
+  @@unique([userId, hex])
   @@index([userId])
-} 
+  @@index([hex])
+}
+
+model SchemeLike {
+  id        Int      @id @default(autoincrement())
+  url       String   @unique
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
