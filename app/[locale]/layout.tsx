@@ -104,7 +104,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
             },
         },
         verification: {
-            google: "your-google-verification-code",
+            google: "G-CCSHGGWTQ2",
         },
         category: "Design Tools",
         classification: "Design and Development Tools",
