@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-import { FaGoogle, FaFacebook, FaXTwitter, FaEnvelope, FaLock } from "react-icons/fa6";
+import { FaGoogle, FaEnvelope, FaLock } from "react-icons/fa6";
 import { useSafeTranslations } from '@/hooks/useSafeTranslations';
 
 export default function LoginPage() {
@@ -142,6 +142,8 @@ export default function LoginPage() {
             {t('googleLogin')}
           </button>
 
+          {/* Facebook和X登录已隐藏 */}
+          {/*
           <button
             onClick={() => handleSignIn("facebook")}
             disabled={loading}
@@ -165,6 +167,7 @@ export default function LoginPage() {
             <FaXTwitter className="mr-2" />
             {t('twitterLogin')}
           </button>
+          */}
         </div>
 
         <p className="mt-6 text-xs text-gray-500 text-center">
