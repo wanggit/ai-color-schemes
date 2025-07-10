@@ -6,21 +6,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
 
   try {
-    // 1. 获取所有被点赞的配色方案URL
-    const likedSchemes = await prisma.schemeLike.findMany({
-      select: {
-        url: true, // 只选择URL字段
+    // 1. 获取所有有示例页面的配色方案（从AiColor表）
+    const colorSchemes = await prisma.aiColor.findMany({
+      where: {
+        OR: [
+          { exampleComp: { not: null } },
+          { exampleAnal: { not: null } },
+          { exampleTria: { not: null } },
+          { exampleMono: { not: null } },
+          { exampleSpCo: { not: null } },
+        ],
       },
+      select: {
+        hex: true,
+      },
+      distinct: ['hex'],
     })
 
-    const likedSchemeUrls = likedSchemes.map((scheme: { url: string }) => ({
-      url: `${baseUrl}${scheme.url}`, // 假设 scheme.url 已经是 '/my-schemes/...' 的格式
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }))
+    // 2. 为每个hex生成多语言的配色方案页面URL
+    const languages = ['en', 'zh', 'zh-tw', 'de', 'ja', 'ko']
+    const schemeUrls = colorSchemes.flatMap((scheme) =>
+      languages.map((lang) => ({
+        url: `${baseUrl}/${lang}/my-schemes/${scheme.hex.replace('#', '')}`,
+        lastModified,
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      }))
+    )
 
-    // 2. 定义核心静态页面
+    // 3. 定义核心静态页面
     const staticPages = [
       {
         url: baseUrl,
@@ -86,10 +100,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           },
         },
       },
+      {
+        url: `${baseUrl}/example`,
+        lastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
+        alternates: {
+          languages: {
+            'en': `${baseUrl}/en/example`,
+            'zh': `${baseUrl}/zh/example`,
+            'zh-TW': `${baseUrl}/zh-tw/example`,
+            'de': `${baseUrl}/de/example`,
+            'ja': `${baseUrl}/ja/example`,
+            'ko': `${baseUrl}/ko/example`,
+          },
+        },
+      },
     ]
 
-    // 3. 合并静态页面和动态生成的点赞页面
-    return [...staticPages, ...likedSchemeUrls]
+    // 4. 合并静态页面和动态配色方案页面
+    return [...staticPages, ...schemeUrls]
   } catch (error) {
     console.error('生成sitemap时发生错误:', error)
     // 如果数据库查询失败，至少返回静态页面
@@ -117,6 +147,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified,
         changeFrequency: 'daily' as const,
         priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/example`,
+        lastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
       },
     ]
   }
