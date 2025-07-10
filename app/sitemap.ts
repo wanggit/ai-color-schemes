@@ -6,28 +6,56 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
 
   try {
-    // 1. 获取所有有示例页面的配色方案（从AiColor表）
-    const colorSchemes = await prisma.aiColor.findMany({
-      where: {
-        OR: [
-          { exampleComp: { not: null } },
-          { exampleAnal: { not: null } },
-          { exampleTria: { not: null } },
-          { exampleMono: { not: null } },
-          { exampleSpCo: { not: null } },
-        ],
-      },
-      select: {
-        hex: true,
-      },
-      distinct: ['hex'],
-    })
+    // 1. 分页获取所有有示例页面的配色方案（从AiColor表）
+    const pageSize = 100 // 每页查询100条记录
+    const maxPages = 5000 // 最多查询50页，即5000条记录
+    let allHexValues: string[] = []
+    let currentPage = 0
+
+    while (currentPage < maxPages) {
+      const colorSchemes = await prisma.aiColor.findMany({
+        where: {
+          OR: [
+            { exampleComp: { not: null } },
+            { exampleAnal: { not: null } },
+            { exampleTria: { not: null } },
+            { exampleMono: { not: null } },
+            { exampleSpCo: { not: null } },
+          ],
+        },
+        select: {
+          hex: true,
+        },
+        distinct: ['hex'],
+        skip: currentPage * pageSize,
+        take: pageSize,
+        orderBy: {
+          updatedAt: 'desc', // 按更新时间倒序，优先展示最新的
+        },
+      })
+
+      // 如果没有更多数据，退出循环
+      if (colorSchemes.length === 0) {
+        break
+      }
+
+      // 收集hex值
+      const hexValues = colorSchemes.map(scheme => scheme.hex)
+      allHexValues.push(...hexValues)
+
+      // 如果返回的记录数小于pageSize，说明已经是最后一页
+      if (colorSchemes.length < pageSize) {
+        break
+      }
+
+      currentPage++
+    }
 
     // 2. 为每个hex生成多语言的配色方案页面URL
     const languages = ['en', 'zh', 'zh-tw', 'de', 'ja', 'ko']
-    const schemeUrls = colorSchemes.flatMap((scheme) =>
+    const schemeUrls = allHexValues.flatMap((hex) =>
       languages.map((lang) => ({
-        url: `${baseUrl}/${lang}/my-schemes/${scheme.hex.replace('#', '')}`,
+        url: `${baseUrl}/${lang}/my-schemes/${encodeURIComponent(hex)}`,
         lastModified,
         changeFrequency: 'weekly' as const,
         priority: 0.6,
@@ -117,6 +145,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     ]
+
+    console.log(`Sitemap generated with ${allHexValues.length} unique hex values, total URLs: ${staticPages.length + schemeUrls.length}`)
 
     // 4. 合并静态页面和动态配色方案页面
     return [...staticPages, ...schemeUrls]
