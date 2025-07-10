@@ -224,9 +224,10 @@ export const PREVIEW_CONFIG = {
 
   // 截图配置
   SCREENSHOT_CONFIG: {
-    viewport: { width: 1200, height: 800 },
+    // 移除固定viewport限制，让页面内容决定截图尺寸
+    viewport: null, // 不设置固定viewport
     type: 'png' as const,
-    fullPage: false,
+    fullPage: true, // 确保截图整个页面
     timeout: 30000,
     waitForTimeout: 2000
   },

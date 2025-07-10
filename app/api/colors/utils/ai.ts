@@ -54,9 +54,12 @@ export const createAiColorExample = async (hex: string, colorScheme: any, token:
 
                     const browser = await chromium.launch(PREVIEW_CONFIG.PLAYWRIGHT_CONFIG);
 
-                    const page = await browser.newPage({
-                        viewport: PREVIEW_CONFIG.SCREENSHOT_CONFIG.viewport
-                    });
+                    // 根据配置决定是否设置viewport限制
+                    const pageOptions: any = {};
+                    if (PREVIEW_CONFIG.SCREENSHOT_CONFIG.viewport) {
+                        pageOptions.viewport = PREVIEW_CONFIG.SCREENSHOT_CONFIG.viewport;
+                    }
+                    const page = await browser.newPage(pageOptions);
 
                     // 构建预览接口URL，避免直接访问Vercel Blob导致下载问题
                     let baseUrl: string;
@@ -82,6 +85,23 @@ export const createAiColorExample = async (hex: string, colorScheme: any, token:
 
                     // 等待一段时间确保CSS和JS加载完成
                     await page.waitForTimeout(PREVIEW_CONFIG.SCREENSHOT_CONFIG.waitForTimeout);
+
+                    // 如果没有设置固定viewport，动态获取页面内容尺寸并调整
+                    if (!PREVIEW_CONFIG.SCREENSHOT_CONFIG.viewport) {
+                        const bodyHandle = await page.$('body');
+                        if (bodyHandle) {
+                            const boundingBox = await bodyHandle.boundingBox();
+                            if (boundingBox) {
+                                // 设置viewport为页面内容的实际尺寸，添加一些边距
+                                await page.setViewportSize({
+                                    width: Math.max(800, Math.ceil(boundingBox.width + 40)), // 最小宽度800px，添加40px边距
+                                    height: Math.max(600, Math.ceil(boundingBox.height + 40)) // 最小高度600px，添加40px边距
+                                });
+                                console.log(`📐 动态调整viewport尺寸: ${Math.ceil(boundingBox.width + 40)}x${Math.ceil(boundingBox.height + 40)}`);
+                            }
+                            await bodyHandle.dispose();
+                        }
+                    }
 
                     // 截图
                     const screenshot = await page.screenshot({
