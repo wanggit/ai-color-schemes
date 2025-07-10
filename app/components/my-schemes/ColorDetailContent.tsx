@@ -42,6 +42,12 @@ type AiColor = {
     exampleTria?: string | null;
     exampleMono?: string | null;
     exampleSpCo?: string | null;
+    // 添加预览图片字段
+    previewComp?: string | null;
+    previewAnal?: string | null;
+    previewTria?: string | null;
+    previewMono?: string | null;
+    previewSpCo?: string | null;
     userId: string;
     createdAt: string;
     updatedAt: string;
@@ -76,6 +82,18 @@ export default function ColorDetailContent({ colorData, translations }: ColorDet
         }
     };
 
+    // 添加获取预览图片字段名的函数
+    const getPreviewKey = (theory: string): string => {
+        switch (theory) {
+            case "Complementary": return "previewComp";
+            case "Analogous": return "previewAnal";
+            case "Triadic": return "previewTria";
+            case "Monochromatic": return "previewMono";
+            case "Split-Complementary": return "previewSpCo";
+            default: return `preview${theory.replace(/[^a-zA-Z0-9]/g, "")}`;
+        }
+    };
+
     const getSchemeName = (theory: string): string => {
         switch (theory) {
             case "Complementary": return tSchemes('complementary');
@@ -96,6 +114,22 @@ export default function ColorDetailContent({ colorData, translations }: ColorDet
             const url = parsedColorData[key as keyof AiColor];
             if (url && typeof url === 'string') {
                 urls[key] = url;
+            }
+        });
+        return urls;
+    }, [parsedColorData, aiResponse]);
+
+    // 添加预览图片URL的构建逻辑
+    const previewUrls = useMemo(() => {
+        const urls: { [key: string]: string } = {};
+        if (!aiResponse?.colorAnalysis?.colorSchemes) return urls;
+
+        aiResponse.colorAnalysis.colorSchemes.forEach(scheme => {
+            const key = getSchemeKey(scheme.theory);
+            const previewKey = getPreviewKey(scheme.theory);
+            const previewUrl = parsedColorData[previewKey as keyof AiColor];
+            if (previewUrl && typeof previewUrl === 'string') {
+                urls[key] = previewUrl;
             }
         });
         return urls;
@@ -158,6 +192,7 @@ export default function ColorDetailContent({ colorData, translations }: ColorDet
                                                 previewMode={previewMode}
                                                 setPreviewMode={setPreviewMode}
                                                 exampleUrls={exampleUrls}
+                                                previewUrls={previewUrls}
                                                 isGeneratingExamples={{}} // Not generating on this page
                                                 regenerateExample={() => { }} // No regeneration on this page
                                                 getSchemeKey={getSchemeKey}

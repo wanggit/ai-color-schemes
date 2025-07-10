@@ -1,44 +1,4 @@
 {
-    "HomePage": {
-        "title": "專業項目的AI配色方案",
-        "subtitle": "使用我們的AI配色生成器，即刻創建美觀、易訪問的配色方案。完美適用於設計師、開發者和創意工作者。",
-        "cta": "開始創建色彩",
-        "features": {
-            "title": "功能特色",
-            "subtitle": "完美配色方案所需的一切",
-            "description": "我們的AI配色生成器提供創建令人驚豔、專業配色方案所需的所有工具。",
-            "analyze": {
-                "name": "色彩分析",
-                "description": "深入分析色彩心理學、可訪問性和視覺和諧性，為您的項目提供專業指導。"
-            },
-            "generate": {
-                "name": "AI生成",
-                "description": "使用先進的AI算法生成多種配色方案，滿足您的具體需求。"
-            },
-            "preview": {
-                "name": "實時預覽",
-                "description": "在真實的UI組件和設計示例中查看您的色彩效果。"
-            },
-            "export": {
-                "name": "導出選項",
-                "description": "將您的配色方案導出為多種格式：CSS、JSON、Adobe等。"
-            },
-            "download": {
-                "name": "下載資源",
-                "description": "將配色方案下載為圖片、PDF或代碼片段，用於您的項目。"
-            }
-        },
-        "credits": {
-            "title": "靈活的積分系統",
-            "description": "使用我們靈活的積分系統，生成所需的任意數量配色方案。完美適用於個人項目和團隊工作流程。",
-            "cta": "查看定價計劃"
-        },
-        "showcase": {
-            "title": "色彩靈感",
-            "subtitle": "熱門配色方案",
-            "description": "探索流行的色彩搭配，從我們社區喜愛的配色方案中獲得靈感。"
-        }
-    },
     "seo": {
         "title": "AI Colors - 專業配色方案的免費AI色彩生成器",
         "description": "使用我們的AI工具即時生成美觀且易於訪問的配色方案。完美適用於設計師、開發者和創意工作者。立即獲得您的完美配色方案！"
@@ -253,6 +213,7 @@
                 "monochromatic": "單色方案",
                 "splitcomplementary": "分裂互補色方案",
                 "split-complementary": "分裂互補色方案",
+                "split-complementarycomplementary": "分裂互補色方案",
                 "tetradic": "四色方案",
                 "compound": "複合方案",
                 "square": "正方形方案"
@@ -368,46 +329,6 @@
         "error": "載入示例失敗。請稍後重試。",
         "tryAnother": "嘗試其他"
     },
-    "HomePage": {
-        "title": "AI配色方案生成器",
-        "subtitle": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
-        "cta": "開始使用 →",
-        "features": {
-            "title": "強大的AI色彩工具",
-            "subtitle": "創建完美配色方案所需的一切",
-            "description": "我們的AI驅動工具會分析您的基礎顏色，並為您的項目生成各種和諧美觀的配色方案。",
-            "analyze": {
-                "name": "色彩分析",
-                "description": "深入分析色彩屬性，包括和諧性、對比度和可訪問性。"
-            },
-            "generate": {
-                "name": "AI生成",
-                "description": "生成各種類型的配色方案，如互補色、鄰近色、三色等。"
-            },
-            "preview": {
-                "name": "即時預覽",
-                "description": "立即在各種UI組件和版面上預覽您的配色方案。"
-            },
-            "export": {
-                "name": "導出格式",
-                "description": "將您的配色方案導出為多種格式，如CSS、SASS和Tailwind CSS。"
-            },
-            "download": {
-                "name": "下載方案",
-                "description": "將您的配色方案下載為檔案，輕鬆整合到您的工作流程中。"
-            }
-        },
-        "credits": {
-            "title": "永不枯竭的靈感",
-            "description": "購買額外積分，繼續生成令人驚豔的配色方案而不受任何中斷。",
-            "cta": "購買積分"
-        },
-        "showcase": {
-            "title": "展示",
-            "subtitle": "看看可能的成果",
-            "description": "探索我們社群創建的配色方案，為您的下一個項目獲得靈感。"
-        }
-    },
     "pages": {
         "billing": {
             "title": "帳單歷史記錄"
@@ -458,5 +379,45 @@
         "strengths": "優勢",
         "recommendedRatio": "推薦比例",
         "bestFor": "最適合"
+    },
+    "HomePage": {
+        "title": "AI配色方案生成器",
+        "subtitle": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
+        "cta": "開始使用 →",
+        "features": {
+            "title": "強大的AI色彩工具",
+            "subtitle": "創建完美配色方案所需的一切",
+            "description": "我們的AI驅動工具會分析您的基礎顏色，並為您的項目生成各種和諧美觀的配色方案。",
+            "analyze": {
+                "name": "色彩分析",
+                "description": "深入分析色彩屬性，包括和諧性、對比度和可訪問性。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "生成各種類型的配色方案，如互補色、鄰近色、三色等。"
+            },
+            "preview": {
+                "name": "即時預覽",
+                "description": "立即在各種UI組件和版面上預覽您的配色方案。"
+            },
+            "export": {
+                "name": "導出格式",
+                "description": "將您的配色方案導出為多種格式，如CSS、SASS和Tailwind CSS。"
+            },
+            "download": {
+                "name": "下載方案",
+                "description": "將您的配色方案下載為檔案，輕鬆整合到您的工作流程中。"
+            }
+        },
+        "credits": {
+            "title": "永不枯竭的靈感",
+            "description": "購買額外積分，繼續生成令人驚豔的配色方案而不受任何中斷。",
+            "cta": "購買積分"
+        },
+        "showcase": {
+            "title": "展示",
+            "subtitle": "看看可能的成果",
+            "description": "探索我們社群創建的配色方案，為您的下一個項目獲得靈感。"
+        }
     }
 }

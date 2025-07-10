@@ -45,6 +45,7 @@ export async function saveColorGeneration(prisma: PrismaClient, hex: string, use
 
     // 根据配色方案理论名称映射到数据库字段
     const exampleUrls: { [key: string]: string | undefined } = {};
+    const previewUrls: { [key: string]: string | undefined } = {};
     const schemes = responseData?.colorAnalysis?.colorSchemes || [];
 
     const theoryToFieldMap: { [key: string]: string } = {
@@ -55,10 +56,26 @@ export async function saveColorGeneration(prisma: PrismaClient, hex: string, use
         'Split-Complementary': 'exampleSpCo'
     };
 
+    const theoryToPreviewFieldMap: { [key: string]: string } = {
+        'Complementary': 'previewComp',
+        'Analogous': 'previewAnal',
+        'Triadic': 'previewTria',
+        'Monochromatic': 'previewMono',
+        'Split-Complementary': 'previewSpCo'
+    };
+
     schemes.forEach((scheme: any) => {
-        if (scheme.theory && scheme.exampleUrl && theoryToFieldMap[scheme.theory]) {
-            const fieldName = theoryToFieldMap[scheme.theory];
-            exampleUrls[fieldName] = scheme.exampleUrl;
+        if (scheme.theory && theoryToFieldMap[scheme.theory]) {
+            const exampleFieldName = theoryToFieldMap[scheme.theory];
+            const previewFieldName = theoryToPreviewFieldMap[scheme.theory];
+
+            if (scheme.exampleUrl) {
+                exampleUrls[exampleFieldName] = scheme.exampleUrl;
+            }
+
+            if (scheme.previewUrl) {
+                previewUrls[previewFieldName] = scheme.previewUrl;
+            }
         }
     });
 
@@ -72,6 +89,7 @@ export async function saveColorGeneration(prisma: PrismaClient, hex: string, use
             data: {
                 aiJson: responseDataStr,
                 ...exampleUrls,
+                ...previewUrls,
                 updatedAt: new Date()
             }
         });
@@ -82,7 +100,8 @@ export async function saveColorGeneration(prisma: PrismaClient, hex: string, use
                 hex: hex.toLowerCase(),
                 aiJson: responseDataStr,
                 userId: userId,
-                ...exampleUrls
+                ...exampleUrls,
+                ...previewUrls
             }
         });
     }

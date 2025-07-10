@@ -262,6 +262,7 @@
                 "monochromatic": "Monochromatic",
                 "splitcomplementary": "Split Complementary",
                 "split-complementary": "Split Complementary",
+                "split-complementarycomplementary": "Split Complementary",
                 "tetradic": "Tetradic",
                 "compound": "Compound",
                 "square": "Square"

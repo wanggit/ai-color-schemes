@@ -216,3 +216,33 @@ Answer:
 }
 }
 `
+
+// 预览图片生成配置
+export const PREVIEW_CONFIG = {
+  // 是否启用预览图片生成功能 - 默认启用
+  ENABLE_PREVIEW_GENERATION: process.env.ENABLE_PREVIEW_GENERATION !== 'false',
+
+  // 截图配置
+  SCREENSHOT_CONFIG: {
+    viewport: { width: 1200, height: 800 },
+    type: 'png' as const,
+    fullPage: false,
+    timeout: 30000,
+    waitForTimeout: 2000
+  },
+
+  // 存储配置
+  STORAGE_CONFIG: {
+    basePath: 'ai-colors-previews',
+    contentType: 'image/png',
+    access: 'public' as const,
+    addRandomSuffix: false,
+    allowOverwrite: true
+  },
+
+  // Playwright配置（用于Vercel）
+  PLAYWRIGHT_CONFIG: {
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }
+};

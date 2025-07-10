@@ -7,6 +7,7 @@ import { put } from "@vercel/blob";
 import { authenticateAndValidateUser } from "../utils/auth";
 import { decrementUserCredits } from "../utils/db";
 
+
 const prisma = new PrismaClient();
 
 type ColorScheme = {
@@ -78,15 +79,28 @@ export async function POST(request: NextRequest) {
     }
     console.log(`✅ HTML生成成功，长度: ${html.length} 字符`);
 
-    // 上传HTML到存储（模拟）
+    // 上传HTML到存储
     const cleanHex = hex.startsWith('#') ? hex.substring(1) : hex;
     const theoryFileName = scheme.theory.toLowerCase().replace(/ /g, '-');
-    const filename = `${theoryFileName}-${userId}-${Date.now()}.html`;
-    const path = `${cleanHex}/${filename}`;
-    console.log(`📁 上传路径: ${path}`);
-    console.log('☁️ 开始上传到云存储...');
-    const url = await uploadToStorage(html, path);
-    console.log(`✅ 上传成功，URL: ${url}`);
+    const timestamp = Date.now();
+    const htmlFilename = `${theoryFileName}-${userId}-${timestamp}.html`;
+    const htmlPath = `${cleanHex}/${htmlFilename}`;
+    console.log(`📁 HTML上传路径: ${htmlPath}`);
+    console.log('☁️ 开始上传HTML到云存储...');
+    console.log(`☁️ 开始上传到云存储 - 路径: ai-colors-examples/${htmlPath}`);
+    const { url } = await put(
+      `ai-colors-examples/${htmlPath}`,
+      html,
+      {
+        access: 'public',
+        contentType: 'text/html; charset=utf-8',
+        addRandomSuffix: false,
+        allowOverwrite: true
+      }
+    );
+    console.log(`✅ HTML上传成功，URL: ${url}`);
+
+
 
     // 更新数据库
     console.log('💾 开始更新数据库...');
@@ -232,12 +246,14 @@ export async function GET(request: NextRequest) {
     const color = colors[0];
     const aiJson = JSON.parse(color.aiJson);
 
-    // Get all schemes from aiJson and attach the corresponding URL
+    // Get all schemes from aiJson and attach the corresponding URL and preview URL
     const schemes = (aiJson.colorAnalysis.colorSchemes || [])
       .map((s: ColorScheme) => {
         const key = getSchemeKey(s.theory) as keyof typeof color;
+        const previewKey = getPreviewKey(s.theory) as keyof typeof color;
         const url = color[key];
-        return { ...s, url };
+        const previewUrl = color[previewKey];
+        return { ...s, url, previewUrl };
       })
       .filter((s: { url: any; }) => s.url); // Only return schemes that have a URL
 
@@ -273,6 +289,18 @@ function getSchemeKey(theory: string): string {
   }
 }
 
+// 获取预览图片对应的字段名
+function getPreviewKey(theory: string): string {
+  switch (theory) {
+    case "Complementary": return "previewComp";
+    case "Analogous": return "previewAnal";
+    case "Triadic": return "previewTria";
+    case "Monochromatic": return "previewMono";
+    case "Split-Complementary": return "previewSpCo";
+    default: return `preview${theory.replace(/[^a-zA-Z0-9]/g, "")}`;
+  }
+}
+
 // 生成HTML示例
 async function generateHtmlExample(scheme: ColorScheme, token: string | undefined, i18n: ApiI18nHandler): Promise<string> {
   // 这里模拟调用AI生成HTML
@@ -305,32 +333,6 @@ async function generateHtmlExample(scheme: ColorScheme, token: string | undefine
     console.error(`❌ HTML生成异常 - 配色方案: ${scheme?.theory || 'unknown'}:`, error);
     console.error(i18n.log("createExampleGeneralFailed", { theory: scheme?.theory || 'unknown' }), error);
     return "error";
-  }
-}
-
-// 上传到云存储
-async function uploadToStorage(html: string, path: string): Promise<string> {
-  try {
-    console.log(`☁️ 开始上传到云存储 - 路径: ai-colors-examples/${path}`);
-    console.log(`📊 HTML大小: ${html.length} 字符`);
-
-    const { url } = await put(
-      `ai-colors-examples/${path}`,
-      html,
-      {
-        access: 'public',
-        contentType: 'text/html; charset=utf-8',
-        addRandomSuffix: false,
-        allowOverwrite: true
-      }
-    );
-
-    console.log(`✅ 上传成功 - URL: ${url}`);
-    return url;
-  } catch (error) {
-    console.error("❌ 上传到云存储失败:", error);
-    console.error("Failed to upload to storage:", error);
-    throw new Error("Failed to upload to storage");
   }
 }
 

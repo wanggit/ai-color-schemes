@@ -243,6 +243,7 @@
                 "monochromatic": "单色方案",
                 "splitcomplementary": "分裂互补色方案",
                 "split-complementary": "分裂互补色方案",
+                "split-complementarycomplementary": "分裂互补色方案",
                 "tetradic": "四色方案",
                 "compound": "复合方案",
                 "square": "正方形方案"
@@ -578,7 +579,7 @@
         "nextColorButton": "下一个颜色",
         "noExamples": "当前没有可用的配色方案示例。"
     },
-    "UserCredits": {
+    "UserCredits_2": {
         "credits": "积分",
         "remaining": "剩余",
         "buyMore": "购买更多"

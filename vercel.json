@@ -1,0 +1,8 @@
+{
+    "functions": {
+        "app/api/colors/example/route.ts": {
+            "maxDuration": 30
+        }
+    },
+    "crons": []
+}

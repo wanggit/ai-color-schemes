@@ -1,6 +1,8 @@
 import { put } from "@vercel/blob";
 import { ApiI18nHandler } from "@/lib/api-i18n";
-import { COLOR_ANALYSIS_SYSTEM_PROMPT, COLOR_SCHEME_BOOTSTRAP5_CUSTOM, COLOR_SCHEME_SYSTEM_PROMPT, COLOR_SCHEME_TAILWINDCSS_CUSTOM } from "../constants";
+import { COLOR_ANALYSIS_SYSTEM_PROMPT, COLOR_SCHEME_BOOTSTRAP5_CUSTOM, COLOR_SCHEME_SYSTEM_PROMPT, COLOR_SCHEME_TAILWINDCSS_CUSTOM, PREVIEW_CONFIG } from "../constants";
+// Playwright导入 - 用于生成预览图片
+import { chromium } from 'playwright';
 
 export const createAiColorExample = async (hex: string, colorScheme: any, token: string | undefined, userId: string, i18n: ApiI18nHandler) => {
     try {
@@ -44,7 +46,75 @@ export const createAiColorExample = async (hex: string, colorScheme: any, token:
             colorScheme.exampleUrl = url;
             console.log("colorScheme.exampleUrl: ", url);
 
-            return url;
+            // 生成预览图片
+            let previewUrl: string | null = null;
+            try {
+                if (PREVIEW_CONFIG.ENABLE_PREVIEW_GENERATION) {
+                    console.log(`📸 开始生成预览图片 - 原始URL: ${url}`);
+
+                    const browser = await chromium.launch(PREVIEW_CONFIG.PLAYWRIGHT_CONFIG);
+
+                    const page = await browser.newPage({
+                        viewport: PREVIEW_CONFIG.SCREENSHOT_CONFIG.viewport
+                    });
+
+                    // 构建预览接口URL，避免直接访问Vercel Blob导致下载问题
+                    let baseUrl: string;
+                    if (process.env.VERCEL_URL) {
+                        // Vercel 部署环境，VERCEL_URL 不包含协议前缀
+                        baseUrl = `https://${process.env.VERCEL_URL}`;
+                    } else if (process.env.NEXTAUTH_URL) {
+                        // NextAuth URL 通常包含协议前缀
+                        baseUrl = process.env.NEXTAUTH_URL;
+                    } else {
+                        // 本地开发环境后备
+                        baseUrl = 'http://localhost:3000';
+                    }
+                    const previewApiUrl = `${baseUrl}/api/colors/preview?url=${encodeURIComponent(url)}`;
+
+                    console.log(`📸 通过预览接口访问: ${previewApiUrl}`);
+
+                    // 等待页面完全加载
+                    await page.goto(previewApiUrl, {
+                        waitUntil: 'networkidle',
+                        timeout: PREVIEW_CONFIG.SCREENSHOT_CONFIG.timeout
+                    });
+
+                    // 等待一段时间确保CSS和JS加载完成
+                    await page.waitForTimeout(PREVIEW_CONFIG.SCREENSHOT_CONFIG.waitForTimeout);
+
+                    // 截图
+                    const screenshot = await page.screenshot({
+                        type: PREVIEW_CONFIG.SCREENSHOT_CONFIG.type,
+                        fullPage: PREVIEW_CONFIG.SCREENSHOT_CONFIG.fullPage
+                    });
+
+                    await browser.close();
+
+                    console.log(`✅ 预览图片生成成功 - 大小: ${screenshot.length} bytes`);
+
+                    // 上传预览图片
+                    const imageFileName = fileName.replace('.html', '.png');
+                    const imagePath = `${PREVIEW_CONFIG.STORAGE_CONFIG.basePath}/${cleanHex}/${imageFileName}`;
+
+                    const imageUploadResult = await put(
+                        imagePath,
+                        screenshot,
+                        PREVIEW_CONFIG.STORAGE_CONFIG
+                    );
+
+                    previewUrl = imageUploadResult.url;
+                    colorScheme.previewUrl = previewUrl;
+                    console.log(`✅ 预览图片上传成功: ${previewUrl}`);
+                } else {
+                    console.log(`⚠️ 预览图片生成功能已禁用`);
+                }
+            } catch (imageError) {
+                console.error(`❌ 预览图片生成失败，但不影响主流程:`, imageError);
+                // 图片生成失败不应该影响主流程
+            }
+
+            return { url, previewUrl };
         } catch (error: unknown) {
             console.error(i18n.log("uploadExampleFailed", { theory: colorScheme.theory }), error);
             throw new Error(i18n.log("uploadExampleFailed", { theory: colorScheme.theory }) + ": " + (error instanceof Error ? error.message : i18n.log("unknownError")));

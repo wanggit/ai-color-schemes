@@ -106,6 +106,12 @@ model AiColor {
   exampleTria String?
   exampleMono String?
   exampleSpCo String?
+  // 添加预览图片URL字段
+  previewComp String? // 互补色预览图片
+  previewAnal String? // 类似色预览图片  
+  previewTria String? // 三角色预览图片
+  previewMono String? // 单色预览图片
+  previewSpCo String? // 分割互补色预览图片
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())

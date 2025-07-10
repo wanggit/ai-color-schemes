@@ -59,6 +59,7 @@ type ProgressUpdate = {
     data?: ColorAnalysis;
     theory?: string;
     exampleUrl?: string;
+    previewUrl?: string;
     tailwindConfig?: string;
     bootstrap5CustomVariables?: string;
     error?: string;
@@ -86,6 +87,7 @@ export default function GenerateClient() {
     const [activeTab, setActiveTab] = useState("analysis");
     const [previewMode, setPreviewMode] = useState<"desktop" | "mobile">("desktop");
     const [exampleUrls, setExampleUrls] = useState<{ [key: string]: string }>({});
+    const [previewUrls, setPreviewUrls] = useState<{ [key: string]: string }>({});
     const [isGeneratingExamples, setIsGeneratingExamples] = useState<{ [key: string]: boolean }>({});
     const [generatedStatus, setGeneratedStatus] = useState<{ [theory: string]: boolean }>({});
     const [showColorPicker, setShowColorPicker] = useState(false);
@@ -134,6 +136,7 @@ export default function GenerateClient() {
         setCurrentStep("");
         setIsError(false);
         setExampleUrls({});
+        setPreviewUrls({});
         setIsGeneratingExamples({});
         setGeneratedStatus({});
         setAiResponse(null);
@@ -273,13 +276,22 @@ export default function GenerateClient() {
 
             if (update.task === 'example' && update.status === 'complete' && update.exampleUrl) {
                 const key = getSchemeKey(update.theory);
-                console.log(`✅ 接收到示例URL更新 - 配色方案: ${update.theory}, 键: ${key}, URL: ${update.exampleUrl}`);
+                console.log(`✅ 接收到示例URL更新 - 配色方案: ${update.theory}, 键: ${key}, URL: ${update.exampleUrl}, 预览图: ${update.previewUrl || '无'}`);
 
                 setExampleUrls(prev => {
                     const newUrls = { ...prev, [key]: update.exampleUrl! };
                     console.log('🔍 更新exampleUrls:', newUrls);
                     return newUrls;
                 });
+
+                // 如果有预览图片URL，也更新
+                if (update.previewUrl) {
+                    setPreviewUrls(prev => {
+                        const newPreviewUrls = { ...prev, [key]: update.previewUrl! };
+                        console.log('🔍 更新previewUrls:', newPreviewUrls);
+                        return newPreviewUrls;
+                    });
+                }
 
                 setIsGeneratingExamples(prev => ({ ...prev, [key]: false }));
 
@@ -371,15 +383,36 @@ export default function GenerateClient() {
 
                 if (data && data.length > 0) {
                     const colorRecord = data[0]; // 取第一条记录
+                    console.log('🔍 完整的数据库记录:', colorRecord);
+                    console.log('🔍 预览字段检查:', {
+                        previewComp: colorRecord.previewComp,
+                        previewAnal: colorRecord.previewAnal,
+                        previewTria: colorRecord.previewTria,
+                        previewMono: colorRecord.previewMono,
+                        previewSpCo: colorRecord.previewSpCo
+                    });
+
                     const existingUrls: { [key: string]: string } = {};
+                    const existingPreviewUrls: { [key: string]: string } = {};
                     const existingStatus: { [theory: string]: boolean } = {};
 
                     schemes.forEach(scheme => {
                         const key = getSchemeKey(scheme.theory);
+                        const previewKey = getPreviewKey(scheme.theory);
+
+                        console.log(`🔍 处理配色方案 ${scheme.theory}: key=${key}, previewKey=${previewKey}`);
+
                         if (colorRecord[key]) {
                             existingUrls[key] = colorRecord[key];
                             existingStatus[scheme.theory] = true;
                             console.log(`✅ 找到现有示例 - ${scheme.theory}: ${colorRecord[key]}`);
+                        }
+
+                        if (colorRecord[previewKey]) {
+                            existingPreviewUrls[key] = colorRecord[previewKey];
+                            console.log(`✅ 找到现有预览图片 - ${scheme.theory}: ${colorRecord[previewKey]}`);
+                        } else {
+                            console.log(`❌ 未找到预览图片 - ${scheme.theory}: ${previewKey}字段为空`);
                         }
                     });
 
@@ -388,11 +421,28 @@ export default function GenerateClient() {
                         setGeneratedStatus(prev => ({ ...prev, ...existingStatus }));
                         console.log(`✅ 成功加载 ${Object.keys(existingUrls).length} 个现有示例URL`);
                     }
+
+                    if (Object.keys(existingPreviewUrls).length > 0) {
+                        setPreviewUrls(prev => ({ ...prev, ...existingPreviewUrls }));
+                        console.log(`✅ 成功加载 ${Object.keys(existingPreviewUrls).length} 个现有预览图片URL`);
+                    }
                 }
             }
         } catch (error) {
             console.error('❌ 加载现有示例URL失败:', error);
             // 不抛出错误，因为这不是关键功能
+        }
+    };
+
+    // 获取预览图片对应的字段名
+    const getPreviewKey = (theory: string): string => {
+        switch (theory) {
+            case "Complementary": return "previewComp";
+            case "Analogous": return "previewAnal";
+            case "Triadic": return "previewTria";
+            case "Monochromatic": return "previewMono";
+            case "Split-Complementary": return "previewSpCo";
+            default: return `preview${theory.replace(/[^a-zA-Z0-9]/g, "")}`;
         }
     };
 
@@ -423,10 +473,18 @@ export default function GenerateClient() {
             if (response.ok) {
                 // 修复字段名称不匹配问题：后端返回url字段，不是exampleUrl
                 const url = data.url || data.exampleUrl;
+                const previewUrl = data.previewUrl;
+
                 if (url) {
                     console.log(`✅ 成功获取URL: ${url}`);
                     setExampleUrls(prev => ({ ...prev, [key]: url }));
                     setGeneratedStatus(prev => ({ ...prev, [scheme.theory]: true }));
+
+                    // 如果有预览图片URL，也更新
+                    if (previewUrl) {
+                        console.log(`✅ 成功获取预览图片URL: ${previewUrl}`);
+                        setPreviewUrls(prev => ({ ...prev, [key]: previewUrl }));
+                    }
                 } else {
                     console.error('❌ 响应中缺少URL字段');
                     throw new Error('响应中缺少URL字段');
@@ -546,6 +604,7 @@ export default function GenerateClient() {
                                                             previewMode={previewMode}
                                                             setPreviewMode={setPreviewMode}
                                                             exampleUrls={exampleUrls}
+                                                            previewUrls={previewUrls}
                                                             isGeneratingExamples={isGeneratingExamples}
                                                             regenerateExample={regenerateExample}
                                                             getSchemeKey={getSchemeKey}

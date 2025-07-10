@@ -182,8 +182,14 @@ export async function generateColorResponseWithProgress(hex: string, writer: Wri
 
             const examplePromise = createAndHandleTask(
                 'example',
-                () => createAiColorExample(hex, colorScheme, token || '', userId, i18n),
-                () => ({ exampleUrl: colorScheme.exampleUrl || '' })
+                async () => {
+                    const result = await createAiColorExample(hex, colorScheme, token || '', userId, i18n);
+                    return result;
+                },
+                (result) => ({
+                    exampleUrl: colorScheme.exampleUrl || '',
+                    previewUrl: result.previewUrl || ''
+                })
             );
 
             const tailwindPromise = createAndHandleTask(

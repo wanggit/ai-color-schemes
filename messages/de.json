@@ -1,44 +1,4 @@
 {
-    "HomePage": {
-        "title": "AI-Farbschemata für professionelle Projekte",
-        "subtitle": "Erstellen Sie mit unserem AI-basierten Generator sofort schöne und zugängliche Farbpaletten. Perfekt für Designer, Entwickler und Kreative.",
-        "cta": "Farberstellung starten",
-        "features": {
-            "title": "Funktionen",
-            "subtitle": "Alles, was Sie für perfekte Farbschemata benötigen",
-            "description": "Unser AI-basierter Farbgenerator bietet alle Tools, die Sie für die Erstellung atemberaubender, professioneller Farbpaletten benötigen.",
-            "analyze": {
-                "name": "Farbanalyse",
-                "description": "Tiefgehende Analyse von Farbpsychologie, Zugänglichkeit und visueller Harmonie für Ihre Projekte."
-            },
-            "generate": {
-                "name": "AI-Generierung",
-                "description": "Generieren Sie mehrere Farbschemata mit fortschrittlichen AI-Algorithmen, die auf Ihre Bedürfnisse zugeschnitten sind."
-            },
-            "preview": {
-                "name": "Live-Vorschau",
-                "description": "Sehen Sie, wie Ihre Farben in echten UI-Komponenten und Design-Beispielen funktionieren."
-            },
-            "export": {
-                "name": "Export-Optionen",
-                "description": "Exportieren Sie Ihre Farbschemata in mehreren Formaten: CSS, JSON, Adobe und mehr."
-            },
-            "download": {
-                "name": "Asset-Download",
-                "description": "Laden Sie Farbpaletten als Bilder, PDFs oder Code-Snippets für Ihre Projekte herunter."
-            }
-        },
-        "credits": {
-            "title": "Flexibles Credit-System",
-            "description": "Verwenden Sie unser flexibles Credit-System, um so viele Farbschemata zu generieren, wie Sie benötigen. Perfekt für Einzelprojekte und Team-Workflows.",
-            "cta": "Preispläne ansehen"
-        },
-        "showcase": {
-            "title": "Inspiration",
-            "subtitle": "Beliebte Farbschemata",
-            "description": "Erkunden Sie trendige Farbkombinationen und lassen Sie sich von den Lieblings-Paletten unserer Community inspirieren."
-        }
-    },
     "seo": {
         "title": "AI Colors - Kostenloser AI-Farbpaletten-Generator für perfekte Schemata",
         "description": "Generieren Sie sofort schöne und zugängliche Farbpaletten mit unserem KI-gestützten Tool. Perfekt für Designer, Entwickler und Kreative. Holen Sie sich jetzt Ihr perfektes Farbschema!"
@@ -253,6 +213,7 @@
                 "monochromatic": "Monochromatisch",
                 "splitcomplementary": "Split-Komplementär",
                 "split-complementary": "Split-Komplementär",
+                "split-complementarycomplementary": "Split-Komplementär",
                 "tetradic": "Tetradisch",
                 "compound": "Zusammengesetzt",
                 "square": "Quadrat"
@@ -568,7 +529,7 @@
         "remaining": "Verbleibend",
         "buyMore": "Mehr kaufen"
     },
-    "exampleColorSchemes": {
+    "exampleColorSchemes_2": {
         "loading": "Beispiele werden geladen...",
         "error": "Beispiele konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
         "tryAnother": "Ein anderes ausprobieren"

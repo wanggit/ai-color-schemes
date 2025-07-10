@@ -148,6 +148,55 @@ npm run dev
 2. 创建应用并配置OAuth 2.0凭证
 3. 添加回调URL: `http://localhost:3000/api/auth/callback/twitter`
 
+## 新功能：预览图片生成
+
+### 功能说明
+系统现在支持将每个配色方案的HTML示例自动生成为预览图片，并保存到云存储中。
+
+### 启用步骤
+
+1. **安装依赖**
+```bash
+npm install playwright
+```
+
+2. **启用功能**
+编辑 `app/api/colors/example/route.ts` 文件：
+- 取消注释 `import { chromium } from 'playwright';` 这一行
+- 将 `generatePreviewImage` 函数中的注释代码块取消注释
+
+3. **Vercel部署注意事项**
+在 `vercel.json` 中添加 Playwright 支持：
+```json
+{
+  "functions": {
+    "app/api/colors/example/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}
+```
+
+### 技术细节
+
+- **截图尺寸**: 1200x800px (标准桌面分辨率)
+- **图片格式**: PNG
+- **存储路径**: `ai-colors-previews/{hex}/{theory}-{userId}-{timestamp}.png`
+- **数据库字段**: `previewComp`, `previewAnal`, `previewTria`, `previewMono`, `previewSpCo`
+
+### 性能优化建议
+
+1. **缓存机制**: 如果HTML内容未变化，可跳过重新生成图片
+2. **异步处理**: 图片生成可以在后台异步进行
+3. **压缩优化**: 可以添加图片压缩以减少存储成本
+4. **多分辨率**: 可以生成多种尺寸的预览图
+
+### 成本考虑
+
+- 每次生成配色方案都会产生额外的图片存储成本
+- Playwright 会增加函数执行时间，可能影响 Vercel 的计费
+- 建议添加配置开关来控制是否启用此功能
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
