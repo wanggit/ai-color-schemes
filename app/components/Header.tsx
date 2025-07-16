@@ -51,11 +51,9 @@ export default function Header() {
                         <Link href={`/${locale}/pricing`} className="text-gray-600 hover:text-gray-900 transition-colors">
                             {t('nav.pricing')}
                         </Link>
-                        {session?.user && (
-                            <Link href={`/${locale}/my-schemes`} className="text-gray-600 hover:text-gray-900 transition-colors">
-                                {t('nav.mySchemes')}
-                            </Link>
-                        )}
+                        <Link href={`/${locale}/my-schemes`} className="text-gray-600 hover:text-gray-900 transition-colors">
+                            {t('nav.mySchemes')}
+                        </Link>
                     </nav>
 
                     {/* 右侧语言切换、Discord图标和用户头像 */}

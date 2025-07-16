@@ -1,4 +1,44 @@
 {
+    "HomePage": {
+        "title": "AI配色方案生成器",
+        "subtitle": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
+        "cta": "開始使用 →",
+        "features": {
+            "title": "強大的AI色彩工具",
+            "subtitle": "創建完美配色方案所需的一切",
+            "description": "我們的AI驅動工具會分析您的基礎顏色，並為您的項目生成各種和諧美觀的配色方案。",
+            "analyze": {
+                "name": "色彩分析",
+                "description": "深入分析色彩屬性，包括和諧性、對比度和可訪問性。"
+            },
+            "generate": {
+                "name": "AI生成",
+                "description": "生成各種類型的配色方案，如互補色、鄰近色、三色等。"
+            },
+            "preview": {
+                "name": "即時預覽",
+                "description": "立即在各種UI組件和版面上預覽您的配色方案。"
+            },
+            "export": {
+                "name": "導出格式",
+                "description": "將您的配色方案導出為多種格式，如CSS、SASS和Tailwind CSS。"
+            },
+            "download": {
+                "name": "下載方案",
+                "description": "將您的配色方案下載為檔案，輕鬆整合到您的工作流程中。"
+            }
+        },
+        "credits": {
+            "title": "永不枯竭的靈感",
+            "description": "購買額外積分，繼續生成令人驚豔的配色方案而不受任何中斷。",
+            "cta": "購買積分"
+        },
+        "showcase": {
+            "title": "展示",
+            "subtitle": "看看可能的成果",
+            "description": "探索我們社群創建的配色方案，為您的下一個項目獲得靈感。"
+        }
+    },
     "seo": {
         "title": "AI Colors - 專業配色方案的免費AI色彩生成器",
         "description": "使用我們的AI工具即時生成美觀且易於訪問的配色方案。完美適用於設計師、開發者和創意工作者。立即獲得您的完美配色方案！"
@@ -31,7 +71,7 @@
             "generate": "生成",
             "example": "示例",
             "pricing": "定價",
-            "mySchemes": "我的配色",
+            "mySchemes": "配色方案畫廊",
             "billing": "帳單",
             "login": "登入",
             "logout": "登出"
@@ -169,7 +209,7 @@
         "schemeDetailsTitle": "{hexValue} 配色方案詳情",
         "table": {
             "color": "顏色",
-            "hex": "十六進制",
+            "hex": "HEX",
             "complementary": "互補色方案",
             "analogous": "鄰近色方案",
             "triadic": "三色方案",
@@ -180,7 +220,16 @@
             "viewExample": "查看示例",
             "notGenerated": "未生成",
             "regenerate": "重新生成配色方案",
-            "viewDetails": "查看詳情"
+            "viewDetails": "查看詳情",
+            "complementary": "互補色",
+            "analogous": "鄰近色",
+            "triadic": "三色",
+            "monochromatic": "單色",
+            "splitcomplementary": "分裂互補色",
+            "split-complementary": "分裂互補色",
+            "tetradic": "四色",
+            "compound": "複合",
+            "square": "正方形"
         },
         "pagination": {
             "previous": "上一頁",
@@ -303,6 +352,61 @@
             "cancelled": "已取消",
             "viewReceipt": "查看收據",
             "download": "下載"
+        },
+        "schemePreview": {
+            "title": "預覽",
+            "desktopView": "桌面視圖",
+            "mobileView": "行動視圖",
+            "regenerateExample": "重新生成範例",
+            "loadFailed": "載入預覽失敗，請嘗試重新生成。",
+            "downloadHtml": "下載HTML檔案"
+        },
+        "colorAnalysis": {
+            "colorMeaning": "色彩含義",
+            "emotionalSummary": "情感總結",
+            "culturalBackground": "文化背景",
+            "western": "西方",
+            "eastern": "東方",
+            "uiApplication": "UI應用",
+            "cautions": "注意事項",
+            "title": "色彩分析",
+            "basicInfo": "基本資訊",
+            "colorSpace": "色彩空間",
+            "temperature": "色彩溫度",
+            "brightness": "亮度",
+            "saturation": "飽和度",
+            "contrast": "對比度",
+            "accessibility": "可訪問性",
+            "warm": "暖色",
+            "cool": "冷色",
+            "neutral": "中性色",
+            "high": "高",
+            "medium": "中等",
+            "low": "低",
+            "excellent": "優秀",
+            "good": "良好",
+            "fair": "一般",
+            "poor": "差"
+        },
+        "tab": {
+            "colorAnalysis": "色彩分析"
+        },
+        "auth": {
+            "accessDenied": "存取被拒絕",
+            "noPermission": "您沒有權限存取此頁面"
+        },
+        "codeSnippet": {
+            "copy": "複製到剪貼簿",
+            "download": "下載檔案",
+            "regenerate": "重新生成"
+        },
+        "exampleColorSchemes": {
+            "loading": "載入示例中...",
+            "error": "載入示例失敗。請稍後重試。",
+            "tryAnother": "嘗試其他"
+        },
+        "tabNavigation": {
+            "colorAnalysis": "色彩分析"
         }
     },
     "examplePage": {
@@ -320,14 +424,8 @@
         "noExamples": "目前沒有可用的配色方案示例。"
     },
     "UserCredits": {
-        "credits": "積分",
-        "remaining": "剩餘",
-        "buyMore": "購買更多"
-    },
-    "exampleColorSchemes": {
-        "loading": "載入示例中...",
-        "error": "載入示例失敗。請稍後重試。",
-        "tryAnother": "嘗試其他"
+        "title": "我的積分",
+        "unlimited": "無限制"
     },
     "pages": {
         "billing": {
@@ -373,6 +471,31 @@
             "terms": "登入即表示您同意我們的服務條款和隱私政策"
         }
     },
+    "admin": {
+        "userManagement": "用戶管理",
+        "loading": "載入中...",
+        "id": "ID",
+        "name": "姓名",
+        "email": "電子郵件",
+        "registrationTime": "註冊時間",
+        "usageCount": "使用次數",
+        "membershipStatus": "會員狀態",
+        "memberExpiration": "會員到期時間",
+        "status": "狀態",
+        "actions": "操作",
+        "noName": "無姓名",
+        "noEmail": "無電子郵件",
+        "member": "會員",
+        "nonMember": "非會員",
+        "normal": "正常",
+        "disabled": "已禁用",
+        "enable": "啟用",
+        "disable": "禁用",
+        "previousPage": "上一頁",
+        "nextPage": "下一頁",
+        "fetchUsersError": "獲取用戶列表失敗",
+        "updateUserError": "更新用戶狀態失敗"
+    },
     "schemeInfo": {
         "description": "描述",
         "uiApplication": "UI應用",
@@ -380,44 +503,93 @@
         "recommendedRatio": "推薦比例",
         "bestFor": "最適合"
     },
-    "HomePage": {
-        "title": "AI配色方案生成器",
-        "subtitle": "使用AI創建令人驚豔的配色板。完美適用於設計師、開發者和創意專業人士。",
-        "cta": "開始使用 →",
-        "features": {
-            "title": "強大的AI色彩工具",
-            "subtitle": "創建完美配色方案所需的一切",
-            "description": "我們的AI驅動工具會分析您的基礎顏色，並為您的項目生成各種和諧美觀的配色方案。",
-            "analyze": {
-                "name": "色彩分析",
-                "description": "深入分析色彩屬性，包括和諧性、對比度和可訪問性。"
-            },
-            "generate": {
-                "name": "AI生成",
-                "description": "生成各種類型的配色方案，如互補色、鄰近色、三色等。"
-            },
-            "preview": {
-                "name": "即時預覽",
-                "description": "立即在各種UI組件和版面上預覽您的配色方案。"
-            },
-            "export": {
-                "name": "導出格式",
-                "description": "將您的配色方案導出為多種格式，如CSS、SASS和Tailwind CSS。"
-            },
-            "download": {
-                "name": "下載方案",
-                "description": "將您的配色方案下載為檔案，輕鬆整合到您的工作流程中。"
-            }
+    "api": {
+        "errors": {
+            "unauthorized": "未授權",
+            "invalidUser": "無效的用戶身份",
+            "userNotFound": "找不到用戶",
+            "accountDisabled": "帳戶已被禁用",
+            "insufficientCredits": "積分不足，請充值",
+            "invalidColorValue": "無效的顏色值",
+            "invalidColorFormat": "無效的顏色格式",
+            "cannotDetermineUser": "無法確定用戶身份",
+            "missingParameters": "缺少必要參數",
+            "invalidPageNumber": "無效的頁碼",
+            "internalServerError": "內部伺服器錯誤",
+            "databaseError": "資料庫操作失敗",
+            "generateFailed": "生成HTML範例失敗",
+            "updateFailed": "更新資料庫失敗",
+            "missingField": "缺少必要欄位",
+            "cannotModifyAdmin": "無法修改管理員用戶",
+            "invalidConfigType": "無效的配置類型",
+            "invalidTheory": "無效的顏色理論",
+            "colorNotFound": "找不到顏色記錄",
+            "schemeNotFound": "找不到配色方案",
+            "regenerateConfigFailed": "重新生成配置失敗",
+            "invalidRequestData": "無效的請求資料",
+            "recordNotFound": "找不到記錄"
         },
-        "credits": {
-            "title": "永不枯竭的靈感",
-            "description": "購買額外積分，繼續生成令人驚豔的配色方案而不受任何中斷。",
-            "cta": "購買積分"
+        "logs": {
+            "startGenerating": "開始生成配色方案，十六進制：{hex}{regenerate}",
+            "forceRegenerate": " (強制重新生成)",
+            "schemeRetry": "重試 {theory}...",
+            "startAiRequest": "開始AI色彩分析請求...",
+            "aiRequestSuccess": "AI請求成功，獲取回應內容...",
+            "aiResponseValid": "AI回應驗證成功",
+            "generateHtmlPath": "generateHtmlExample 路徑：{path}",
+            "savingToDatabase": "儲存到資料庫失敗：",
+            "generateColorFailed": "生成配色方案失敗：",
+            "fetchUsersFailed": "獲取配色方案失敗：",
+            "fetchUsersListFailed": "獲取用戶列表失敗：",
+            "updateUserStatusFailed": "更新用戶狀態失敗：",
+            "createExampleFailed": "創建範例所需的參數不完整：",
+            "uploadExampleFailed": "上傳 {theory} 範例HTML失敗：",
+            "createExampleGeneralFailed": "創建 {theory} 範例失敗：",
+            "generateDefaultHtmlFailed": "生成預設HTML失敗：",
+            "startAnalyzing": "開始色彩分析",
+            "requestingAi": "請求AI色彩分析...",
+            "parsingAiResponse": "解析AI回應資料...",
+            "basicAnalysisComplete": "基本色彩分析完成",
+            "generatingExamples": "生成配色方案範例...",
+            "sendStreamUpdateFailed": "發送串流更新失敗：",
+            "unknownError": "未知錯誤",
+            "openaiUrlNotConfigured": "OPENAI_URL 環境變數未配置",
+            "aiRequestFailed": "AI請求失敗 ({status})：{error}",
+            "aiEmptyChoices": "AI返回空的選項陣列",
+            "aiIncorrectFormat": "AI返回的內容格式不正確",
+            "aiInvalidJson": "AI返回的內容不是有效的JSON",
+            "aiRequestError": "AI請求期間發生錯誤",
+            "aiResponsePreview": "回應內容預覽：",
+            "aiDataFormatError": "AI返回的資料格式錯誤，無法解析JSON",
+            "aiResponseError": "AI請求返回錯誤：",
+            "aiStructureIncorrect": "AI返回的資料結構不正確",
+            "aiParseJsonFailed": "無法將AI返回的內容解析為JSON",
+            "aiMissingColorSchemes": "AI返回的資料缺少必要的配色方案資訊",
+            "aiAnalysisFailed": "AI分析失敗，直接通知用戶：",
+            "aiGeneralError": "AI遇到問題，請稍後重試",
+            "previewProxyError": "預覽代理錯誤：",
+            "uploadToStorageFailed": "上傳到儲存失敗：",
+            "downloadContentError": "下載內容錯誤：",
+            "loginProcessError": "登入過程錯誤：",
+            "defaultColorScheme": "配色方案",
+            "defaultSchemeExample": "這是一個配色方案範例",
+            "defaultColorDisplay": "色彩顯示",
+            "defaultApplicationScene": "適用於各種UI設計場景",
+            "defaultAdvantages": "提供良好的視覺體驗",
+            "defaultExampleButton": "範例按鈕",
+            "startRegeneratingConfig": "開始重新生成配置 - 十六進制：{hex}，類型：{configType}，理論：{theory}",
+            "updateColorRecordFailed": "更新顏色記錄失敗",
+            "createTailwindConfigFailed": "創建Tailwind配置失敗",
+            "createBootstrap5CustomVariablesFailed": "創建Bootstrap 5自定義變數失敗",
+            "createTailwindConfigGeneralFailed": "為 {theory} 創建Tailwind配置失敗",
+            "createBootstrap5CustomVariablesGeneralFailed": "為 {theory} 創建Bootstrap 5自定義變數失敗",
+            "tailwindRetry": "重試Tailwind配置生成 - {theory}",
+            "bootstrap5Retry": "重試Bootstrap 5配置生成 - {theory}"
         },
-        "showcase": {
-            "title": "展示",
-            "subtitle": "看看可能的成果",
-            "description": "探索我們社群創建的配色方案，為您的下一個項目獲得靈感。"
+        "success": {
+            "schemeGenerated": "配色方案生成成功",
+            "exampleGenerated": "範例生成成功",
+            "dataUpdated": "資料更新成功"
         }
     }
 }

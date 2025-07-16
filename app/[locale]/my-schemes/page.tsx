@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from 'next-intl';
@@ -9,7 +8,6 @@ import GradientBackground2 from "@/app/components/GradientBackground2";
 import { AiColor } from "@prisma/client";
 
 export default function MySchemesPage() {
-    const { data: session, status } = useSession();
     const router = useRouter();
     const params = useParams();
     const locale = params.locale as string;
@@ -22,13 +20,11 @@ export default function MySchemesPage() {
     const [error, setError] = useState<string | null>(null);
 
     const fetchSchemes = useCallback(async (page: number) => {
-        if (status !== "authenticated") return;
-
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`/api/user/colors?page=${page}`, {
+            const response = await fetch(`/api/colors/public?page=${page}`, {
                 headers: {
                     "Accept-Language": locale, // 添加语言信息到请求头
                 }
@@ -46,16 +42,11 @@ export default function MySchemesPage() {
         } finally {
             setLoading(false);
         }
-    }, [status]);
+    }, [locale, t]);
 
     useEffect(() => {
-        if (status === "loading") return;
-        if (status === "unauthenticated") {
-            router.push(`/${locale}/login`);
-            return;
-        }
         fetchSchemes(currentPage);
-    }, [status, currentPage, router, fetchSchemes]);
+    }, [currentPage, fetchSchemes]);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
