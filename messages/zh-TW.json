@@ -659,11 +659,11 @@
         "recommendedRatio": "推薦比例",
         "bestFor": "最適於",
         "nextColorButton": "下一個顏色",
-        "noExamples": "目前沒有可用的配色方案範例。"
+        "noExamples": "暫無範例，請稍後再試。",
+        "sharing": "分享中..."
     },
     "UserCredits": {
         "title": "我的積分",
         "unlimited": "無限"
-    },
-    "sharing": "分享中..."
+    }
 }

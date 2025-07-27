@@ -659,11 +659,11 @@
         "recommendedRatio": "권장 비율",
         "bestFor": "최적 대상",
         "nextColorButton": "다음 색상",
-        "noExamples": "현재 사용 가능한 색상 구성표 예제가 없습니다."
+        "noExamples": "현재 사용할 수 있는 색상 구성 예시가 없습니다.",
+        "sharing": "공유 중..."
     },
     "UserCredits": {
         "title": "내 크레딧",
         "unlimited": "무제한"
-    },
-    "sharing": "공유 중..."
+    }
 }

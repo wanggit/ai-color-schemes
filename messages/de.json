@@ -659,11 +659,11 @@
         "recommendedRatio": "Empfohlenes Verhältnis",
         "bestFor": "Am besten für",
         "nextColorButton": "Nächste Farbe",
-        "noExamples": "Derzeit sind keine Farbschemabeispiele verfügbar."
+        "noExamples": "Keine Beispiele gefunden. Bitte versuchen Sie es später erneut.",
+        "sharing": "Teilen..."
     },
     "UserCredits": {
         "title": "Meine Credits",
         "unlimited": "Unbegrenzt"
-    },
-    "sharing": "Teilen..."
+    }
 }

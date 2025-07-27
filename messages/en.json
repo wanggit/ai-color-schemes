@@ -659,11 +659,11 @@
         "recommendedRatio": "Recommended Ratio",
         "bestFor": "Best For",
         "nextColorButton": "Next Color",
-        "noExamples": "No color scheme examples available at the moment."
+        "noExamples": "No examples found. Please try again later.",
+        "sharing": "Sharing..."
     },
     "UserCredits": {
         "title": "My Credits",
         "unlimited": "Unlimited"
-    },
-    "sharing": "Sharing..."
+    }
 }

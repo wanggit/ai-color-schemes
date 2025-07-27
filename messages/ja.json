@@ -659,11 +659,11 @@
         "recommendedRatio": "推奨比率",
         "bestFor": "最適",
         "nextColorButton": "次の色",
-        "noExamples": "現在、利用可能な配色の例はありません。"
+        "noExamples": "現在、利用可能な配色の例はありません。",
+        "sharing": "共有中..."
     },
     "UserCredits": {
         "title": "私のクレジット",
         "unlimited": "無制限"
-    },
-    "sharing": "共有中..."
+    }
 }

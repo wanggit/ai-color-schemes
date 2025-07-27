@@ -669,11 +669,11 @@
         "recommendedRatio": "推荐比例",
         "bestFor": "最适于",
         "nextColorButton": "下一个颜色",
-        "noExamples": "当前没有可用的配色方案示例。"
+        "noExamples": "暂无示例，请稍后再试。",
+        "sharing": "分享中..."
     },
     "UserCredits": {
         "title": "我的积分",
         "unlimited": "无限"
-    },
-    "sharing": "分享中..."
+    }
 }
