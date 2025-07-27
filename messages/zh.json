@@ -674,5 +674,6 @@
     "UserCredits": {
         "title": "我的积分",
         "unlimited": "无限"
-    }
+    },
+    "sharing": "分享中..."
 }

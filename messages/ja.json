@@ -664,5 +664,6 @@
     "UserCredits": {
         "title": "私のクレジット",
         "unlimited": "無制限"
-    }
+    },
+    "sharing": "共有中..."
 }

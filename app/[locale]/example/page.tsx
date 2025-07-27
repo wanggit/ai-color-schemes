@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import GradientBackground from '@/app/components/GradientBackground';
+import html2canvas from 'html2canvas';
 
 // Define types for the data
 type Scheme = {
@@ -35,6 +36,8 @@ export default function ExamplePage() {
     const [likedSchemes, setLikedSchemes] = useState<Record<string, boolean>>({});
     const [iframeHeight, setIframeHeight] = useState(900); // 默认高度
     const [iframeLoading, setIframeLoading] = useState(true);
+    const [isSharing, setIsSharing] = useState(false);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -136,6 +139,73 @@ export default function ExamplePage() {
         }
     };
 
+    const handleShare = async () => {
+        if (!iframeRef.current || !currentScheme) {
+            console.error('Iframe or current scheme is not available.');
+            return;
+        }
+
+        setIsSharing(true);
+
+        try {
+            const iframeDocument = iframeRef.current.contentDocument;
+            if (!iframeDocument) {
+                throw new Error('Could not access iframe content.');
+            }
+
+            const body = iframeDocument.body;
+
+            // Temporarily set body width to ensure full capture
+            const originalWidth = body.style.width;
+            body.style.width = '100vw';
+
+            const canvas = await html2canvas(body, {
+                useCORS: true,
+                allowTaint: true,
+                scale: 2, // Increase scale for better quality
+                height: body.scrollHeight, // Ensure full height is captured
+                windowHeight: body.scrollHeight,
+                scrollY: -window.scrollY,
+            });
+
+            // Restore original width
+            body.style.width = originalWidth;
+
+            canvas.toBlob(async (blob) => {
+                if (!blob) {
+                    throw new Error('Failed to create blob from canvas.');
+                }
+
+                const filename = `color-scheme-${Date.now()}.png`;
+                const response = await fetch(`/api/colors/upload-image?filename=${filename}`, {
+                    method: 'POST',
+                    body: blob,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to upload image.');
+                }
+
+                const newBlob = await response.json();
+                const imageUrl = newBlob.url;
+
+                const pinterestUrl = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                    window.location.href
+                )}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(
+                    currentScheme.description || 'Check out this amazing color scheme!'
+                )}`;
+
+                window.open(pinterestUrl, '_blank', 'noopener,noreferrer');
+                setIsSharing(false);
+            }, 'image/png');
+
+        } catch (error) {
+            console.error('Sharing failed:', error);
+            alert('Failed to share image. Please try again.');
+            setIsSharing(false);
+        }
+    };
+
     const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
         const iframe = event.currentTarget;
         try {
@@ -206,17 +276,32 @@ export default function ExamplePage() {
                                         <span>{likes}</span>
                                     </button>
                                 </div>
-                                {colorData.schemes.length > 1 && (
-                                    <div className="flex items-center space-x-2">
-                                        <button onClick={handlePrevScheme} disabled={schemeIndex === 0} className="px-4 py-2 bg-purple-600 rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700">
-                                            {t('prevButton')}
-                                        </button>
-                                        <span>{schemeIndex + 1} / {colorData.schemes.length}</span>
-                                        <button onClick={handleNextScheme} disabled={!colorData || (page >= colorData.total && schemeIndex === colorData.schemes.length - 1)} className="px-4 py-2 bg-purple-600 rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700">
-                                            {t('nextButton')}
-                                        </button>
-                                    </div>
-                                )}
+                                <div className="flex items-center space-x-2">
+                                    <button onClick={handlePrevScheme} disabled={schemeIndex === 0} className="px-4 py-2 bg-purple-600 rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700">
+                                        {t('prevButton')}
+                                    </button>
+                                    <span>{schemeIndex + 1} / {colorData.schemes.length}</span>
+                                    <button onClick={handleNextScheme} disabled={!colorData || (page >= colorData.total && schemeIndex === colorData.schemes.length - 1)} className="px-4 py-2 bg-purple-600 rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700">
+                                        {t('nextButton')}
+                                    </button>
+                                    <button
+                                        onClick={handleShare}
+                                        disabled={isSharing || iframeLoading}
+                                        className="px-4 py-2 bg-pink-600 text-white rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-pink-700 flex items-center"
+                                    >
+                                        {isSharing ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                {t('sharing', { defaultValue: 'Sharing...' })}
+                                            </>
+                                        ) : (
+                                            'Share to Pinterest'
+                                        )}
+                                    </button>
+                                </div>
                             </div>
 
                             <div
@@ -232,6 +317,7 @@ export default function ExamplePage() {
                                     </div>
                                 )}
                                 <iframe
+                                    ref={iframeRef}
                                     src={`/api/colors/preview?url=${encodeURIComponent(currentScheme.url)}`}
                                     title={currentScheme.theory}
                                     className="w-full h-full border-0"

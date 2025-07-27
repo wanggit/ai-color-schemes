@@ -664,5 +664,6 @@
     "UserCredits": {
         "title": "내 크레딧",
         "unlimited": "무제한"
-    }
+    },
+    "sharing": "공유 중..."
 }

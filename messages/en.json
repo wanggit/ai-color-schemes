@@ -664,5 +664,6 @@
     "UserCredits": {
         "title": "My Credits",
         "unlimited": "Unlimited"
-    }
+    },
+    "sharing": "Sharing..."
 }

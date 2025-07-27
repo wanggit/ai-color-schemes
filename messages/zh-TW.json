@@ -664,5 +664,6 @@
     "UserCredits": {
         "title": "我的積分",
         "unlimited": "無限"
-    }
+    },
+    "sharing": "分享中..."
 }

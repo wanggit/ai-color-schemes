@@ -664,5 +664,6 @@
     "UserCredits": {
         "title": "Meine Credits",
         "unlimited": "Unbegrenzt"
-    }
+    },
+    "sharing": "Teilen..."
 }
