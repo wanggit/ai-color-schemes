@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
-import GenerateClient from '@/app/components/GenerateClient';
+import GenerateClientNew from '@/app/components/GenerateClientNew';
 
 type Props = {
     params: { locale: string };
@@ -34,7 +34,7 @@ export default async function GeneratePage({ params }: Props) {
             {/* 渲染负责所有交互的客户端组件 */}
             {/* Suspense用于处理客户端组件的懒加载或数据获取 */}
             <Suspense fallback={<div className="text-center p-8">Loading Interactive UI...</div>}>
-                <GenerateClient />
+                <GenerateClientNew />
             </Suspense>
         </div>
     );

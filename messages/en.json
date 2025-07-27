@@ -82,9 +82,7 @@
     "home": {
         "hero": {
             "title": "AI Color Scheme Generator",
-            "titleZh": "AI Color Scheme Generator",
             "description": "Create stunning color palettes with AI. Perfect for designers, developers, and creative professionals.",
-            "descriptionZh": "Create stunning color palettes with AI. Perfect for designers, developers, and creative professionals.",
             "cta": "Start Creating Colors →"
         },
         "features": {
@@ -92,27 +90,19 @@
             "subtitle": "Everything you need to create perfect color schemes",
             "aiPowered": {
                 "title": "AI-Powered Generation",
-                "titleZh": "AI-Powered Generation",
-                "description": "Advanced AI algorithms create perfect color schemes instantly",
-                "descriptionZh": "Advanced AI algorithms create perfect color schemes instantly"
+                "description": "Advanced AI algorithms create perfect color schemes instantly"
             },
             "designerFriendly": {
                 "title": "Designer-Friendly",
-                "titleZh": "Designer-Friendly",
-                "description": "Professional color palettes for web, UI/UX, and graphic design",
-                "descriptionZh": "Professional color palettes for web, UI/UX, and graphic design"
+                "description": "Professional color palettes for web, UI/UX, and graphic design"
             },
             "multipleSchemes": {
                 "title": "Multiple Schemes",
-                "titleZh": "Multiple Schemes",
-                "description": "Generate complementary, triadic, analogous and custom color schemes",
-                "descriptionZh": "Generate complementary, triadic, analogous and custom color schemes"
+                "description": "Generate complementary, triadic, analogous and custom color schemes"
             },
             "developerTools": {
                 "title": "Developer Tools",
-                "titleZh": "Developer Tools",
-                "description": "Export CSS, HTML examples and integrate with your workflow",
-                "descriptionZh": "Export CSS, HTML examples and integrate with your workflow"
+                "description": "Export CSS, HTML examples and integrate with your workflow"
             }
         },
         "cta": {
@@ -220,16 +210,7 @@
             "viewExample": "View Example",
             "notGenerated": "Not Generated",
             "regenerate": "Regenerate color scheme",
-            "viewDetails": "View Details",
-            "complementary": "Complementary",
-            "analogous": "Analogous",
-            "triadic": "Triadic",
-            "monochromatic": "Monochromatic",
-            "splitcomplementary": "Split Complementary",
-            "split-complementary": "Split Complementary",
-            "tetradic": "Tetradic",
-            "compound": "Compound",
-            "square": "Square"
+            "viewDetails": "View Details"
         },
         "pagination": {
             "previous": "Previous",
@@ -254,6 +235,24 @@
         "limitReached": "Free usage limit reached, please upgrade to member to continue.",
         "accessDenied": "Access denied: {error}",
         "requestError": "Request error: {error}",
+        "client": {
+            "loading": "Loading...",
+            "analyzingColorTitle": "AI is analyzing the color...",
+            "waitingForAI": "Waiting for AI response...",
+            "aiLogTitle": "AI Generation Log",
+            "clearLogs": "Clear",
+            "currentStepLabel": "Current Step:",
+            "stepBasic": "Basic Analysis",
+            "stepSchemes": "Scheme Generation",
+            "stepComplete": "Complete",
+            "schemeGenerationProgress": "Scheme Generation Progress",
+            "tasksCompleted": "{completedTasks}/{totalTasks} tasks completed",
+            "noLogs": "No logs yet",
+            "jsonFormatErrorTitle": "JSON Format Error",
+            "generationFailedTitle": "Generation Failed",
+            "regenerate": "Regenerate",
+            "viewErrorDetails": "View error details"
+        },
         "mySchemes": {
             "table": {
                 "complementary": "Complementary",
@@ -262,10 +261,71 @@
                 "monochromatic": "Monochromatic",
                 "splitcomplementary": "Split Complementary",
                 "split-complementary": "Split Complementary",
-                "split-complementarycomplementary": "Split Complementary",
                 "tetradic": "Tetradic",
                 "compound": "Compound",
                 "square": "Square"
+            }
+        },
+        "aiLogs": {
+            "error": {
+                "invalidBaseData": "Unable to start color scheme generation: invalid base analysis data",
+                "schemeNotFound": "Color scheme not found: {theory}",
+                "generationProcess": "=== Error during generation process ===",
+                "errorType": "Error type: {type}",
+                "errorMessage": "Error message: {message}",
+                "errorStack": "Error stack: {stack}",
+                "baseDataFormat": "Base analysis data format error: missing color scheme data",
+                "jsonFormat": "Detected JSON format error, will attempt to retry"
+            },
+            "step1": {
+                "title": "=== Step 1: Basic Color Analysis ===",
+                "analyzingColor": "Analyzing color: {color}",
+                "analysisComplete": "Basic color analysis complete, waiting for color scheme generation..."
+            },
+            "step2": {
+                "title": "=== Step 2: {hexColor} Color Scheme Generation ===",
+                "schemeOrder": "Color scheme generation order: {order}",
+                "validatingData": "Validating base data: found {count} color schemes",
+                "initializedStatus": "Initialized generation status for all color schemes",
+                "processingScheme": "[{current}/{total}] Start processing color scheme: {theory}",
+                "foundSchemeData": "Found color scheme data, starting to generate related resources: {theory}",
+                "generatingTask": "[{schemeIndex}.{taskIndex}] Start generating {task}: {theory}",
+                "generatingTaskProgress": "Generating {task}: {theory}...",
+                "waitingForPreviousTask": "Waiting for the previous task to complete...",
+                "apiRequestDuration": "API request duration: {duration}ms",
+                "apiResponseSuccess": "API response success: {theory} {task}",
+                "setExampleUrl": "Set example URL: {url}",
+                "setTailwindConfig": "Set Tailwind config",
+                "setBootstrapConfig": "Set Bootstrap config",
+                "taskCompleted": "✓ {task} completed: {theory}",
+                "taskFailed": "✗ {task} failed: {theory} - {error}",
+                "taskError": "✗ {task} exception: {theory} - {error}",
+                "schemeCompleted": "Color scheme {theory} processing complete"
+            },
+            "step3": {
+                "title": "=== Step 3: Generation Complete ===",
+                "allSchemesCompleted": "All color scheme generations are complete!"
+            },
+            "generationEnded": "Generation process ended",
+            "stream": {
+                "generatingContent": "AI is generating content...",
+                "baseDataReceived": "Base analysis data received completely",
+                "foundSchemes": "Found {count} color schemes"
+            },
+            "retry": {
+                "fail": {
+                    "noData": "Retry failed: No AI response data or data format is incorrect",
+                    "schemeNotFound": "Retry failed: Color scheme {theory} not found",
+                    "apiError": "✗ Retry failed: {theory} {task} - {error}",
+                    "exception": "✗ Retry exception: {theory} {task} - {error}"
+                },
+                "start": "Starting retry: {theory} {task}",
+                "progress": "Retrying {task}: {theory}...",
+                "apiSuccess": "Retry API response success: {theory} {task}",
+                "setExampleUrl": "Retry has set example URL: {url}",
+                "setTailwindConfig": "Retry has set Tailwind config",
+                "setBootstrapConfig": "Retry has set Bootstrap config",
+                "success": "✓ Retry successful: {theory} {task}"
             }
         }
     },
@@ -486,6 +546,19 @@
         "bestFor": "Best For"
     },
     "api": {
+        "basicAnalysis": {
+            "start": "Starting basic color analysis...",
+            "requestingAI": "Requesting AI analysis...",
+            "parsingResponse": "Parsing AI response...",
+            "parsingComplete": "AI response parsing complete",
+            "retryInvalidJson": "AI response is not valid JSON. Asking AI to fix the JSON format... ({retryCount}/{maxRetries})",
+            "fixingJson": "Asking AI to fix JSON format ({retryCount}/{maxRetries})...",
+            "parseFailed": "Failed to parse AI response after {maxAttempts} attempts. The AI returned invalid JSON format.",
+            "invalidJsonFormat": "Invalid JSON format. Raw response: {rawResponse}",
+            "parseFailedRaw": "Failed to parse AI response after {maxAttempts} attempts. Raw response: {rawResponse}",
+            "savingToDb": "Saving to database...",
+            "analysisComplete": "Basic color analysis complete"
+        },
         "errors": {
             "unauthorized": "Unauthorized",
             "invalidUser": "Invalid user identity",

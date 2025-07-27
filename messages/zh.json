@@ -235,6 +235,24 @@
         "limitReached": "已达到免费使用次数上限，请升级为会员以继续使用。",
         "accessDenied": "访问被拒绝：{error}",
         "requestError": "请求错误：{error}",
+        "client": {
+            "loading": "加载中...",
+            "analyzingColorTitle": "AI 正在分析颜色...",
+            "waitingForAI": "正在等待AI响应...",
+            "aiLogTitle": "AI 生成日志",
+            "clearLogs": "清除",
+            "currentStepLabel": "当前步骤:",
+            "stepBasic": "基础分析",
+            "stepSchemes": "配色方案生成",
+            "stepComplete": "完成",
+            "schemeGenerationProgress": "配色方案生成进度",
+            "tasksCompleted": "{completedTasks}/{totalTasks} 任务完成",
+            "noLogs": "暂无日志",
+            "jsonFormatErrorTitle": "JSON格式错误",
+            "generationFailedTitle": "生成失败",
+            "regenerate": "重新生成",
+            "viewErrorDetails": "查看详细错误信息"
+        },
         "mySchemes": {
             "table": {
                 "complementary": "互补色方案",
@@ -243,10 +261,71 @@
                 "monochromatic": "单色方案",
                 "splitcomplementary": "分裂互补色方案",
                 "split-complementary": "分裂互补色方案",
-                "split-complementarycomplementary": "分裂互补色方案",
                 "tetradic": "四色方案",
                 "compound": "复合方案",
                 "square": "正方形方案"
+            }
+        },
+        "aiLogs": {
+            "error": {
+                "invalidBaseData": "无法开始配色方案生成：基础分析数据无效",
+                "schemeNotFound": "未找到配色方案: {theory}",
+                "generationProcess": "=== 生成过程发生错误 ===",
+                "errorType": "错误类型: {type}",
+                "errorMessage": "错误信息: {message}",
+                "errorStack": "错误堆栈: {stack}",
+                "baseDataFormat": "基础分析数据格式错误：缺少配色方案数据",
+                "jsonFormat": "检测到JSON格式错误，将尝试重试"
+            },
+            "step1": {
+                "title": "=== 步骤1: 基础颜色分析 ===",
+                "analyzingColor": "分析颜色: {color}",
+                "analysisComplete": "基础颜色分析完成，等待配色方案生成..."
+            },
+            "step2": {
+                "title": "=== 步骤2: {hexColor} 配色方案生成 ===",
+                "schemeOrder": "配色方案生成顺序: {order}",
+                "validatingData": "验证基础数据：找到 {count} 个配色方案",
+                "initializedStatus": "已初始化所有配色方案的生成状态",
+                "processingScheme": "[{current}/{total}] 开始处理配色方案: {theory}",
+                "foundSchemeData": "找到配色方案数据，开始生成相关资源: {theory}",
+                "generatingTask": "[{schemeIndex}.{taskIndex}] 开始生成{task}: {theory}",
+                "generatingTaskProgress": "正在生成{task}: {theory}...",
+                "waitingForPreviousTask": "等待前一个任务完成...",
+                "apiRequestDuration": "API请求耗时: {duration}ms",
+                "apiResponseSuccess": "API响应成功: {theory} {task}",
+                "setExampleUrl": "已设置示例URL: {url}",
+                "setTailwindConfig": "已设置Tailwind配置",
+                "setBootstrapConfig": "已设置Bootstrap配置",
+                "taskCompleted": "✓ {task}完成: {theory}",
+                "taskFailed": "✗ {task}失败: {theory} - {error}",
+                "taskError": "✗ {task}异常: {theory} - {error}",
+                "schemeCompleted": "配色方案 {theory} 处理完成"
+            },
+            "step3": {
+                "title": "=== 步骤3: 生成完成 ===",
+                "allSchemesCompleted": "所有配色方案生成完成！"
+            },
+            "generationEnded": "生成过程结束",
+            "stream": {
+                "generatingContent": "AI正在生成内容...",
+                "baseDataReceived": "基础分析数据接收完成",
+                "foundSchemes": "找到 {count} 个配色方案"
+            },
+            "retry": {
+                "fail": {
+                    "noData": "重试失败: 无AI响应数据或数据格式错误",
+                    "schemeNotFound": "重试失败: 未找到配色方案 {theory}",
+                    "apiError": "✗ 重试失败: {theory} {task} - {error}",
+                    "exception": "✗ 重试异常: {theory} {task} - {error}"
+                },
+                "start": "开始重试: {theory} {task}",
+                "progress": "正在重试{task}: {theory}...",
+                "apiSuccess": "重试API响应成功: {theory} {task}",
+                "setExampleUrl": "重试已设置示例URL: {url}",
+                "setTailwindConfig": "重试已设置Tailwind配置",
+                "setBootstrapConfig": "重试已设置Bootstrap配置",
+                "success": "✓ 重试成功: {theory} {task}"
             }
         }
     },
@@ -477,6 +556,19 @@
         "bestFor": "最适用于"
     },
     "api": {
+        "basicAnalysis": {
+            "start": "开始基础颜色分析...",
+            "requestingAI": "正在请求AI分析...",
+            "parsingResponse": "正在解析AI响应...",
+            "parsingComplete": "AI响应解析完成",
+            "retryInvalidJson": "AI响应不是有效的JSON。正在请求AI修复JSON格式... ({retryCount}/{maxRetries})",
+            "fixingJson": "正在请求AI修复JSON格式 ({retryCount}/{maxRetries})...",
+            "parseFailed": "在 {maxAttempts} 次尝试后解析AI响应失败。AI返回了无效的JSON格式。",
+            "invalidJsonFormat": "无效的JSON格式。原始响应: {rawResponse}",
+            "parseFailedRaw": "在 {maxAttempts} 次尝试后解析AI响应失败。原始响应: {rawResponse}",
+            "savingToDb": "正在保存到数据库...",
+            "analysisComplete": "基础颜色分析完成"
+        },
         "errors": {
             "unauthorized": "未授权",
             "invalidUser": "无效的用户身份",
@@ -579,9 +671,8 @@
         "nextColorButton": "下一个颜色",
         "noExamples": "当前没有可用的配色方案示例。"
     },
-    "UserCredits_2": {
-        "credits": "积分",
-        "remaining": "剩余",
-        "buyMore": "购买更多"
+    "UserCredits": {
+        "title": "我的积分",
+        "unlimited": "无限"
     }
 }

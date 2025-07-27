@@ -137,7 +137,7 @@ export const authOptions: NextAuthOptions = {
                 isDisabled: false,
                 membershipType: MembershipType.FREE,
                 monthlyUsageCount: 0,
-                credits: 30, // 新用户注册时，赠送30个Credits
+                credits: 36, // 新用户注册时，赠送36个Credits
                 lastUsageResetAt: new Date(),
               }
             });

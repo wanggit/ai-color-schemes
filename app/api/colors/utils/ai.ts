@@ -1,6 +1,8 @@
 import { put } from "@vercel/blob";
 import { ApiI18nHandler } from "@/lib/api-i18n";
 import { COLOR_ANALYSIS_SYSTEM_PROMPT, COLOR_SCHEME_BOOTSTRAP5_CUSTOM, COLOR_SCHEME_SYSTEM_PROMPT, COLOR_SCHEME_TAILWINDCSS_CUSTOM, PREVIEW_CONFIG } from "../constants";
+import { gpt4oModel, deepseekr1Model } from '@/lib/ai-provider';
+import { generateText } from 'ai';
 // Playwright导入 - 用于生成预览图片
 import { chromium } from 'playwright';
 
@@ -195,215 +197,130 @@ export const createBootstrap5CustomVariables = async (colorScheme: any, token: s
 }
 
 export const requestAiCode = async (colorScheme: any, token: string | undefined, systemPrompt: string, lang: string) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        "model": "deepseek-r1",
-        "messages": [
-            {
-                "role": "system",
-                "content": systemPrompt
-            },
-            {
-                "role": "user",
-                "content": `${JSON.stringify(colorScheme)}`
-            }
-        ],
-        "temperature": 0.5,
-        "max_tokens": 16384,
-        "stream": false
-    });
-
-    const requestOptions: RequestInit = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    const openaiUrl = process.env.OPENAI_URL;
-    const response = await fetch(`${openaiUrl}/v1/chat/completions`, requestOptions);
-    let content = await response.text();
-    let contentJson = null;
     try {
-        contentJson = JSON.parse(content);
-    } catch (error) {
-        console.log("Failed to request Ai Color Scheme, Try again:", error);
-        const response = await fetch(`${openaiUrl}/v1/chat/completions`, requestOptions);
-        content = await response.text();
-        try {
-            contentJson = JSON.parse(content);
-        } catch (error) {
-            console.log("Failed to request Ai Color Scheme:", error);
-            return "error";
+        if (!token) {
+            throw new Error('Missing OpenAI API key');
         }
-    }
-    if (contentJson.error) {
-        console.log("contentJson.error has ERROR: ", contentJson.error);
+
+        const { text } = await generateText({
+            model: deepseekr1Model,
+            messages: [
+                {
+                    role: 'system',
+                    content: systemPrompt
+                },
+                {
+                    role: 'user',
+                    content: `${JSON.stringify(colorScheme)}`
+                }
+            ],
+            temperature: 0.5,
+            maxTokens: 16384,
+        });
+
+        let content = text;
+        const startTag: string = "```" + lang;
+        const endTag: string = "```";
+        let startIndex = content.indexOf(startTag);
+        if (startIndex === -1) {
+            startIndex = content.indexOf("```");
+            if (startIndex !== -1) {
+                content = content.substring(startIndex + 3)
+            }
+        } else {
+            content = content.substring(startIndex + startTag.length);
+        }
+        const endIndex = content.lastIndexOf(endTag);
+        if (endIndex !== -1) {
+            content = content.substring(0, endIndex)
+        }
+        content = content.trim()
+            .replace(/\\n/g, '\n')
+            .replace(/\\"/g, '"')
+        return content;
+    } catch (error) {
+        console.log("Failed to request Ai Code:", error);
         return "error";
     }
-    content = contentJson.choices[0].message.content;
-    const startTag: string = "```" + lang;
-    const endTag: string = "```";
-    let startIndex = content.indexOf(startTag);
-    if (startIndex === -1) {
-        startIndex = content.indexOf("```");
-        if (startIndex !== -1) {
-            content = content.substring(startIndex + 3)
-        }
-    } else {
-        content = content.substring(startIndex + startTag.length);
-    }
-    const endIndex = content.lastIndexOf(endTag);
-    if (endIndex !== -1) {
-        content = content.substring(0, endIndex)
-    }
-    content = content.trim()
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"')
-    return content;
 }
 
 export const requestAiColorScheme = async (colorScheme: any, token: string | undefined) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        "model": "deepseek-r1",
-        "messages": [
-            {
-                "role": "system",
-                "content": COLOR_SCHEME_SYSTEM_PROMPT
-            },
-            {
-                "role": "user",
-                "content": `${JSON.stringify(colorScheme)}`
-            }
-        ],
-        "temperature": 0.5,
-        "max_tokens": 16384,
-        "stream": false
-    });
-
-    const requestOptions: RequestInit = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    const openaiUrl = process.env.OPENAI_URL;
-    const response = await fetch(`${openaiUrl}/v1/chat/completions`, requestOptions);
-    let content = await response.text();
-    let contentJson = null;
     try {
-        contentJson = JSON.parse(content);
-    } catch (error) {
-        console.log("Failed to request Ai Color Scheme, Try again:", error);
-        const response = await fetch(`${openaiUrl}/v1/chat/completions`, requestOptions);
-        content = await response.text();
-        try {
-            contentJson = JSON.parse(content);
-        } catch (error) {
-            console.log("Failed to request Ai Color Scheme:", error);
-            return "error";
+        if (!token) {
+            throw new Error('Missing OpenAI API key');
         }
-    }
-    if (contentJson.error) {
-        console.log("contentJson.error has ERROR: ", contentJson.error);
+
+        const { text } = await generateText({
+            model: deepseekr1Model,
+            messages: [
+                {
+                    role: 'system',
+                    content: COLOR_SCHEME_SYSTEM_PROMPT
+                },
+                {
+                    role: 'user',
+                    content: `${JSON.stringify(colorScheme)}`
+                }
+            ],
+            temperature: 0.5,
+            maxTokens: 16384,
+        });
+
+        let content = text;
+        const startTag: string = "```html";
+        const endTag: string = "```";
+        const startIndex = content.indexOf(startTag);
+        const endIndex = content.indexOf(endTag, startIndex + startTag.length);
+        if (startIndex !== -1 && endIndex !== -1) {
+            content = content.substring(startIndex + startTag.length, endIndex)
+        }
+        content = content.trim()
+            .replace(/\\n/g, '\n')
+            .replace(/\\"/g, '"')
+            .replace(/\u003c/g, '<')
+            .replace(/\u003e/g, '>');
+        return content;
+    } catch (error) {
+        console.log("Failed to request Ai Color Scheme:", error);
         return "error";
     }
-    content = contentJson.choices[0].message.content;
-    const startTag: string = "```html";
-    const endTag: string = "```";
-    const startIndex = content.indexOf(startTag);
-    const endIndex = content.indexOf(endTag, startIndex + startTag.length);
-    if (startIndex !== -1 && endIndex !== -1) {
-        content = content.substring(startIndex + startTag.length, endIndex)
-    }
-    content = content.trim()
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"')
-        .replace(/\u003c/g, '<')
-        .replace(/\u003e/g, '>');
-    return content;
 }
 
 // 请求AI生成颜色分析响应
 export async function requestAiColor(hex: string, token: string | undefined, i18n: ApiI18nHandler) {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        "model": "deepseek-r1",
-        "messages": [
-            {
-                "role": "system",
-                "content": COLOR_ANALYSIS_SYSTEM_PROMPT
-            },
-            {
-                "role": "user",
-                "content": `${hex}`
-            }
-        ],
-        "temperature": 0.5,
-        "max_tokens": 16384,
-        "stream": false
-    });
-
-    const requestOptions: RequestInit = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    console.log(i18n.log("startAiRequest"));
-
     try {
-        const openaiUrl = process.env.OPENAI_URL;
-        if (!openaiUrl) {
+        if (!token) {
             throw new Error(i18n.log("openaiUrlNotConfigured"));
         }
-        const url = `${openaiUrl}/v1/chat/completions`;
-        console.log("url: ", url);
-        const response = await fetch(url, requestOptions);
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error(i18n.log("aiRequestFailed", { status: response.status, error: errorText }));
-            throw new Error(i18n.log("aiRequestFailed", { status: response.status, error: errorText }));
-        }
+        console.log(i18n.log("startAiRequest"));
+
+        const { text } = await generateText({
+            model: gpt4oModel,
+            messages: [
+                {
+                    role: 'system',
+                    content: COLOR_ANALYSIS_SYSTEM_PROMPT
+                },
+                {
+                    role: 'user',
+                    content: `${hex}`
+                }
+            ],
+            temperature: 0.5,
+            maxTokens: 16384,
+        });
 
         console.log(i18n.log("aiRequestSuccess"));
-        const responseText = await response.text();
 
-        // 验证返回的是有效JSON
-        try {
-            const responseJson = JSON.parse(responseText);
-            if (!responseJson.choices || responseJson.choices.length === 0) {
-                console.error(i18n.log("aiEmptyChoices"), responseJson);
-                throw new Error(i18n.log("aiEmptyChoices"));
-            }
-
-            if (!responseJson.choices[0].message || !responseJson.choices[0].message.content) {
-                console.error(i18n.log("aiIncorrectFormat"), responseJson.choices[0]);
-                throw new Error(i18n.log("aiIncorrectFormat"));
-            }
-
-            console.log(i18n.log("aiResponseValid"));
-        } catch (error) {
-            console.error(i18n.log("aiInvalidJson"), responseText);
-            if (responseText.length > 200) {
-                console.error(i18n.log("aiResponsePreview"), responseText.substring(0, 200) + "...");
-            }
-            throw new Error(i18n.log("aiInvalidJson"));
-        }
-
-        return responseText;
+        // 返回标准格式的响应
+        return JSON.stringify({
+            choices: [{
+                message: {
+                    content: text
+                }
+            }]
+        });
     } catch (error) {
         console.error(i18n.log("aiRequestError"), error);
         // 返回一个可解析但表示错误的JSON

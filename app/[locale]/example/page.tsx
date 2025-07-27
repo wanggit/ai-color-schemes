@@ -153,9 +153,9 @@ export default function ExamplePage() {
                             iframeDocument.documentElement?.offsetHeight || 0
                         );
 
-                        // 设置最小高度为900px，最大高度为1600px
+                        // 设置最小高度为900px，最大高度为2600px
                         const minHeight = 900;
-                        const maxHeight = 1600;
+                        const maxHeight = 2600;
                         const finalHeight = Math.min(Math.max(height, minHeight), maxHeight);
 
                         setIframeHeight(finalHeight);

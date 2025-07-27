@@ -1,13 +1,53 @@
 {
+    "HomePage": {
+        "title": "KI-Farbschemata für professionelle Projekte",
+        "subtitle": "Erstellen Sie sofort schöne, zugängliche Farbpaletten mit unserem KI-gestützten Generator. Perfekt für Designer, Entwickler und Kreative.",
+        "cta": "Farben erstellen",
+        "features": {
+            "title": "Funktionen",
+            "subtitle": "Alles, was Sie für perfekte Farbschemata benötigen",
+            "description": "Unser KI-gestützter Farbgenerator bietet alle Werkzeuge, die Sie benötigen, um atemberaubende, professionelle Farbpaletten zu erstellen.",
+            "analyze": {
+                "name": "Farbanalyse",
+                "description": "Tiefgehende Analyse von Farbpsychologie, Zugänglichkeit und visueller Harmonie für Ihre Projekte."
+            },
+            "generate": {
+                "name": "KI-Generierung",
+                "description": "Generieren Sie mehrere Farbschemata mit fortschrittlichen KI-Algorithmen, die auf Ihre Bedürfnisse zugeschnitten sind."
+            },
+            "preview": {
+                "name": "Live-Vorschau",
+                "description": "Sehen Sie, wie Ihre Farben in echten UI-Komponenten und Designbeispielen wirken."
+            },
+            "export": {
+                "name": "Exportoptionen",
+                "description": "Exportieren Sie Ihre Farbschemata in verschiedenen Formaten: CSS, JSON, Adobe und mehr."
+            },
+            "download": {
+                "name": "Assets herunterladen",
+                "description": "Laden Sie Farbpaletten als Bilder, PDFs oder Code-Schnipsel für Ihre Projekte herunter."
+            }
+        },
+        "credits": {
+            "title": "Flexibles Credit-System",
+            "description": "Nutzen Sie unser flexibles Credit-System, um so viele Farbschemata zu generieren, wie Sie benötigen. Perfekt für Einzelprojekte und Team-Workflows.",
+            "cta": "Preispläne anzeigen"
+        },
+        "showcase": {
+            "title": "Inspiration",
+            "subtitle": "Beliebte Farbschemata",
+            "description": "Entdecken Sie trendige Farbkombinationen und lassen Sie sich von den Lieblingspaletten unserer Community inspirieren."
+        }
+    },
     "seo": {
-        "title": "AI Colors - Kostenloser AI-Farbpaletten-Generator für perfekte Schemata",
-        "description": "Generieren Sie sofort schöne und zugängliche Farbpaletten mit unserem KI-gestützten Tool. Perfekt für Designer, Entwickler und Kreative. Holen Sie sich jetzt Ihr perfektes Farbschema!"
+        "title": "AI Colors - Kostenloser KI-Farbpaletten-Generator für perfekte Schemata",
+        "description": "Erstellen Sie sofort schöne und zugängliche Farbpaletten mit unserem KI-gestützten Tool. Perfekt für Designer, Entwickler und Kreative. Holen Sie sich jetzt Ihr perfektes Farbschema!"
     },
     "generate_page": {
-        "seo_title": "AI-Farbpaletten-Generator - Erstellen und Visualisieren von Farbschemata",
-        "seo_description": "Generieren Sie atemberaubende, zugängliche Farbschemata mit unserem kostenlosen KI-Tool. Geben Sie eine Farbe ein und erhalten Sie sofort komplementäre, triadische und andere Paletten. Perfekt für UI/UX-Designer und -Entwickler.",
-        "h1": "AI-Farbpaletten-Generator",
-        "intro": "Erwecken Sie Ihre Farbideen zum Leben. Geben Sie eine Farbe ein und lassen Sie unsere KI einzigartige und professionelle Paletten für Ihre Projekte erstellen. Sie können mit einer beliebten Farbe beginnen oder Ihren eigenen Hex-Code eingeben."
+        "seo_title": "KI-Farbpaletten-Generator - Farbschemata erstellen & visualisieren",
+        "seo_description": "Erstellen Sie mit unserem kostenlosen KI-Tool atemberaubende, zugängliche Farbschemata. Geben Sie eine Farbe ein und erhalten Sie sofort komplementäre, triadische und andere Paletten. Perfekt für UI/UX-Designer und Entwickler.",
+        "h1": "KI-Farbpaletten-Generator",
+        "intro": "Erwecken Sie Ihre Farbideen zum Leben. Geben Sie eine Farbe ein und lassen Sie unsere KI einzigartige und professionelle Paletten für Ihre Projekte erstellen. Sie können beginnen, indem Sie eine beliebte Farbe auswählen oder unten Ihren eigenen Hex-Code eingeben."
     },
     "common": {
         "loading": "Wird geladen...",
@@ -21,7 +61,7 @@
         "close": "Schließen",
         "back": "Zurück",
         "next": "Weiter",
-        "previous": "Vorherige",
+        "previous": "Zurück",
         "submit": "Absenden"
     },
     "header": {
@@ -37,63 +77,53 @@
             "logout": "Abmelden"
         },
         "credits": "Credits",
-        "discord": "Tritt unserer Discord-Community bei"
+        "discord": "Treten Sie unserer Discord-Community bei"
     },
     "home": {
         "hero": {
-            "title": "AI Farbschema-Generator",
-            "titleZh": "AI Farbschema-Generator",
+            "title": "KI-Farbschema-Generator",
             "description": "Erstellen Sie atemberaubende Farbpaletten mit KI. Perfekt für Designer, Entwickler und Kreativprofis.",
-            "descriptionZh": "Erstellen Sie atemberaubende Farbpaletten mit KI. Perfekt für Designer, Entwickler und Kreativprofis.",
             "cta": "Farben erstellen →"
         },
         "features": {
             "title": "Leistungsstarke KI-Farbwerkzeuge",
             "subtitle": "Alles, was Sie brauchen, um perfekte Farbschemata zu erstellen",
             "aiPowered": {
-                "title": "KI-gestützte Erzeugung",
-                "titleZh": "KI-gestützte Erzeugung",
-                "description": "Fortschrittliche KI-Algorithmen erstellen sofort perfekte Farbschemata",
-                "descriptionZh": "Fortschrittliche KI-Algorithmen erstellen sofort perfekte Farbschemata"
+                "title": "KI-gestützte Generierung",
+                "description": "Fortschrittliche KI-Algorithmen erstellen sofort perfekte Farbschemata"
             },
             "designerFriendly": {
-                "title": "Designerfreundlich",
-                "titleZh": "Designerfreundlich",
-                "description": "Professionelle Farbpaletten für Web, UI/UX und Grafikdesign",
-                "descriptionZh": "Professionelle Farbpaletten für Web, UI/UX und Grafikdesign"
+                "title": "Designer-freundlich",
+                "description": "Professionelle Farbpaletten für Web, UI/UX und Grafikdesign"
             },
             "multipleSchemes": {
                 "title": "Mehrere Schemata",
-                "titleZh": "Mehrere Schemata",
-                "description": "Generieren Sie komplementäre, triadische, analoge und benutzerdefinierte Farbschemata",
-                "descriptionZh": "Generieren Sie komplementäre, triadische, analoge und benutzerdefinierte Farbschemata"
+                "description": "Generieren Sie komplementäre, triadische, analoge und benutzerdefinierte Farbschemata"
             },
             "developerTools": {
                 "title": "Entwicklerwerkzeuge",
-                "titleZh": "Entwicklerwerkzeuge",
-                "description": "Exportieren Sie CSS, HTML-Beispiele und integrieren Sie sie in Ihren Arbeitsablauf",
-                "descriptionZh": "Exportieren Sie CSS, HTML-Beispiele und integrieren Sie sie in Ihren Arbeitsablauf"
+                "description": "Exportieren Sie CSS, HTML-Beispiele und integrieren Sie sie in Ihren Workflow"
             }
         },
         "cta": {
-            "title": "Bereit, erstaunliche Farben zu erstellen?",
+            "title": "Bereit, erstaunliche Farben zu kreieren?",
             "subtitle": "Schließen Sie sich Tausenden von Designern und Entwicklern an, die unseren KI-Farbgenerator verwenden",
             "tryFree": "Jetzt kostenlos testen",
             "viewPricing": "Preise anzeigen"
         }
     },
     "generate": {
-        "title": "AI Farbschema-Generator",
+        "title": "KI-Farbschema-Generator",
         "inputHex": "Hex-Farbwert eingeben",
         "generate": "Farbschema generieren",
         "regenerate": "Neu generieren",
         "analyzing": "Farbe wird analysiert...",
         "generating": "Farbschemata werden generiert...",
         "progress": {
-            "preparing": "Vorbereitung...",
-            "analyzing": "Analyse der Farbeigenschaften...",
-            "generating": "Erstellen von Farbschemata...",
-            "complete": "Erstellung abgeschlossen"
+            "preparing": "Vorbereiten...",
+            "analyzing": "Farbeigenschaften werden analysiert...",
+            "generating": "Farbschemata werden generiert...",
+            "complete": "Generierung abgeschlossen"
         },
         "tabs": {
             "analysis": "Farbanalyse",
@@ -104,8 +134,8 @@
         "colorPicker": "Farbwähler",
         "errors": {
             "invalidColor": "Bitte geben Sie einen gültigen Hex-Farbwert ein",
-            "loginRequired": "Bitte zuerst einloggen",
-            "limitReached": "Kostenlose Nutzungsgrenze erreicht",
+            "loginRequired": "Bitte zuerst anmelden",
+            "limitReached": "Kostenloses Nutzungslimit erreicht",
             "accountDisabled": "Ihr Konto wurde deaktiviert, bitte kontaktieren Sie den Administrator",
             "networkError": "Netzwerkfehler, bitte versuchen Sie es später erneut"
         }
@@ -118,7 +148,7 @@
             "price": "/Monat",
             "features": [
                 "300 Credits pro Monat",
-                "Bevorzugter Zugang zu neuen Funktionen",
+                "Vorrangiger Zugang zu neuen Funktionen",
                 "Exklusiver Community-Zugang"
             ],
             "button": "Monatsplan wählen"
@@ -130,7 +160,7 @@
             "discount": "38% sparen",
             "features": [
                 "300 Credits pro Monat",
-                "Bevorzugter Zugang zu neuen Funktionen",
+                "Vorrangiger Zugang zu neuen Funktionen",
                 "Exklusiver Community-Zugang",
                 "Jährliche Abrechnung, sorgenfreie Verlängerung"
             ],
@@ -138,19 +168,19 @@
         },
         "credits": {
             "title": "Credits kaufen",
-            "description": "Jeder $1 bringt Ihnen {count} Credits.",
+            "description": "Für jeden $1 erhalten Sie {count} Credits.",
             "placeholder": "USD-Betrag eingeben",
             "button": "Jetzt kaufen",
-            "purchaseText": "Kaufe {times} Credits",
+            "purchaseText": "{times} Credits kaufen",
             "buyNow": "Jetzt kaufen"
         },
-        "note": "Wenn das Mitgliedschaftskontingent erschöpft ist, können Sie zusätzliche Credits erwerben. Jeder $1 bringt Ihnen {count} Credits."
+        "note": "Wenn das Mitgliedschaftskontingent erschöpft ist, können Sie zusätzliche Credits kaufen. Für jeden $1 erhalten Sie {count} Credits."
     },
     "login": {
         "title": "Melden Sie sich bei Ihrem Konto an",
-        "subtitle": "Melden Sie sich mit einer der folgenden Methoden an, um den AI Color Assistant weiter zu nutzen",
+        "subtitle": "Melden Sie sich mit einer der folgenden Methoden an, um den KI-Farbassistenten weiterhin zu verwenden",
         "google": "Mit Google anmelden",
-        "terms": "Durch die Anmeldung stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu"
+        "terms": "Durch die Anmeldung stimmen Sie unseren Nutzungsbedingungen und Datenschutzbestimmungen zu"
     },
     "auth": {
         "signIn": "Anmelden",
@@ -164,7 +194,7 @@
         "schemesList": "Liste der Farbschemata",
         "generateNew": "Neues Farbschema generieren",
         "noSchemes": "Sie haben noch keine Farbschemata erstellt.",
-        "goGenerate": "Gehe zu Generieren",
+        "goGenerate": "Generieren",
         "fetchError": "Fehler beim Abrufen der Farbschemata",
         "schemeDetailsTitle": "{hexValue} Farbschema-Details",
         "table": {
@@ -177,10 +207,10 @@
             "splitComplementary": "Geteilt-komplementäres Schema",
             "updateTime": "Aktualisierungszeit",
             "actions": "Aktionen",
-            "viewExample": "Beispiel ansehen",
+            "viewExample": "Beispiel anzeigen",
             "notGenerated": "Nicht generiert",
             "regenerate": "Farbschema neu generieren",
-            "viewDetails": "Details ansehen"
+            "viewDetails": "Details anzeigen"
         },
         "pagination": {
             "previous": "Zurück",
@@ -189,34 +219,113 @@
         }
     },
     "generatePage": {
-        "h1": "AI Farbpaletten-Generator",
-        "intro": "Erwecken Sie Ihre Farbideen zum Leben. Geben Sie eine Farbe ein, und unsere KI erstellt einzigartige und professionelle Paletten für Ihre Projekte. Sie können mit einer beliebten Farbe beginnen oder Ihren eigenen Hex-Code eingeben.",
-        "preparing": "Bereiten Sie Ihr Farbmeisterwerk vor...",
-        "generating": "Generiere Ihre Farbschemata...",
-        "analyzing": "Analysiere Farbpsychologie...",
-        "designing": "Entwerfe UI-Beispiele...",
-        "finalizing": "Fertigstellung...",
+        "h1": "KI-Farbpaletten-Generator",
+        "intro": "Erwecken Sie Ihre Farbideen zum Leben. Geben Sie eine Farbe ein und lassen Sie unsere KI einzigartige und professionelle Paletten für Ihre Projekte erstellen. Sie können beginnen, indem Sie eine beliebte Farbe auswählen oder unten Ihren eigenen Hex-Code eingeben.",
+        "preparing": "Ihr Farbmodell wird vorbereitet...",
+        "generating": "Ihre Farbschemata werden generiert...",
+        "analyzing": "Farbpsychologie wird analysiert...",
+        "designing": "UI-Beispiele werden entworfen...",
+        "finalizing": "Wird abgeschlossen...",
         "generateFailed": "Generierung fehlgeschlagen: {error}",
         "upgradeButton": "Plan upgraden",
-        "regenerateExample": "Beispiel regenerieren",
-        "generatingExample": "Beispiel generieren...",
+        "regenerateExample": "Beispiel neu generieren",
+        "generatingExample": "Beispiel wird generiert...",
         "viewOnGithub": "Auf GitHub ansehen",
-        "accountDisabled": "Ihr Konto wurde deaktiviert, bitte kontaktieren Sie den Administrator.",
-        "limitReached": "Kostenloses Nutzungslimit erreicht, bitte upgraden Sie auf Mitgliedschaft, um fortzufahren.",
+        "accountDisabled": "Ihr Konto wurde deaktiviert. Bitte kontaktieren Sie den Administrator.",
+        "limitReached": "Kostenloses Nutzungslimit erreicht. Bitte upgraden Sie auf Mitglied, um fortzufahren.",
         "accessDenied": "Zugriff verweigert: {error}",
         "requestError": "Anfragefehler: {error}",
+        "client": {
+            "loading": "Wird geladen...",
+            "analyzingColorTitle": "KI analysiert die Farbe...",
+            "waitingForAI": "Warte auf KI-Antwort...",
+            "aiLogTitle": "KI-Generierungsprotokoll",
+            "clearLogs": "Löschen",
+            "currentStepLabel": "Aktueller Schritt:",
+            "stepBasic": "Grundanalyse",
+            "stepSchemes": "Schemagenerierung",
+            "stepComplete": "Abgeschlossen",
+            "schemeGenerationProgress": "Fortschritt der Schemagenerierung",
+            "tasksCompleted": "{completedTasks}/{totalTasks} Aufgaben abgeschlossen",
+            "noLogs": "Noch keine Protokolle",
+            "jsonFormatErrorTitle": "JSON-Formatfehler",
+            "generationFailedTitle": "Generierung fehlgeschlagen",
+            "regenerate": "Neu generieren",
+            "viewErrorDetails": "Fehlerdetails anzeigen"
+        },
         "mySchemes": {
             "table": {
                 "complementary": "Komplementär",
                 "analogous": "Analog",
                 "triadic": "Triadisch",
                 "monochromatic": "Monochromatisch",
-                "splitcomplementary": "Split-Komplementär",
-                "split-complementary": "Split-Komplementär",
-                "split-complementarycomplementary": "Split-Komplementär",
+                "splitcomplementary": "Geteilt-komplementär",
+                "split-complementary": "Geteilt-komplementär",
                 "tetradic": "Tetradisch",
-                "compound": "Zusammengesetzt",
+                "compound": "Verbindung",
                 "square": "Quadrat"
+            }
+        },
+        "aiLogs": {
+            "error": {
+                "invalidBaseData": "Farbschema-Generierung kann nicht gestartet werden: Ungültige Basisanalysedaten",
+                "schemeNotFound": "Farbschema nicht gefunden: {theory}",
+                "generationProcess": "=== Fehler während des Generierungsprozesses ===",
+                "errorType": "Fehlertyp: {type}",
+                "errorMessage": "Fehlermeldung: {message}",
+                "errorStack": "Fehlerstapel: {stack}",
+                "baseDataFormat": "Format der Basisanalysedaten fehlerhaft: Fehlende Farbschemadaten",
+                "jsonFormat": "JSON-Formatfehler erkannt, Wiederholung wird versucht"
+            },
+            "step1": {
+                "title": "=== Schritt 1: Grundlegende Farbanalyse ===",
+                "analyzingColor": "Farbe wird analysiert: {color}",
+                "analysisComplete": "Grundlegende Farbanalyse abgeschlossen, warte auf Generierung des Farbschemas..."
+            },
+            "step2": {
+                "title": "=== Schritt 2: {hexColor} Farbschema-Generierung ===",
+                "schemeOrder": "Reihenfolge der Farbschema-Generierung: {order}",
+                "validatingData": "Basisdaten werden validiert: {count} Farbschemata gefunden",
+                "initializedStatus": "Generierungsstatus für alle Farbschemata initialisiert",
+                "processingScheme": "[{current}/{total}] Verarbeitung des Farbschemas wird gestartet: {theory}",
+                "foundSchemeData": "Farbschemadaten gefunden, Generierung verwandter Ressourcen wird gestartet: {theory}",
+                "generatingTask": "[{schemeIndex}.{taskIndex}] Generierung von {task} wird gestartet: {theory}",
+                "generatingTaskProgress": "{task} wird generiert: {theory}...",
+                "waitingForPreviousTask": "Warte auf den Abschluss der vorherigen Aufgabe...",
+                "apiRequestDuration": "API-Anforderungsdauer: {duration}ms",
+                "apiResponseSuccess": "API-Antwort erfolgreich: {theory} {task}",
+                "setExampleUrl": "Beispiel-URL festgelegt: {url}",
+                "setTailwindConfig": "Tailwind-Konfiguration festgelegt",
+                "setBootstrapConfig": "Bootstrap-Konfiguration festgelegt",
+                "taskCompleted": "✓ {task} abgeschlossen: {theory}",
+                "taskFailed": "✗ {task} fehlgeschlagen: {theory} - {error}",
+                "taskError": "✗ {task}-Ausnahme: {theory} - {error}",
+                "schemeCompleted": "Verarbeitung des Farbschemas {theory} abgeschlossen"
+            },
+            "step3": {
+                "title": "=== Schritt 3: Generierung abgeschlossen ===",
+                "allSchemesCompleted": "Alle Farbschema-Generierungen sind abgeschlossen!"
+            },
+            "generationEnded": "Generierungsprozess beendet",
+            "stream": {
+                "generatingContent": "KI generiert Inhalte...",
+                "baseDataReceived": "Basisanalysedaten vollständig empfangen",
+                "foundSchemes": "{count} Farbschemata gefunden"
+            },
+            "retry": {
+                "fail": {
+                    "noData": "Wiederholung fehlgeschlagen: Keine KI-Antwortdaten oder Datenformat ist falsch",
+                    "schemeNotFound": "Wiederholung fehlgeschlagen: Farbschema {theory} nicht gefunden",
+                    "apiError": "✗ Wiederholung fehlgeschlagen: {theory} {task} - {error}",
+                    "exception": "✗ Wiederholungsausnahme: {theory} {task} - {error}"
+                },
+                "start": "Wiederholung wird gestartet: {theory} {task}",
+                "progress": "Wiederhole {task}: {theory}...",
+                "apiSuccess": "API-Antwort bei Wiederholung erfolgreich: {theory} {task}",
+                "setExampleUrl": "Beispiel-URL bei Wiederholung festgelegt: {url}",
+                "setTailwindConfig": "Tailwind-Konfiguration bei Wiederholung festgelegt",
+                "setBootstrapConfig": "Bootstrap-Konfiguration bei Wiederholung festgelegt",
+                "success": "✓ Wiederholung erfolgreich: {theory} {task}"
             }
         }
     },
@@ -232,28 +341,28 @@
             "createOrderFailed": "Bestellung konnte nicht erstellt werden, bitte versuchen Sie es später erneut.",
             "paymentFailed": "Zahlungsüberprüfung fehlgeschlagen.",
             "paymentError": "Zahlungsabwicklung fehlgeschlagen, bitte kontaktieren Sie den Support.",
-            "paypalError": "Bei der Zahlung ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.",
+            "paypalError": "Fehler während der Zahlung, bitte versuchen Sie es erneut.",
             "paymentCancelled": "Zahlung wurde abgebrochen.",
             "creditsPurchaseSuccess": "Credits erfolgreich gekauft!",
             "paymentSuccess": "Zahlung erfolgreich! Ihre Mitgliedschaft wurde aktiviert.",
             "completePayment": "Zahlung abschließen: {planName}",
             "paymentInstructions": "Sie werden zu PayPal weitergeleitet, um den Zahlungsvorgang abzuschließen.",
-            "processing": "Verarbeite...",
-            "membershipPurchaseSuccess": "Mitgliedschaft erfolgreich erworben!"
+            "processing": "Wird verarbeitet...",
+            "membershipPurchaseSuccess": "Mitgliedschaft erfolgreich gekauft!"
         },
         "colorInput": {
-            "title": "AI Farbschema-Generator",
-            "colorPickerTip": "Nachdem Sie eine Farbe ausgewählt haben, klicken Sie bitte auf die Schaltfläche 'Farbschema generieren'",
-            "generating": "Generiere...",
+            "title": "KI-Farbschema-Generator",
+            "colorPickerTip": "Nach Auswahl einer Farbe klicken Sie bitte auf die Schaltfläche 'Farbschema generieren'",
+            "generating": "Wird generiert...",
             "generateScheme": "Farbschema generieren",
             "colorInput": "Farbeingabe",
             "popularColors": "Beliebte Farben",
             "colorPicker": "Farbwähler",
             "generate": "Generieren",
-            "analyzing": "Analysiere...",
+            "analyzing": "Wird analysiert...",
             "coralRed": "Korallenrot",
-            "mintGreen": "Minzgrün",
-            "navy": "Marineblau",
+            "mintGreen": "Mintgrün",
+            "navy": "Marine",
             "lavenderPurple": "Lavendel-Lila",
             "sunsetOrange": "Sonnenuntergangs-Orange",
             "oceanBlue": "Ozeanblau",
@@ -265,12 +374,12 @@
         "popularColors": {
             "coral": "Koralle",
             "paleGreen": "Blassgrün",
-            "navy": "Marineblau",
+            "navy": "Marine",
             "darkViolet": "Dunkelviolett",
             "darkOliveGreen": "Dunkelolivgrün",
             "deepBlue": "Tiefblau",
-            "forest": "Waldgrün",
-            "wine": "Weinrot",
+            "forest": "Wald",
+            "wine": "Wein",
             "graphite": "Graphit",
             "midnightBlue": "Mitternachtsblau"
         },
@@ -304,7 +413,7 @@
             "failed": "Fehlgeschlagen",
             "pending": "Ausstehend",
             "cancelled": "Abgebrochen",
-            "viewReceipt": "Beleg ansehen",
+            "viewReceipt": "Beleg anzeigen",
             "download": "Herunterladen"
         },
         "schemePreview": {
@@ -330,16 +439,16 @@
             "brightness": "Helligkeit",
             "saturation": "Sättigung",
             "contrast": "Kontrast",
-            "accessibility": "Barrierefreiheit",
+            "accessibility": "Zugänglichkeit",
             "warm": "Warm",
-            "cool": "Kalt",
+            "cool": "Kühl",
             "neutral": "Neutral",
             "high": "Hoch",
             "medium": "Mittel",
             "low": "Niedrig",
             "excellent": "Ausgezeichnet",
             "good": "Gut",
-            "fair": "Mäßig",
+            "fair": "Mittelmäßig",
             "poor": "Schlecht"
         },
         "tab": {
@@ -357,7 +466,7 @@
         "exampleColorSchemes": {
             "loading": "Beispiele werden geladen...",
             "error": "Beispiele konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-            "tryAnother": "Ein anderes ausprobieren"
+            "tryAnother": "Ein anderes versuchen"
         }
     },
     "pages": {
@@ -369,7 +478,7 @@
                 "title": "Erstellen Sie atemberaubende Farbschemata mit KI"
             },
             "startGenerate": "Generierung starten",
-            "startGenerating": "Farben generieren starten",
+            "startGenerating": "Farben generieren",
             "viewPricing": "Preise anzeigen"
         },
         "notFound": {
@@ -381,16 +490,16 @@
             "backHome": "Zurück zur Startseite"
         },
         "login": {
-            "title": "Benutzer-Login",
+            "title": "Benutzeranmeldung",
             "heading": "Melden Sie sich bei Ihrem Konto an",
             "description": "Wählen Sie Ihre Anmeldemethode",
-            "instructions": "Melden Sie sich mit einer der folgenden Methoden an, um den AI Color Assistant weiter zu nutzen",
+            "instructions": "Melden Sie sich mit einer der folgenden Methoden an, um den KI-Farbassistenten weiterhin zu verwenden",
             "email": "E-Mail",
             "password": "Passwort",
             "devPassword": "Passwort (beliebiger Wert im Entwicklermodus)",
-            "emailPlaceholder": "deine.email@beispiel.com",
+            "emailPlaceholder": "ihre.email@example.com",
             "passwordPlaceholder": "••••••••",
-            "emailRequired": "Bitte geben Sie Ihre E-Mail ein",
+            "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
             "loginFailed": "Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut",
             "loggingIn": "Anmeldung läuft...",
             "emailLogin": "Mit E-Mail anmelden",
@@ -401,7 +510,7 @@
             "twitterLogin": "Mit X anmelden",
             "loginButton": "Anmelden",
             "loginError": "Anmeldung fehlgeschlagen, bitte überprüfen Sie Ihre Anmeldedaten",
-            "terms": "Durch die Anmeldung stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu"
+            "terms": "Durch die Anmeldung stimmen Sie unseren Nutzungsbedingungen und Datenschutzbestimmungen zu"
         }
     },
     "admin": {
@@ -419,13 +528,13 @@
         "noName": "Kein Name",
         "noEmail": "Keine E-Mail",
         "member": "Mitglied",
-        "nonMember": "Kein Mitglied",
+        "nonMember": "Nicht-Mitglied",
         "normal": "Normal",
         "disabled": "Deaktiviert",
         "enable": "Aktivieren",
         "disable": "Deaktivieren",
-        "previousPage": "Zurück",
-        "nextPage": "Weiter",
+        "previousPage": "Vorherige Seite",
+        "nextPage": "Nächste Seite",
         "fetchUsersError": "Fehler beim Abrufen der Benutzerliste",
         "updateUserError": "Fehler beim Aktualisieren des Benutzerstatus"
     },
@@ -437,6 +546,19 @@
         "bestFor": "Am besten für"
     },
     "api": {
+        "basicAnalysis": {
+            "start": "Starte grundlegende Farbanalyse...",
+            "requestingAI": "Fordere KI-Analyse an...",
+            "parsingResponse": "Parse KI-Antwort...",
+            "parsingComplete": "KI-Antwort-Parsing abgeschlossen",
+            "retryInvalidJson": "KI-Antwort ist kein gültiges JSON. Fordere KI auf, das JSON-Format zu korrigieren... ({retryCount}/{maxRetries})",
+            "fixingJson": "Fordere KI auf, das JSON-Format zu korrigieren ({retryCount}/{maxRetries})...",
+            "parseFailed": "Fehler beim Parsen der KI-Antwort nach {maxAttempts} Versuchen. Die KI hat ein ungültiges JSON-Format zurückgegeben.",
+            "invalidJsonFormat": "Ungültiges JSON-Format. Roh-Antwort: {rawResponse}",
+            "parseFailedRaw": "Fehler beim Parsen der KI-Antwort nach {maxAttempts} Versuchen. Roh-Antwort: {rawResponse}",
+            "savingToDb": "Speichere in Datenbank...",
+            "analysisComplete": "Grundlegende Farbanalyse abgeschlossen"
+        },
         "errors": {
             "unauthorized": "Unbefugt",
             "invalidUser": "Ungültige Benutzeridentität",
@@ -449,50 +571,57 @@
             "missingParameters": "Fehlende erforderliche Parameter",
             "invalidPageNumber": "Ungültige Seitenzahl",
             "internalServerError": "Interner Serverfehler",
-            "databaseError": "Datenbankoperation fehlgeschlagen",
+            "databaseError": "Datenbankvorgang fehlgeschlagen",
             "generateFailed": "HTML-Beispiel konnte nicht generiert werden",
             "updateFailed": "Datenbank konnte nicht aktualisiert werden",
             "missingField": "Fehlendes erforderliches Feld",
-            "cannotModifyAdmin": "Admin-Benutzer kann nicht geändert werden"
+            "cannotModifyAdmin": "Administratorbenutzer können nicht geändert werden",
+            "invalidConfigType": "Ungültiger Konfigurationstyp",
+            "invalidTheory": "Ungültige Farbtheorie",
+            "colorNotFound": "Farbdatensatz nicht gefunden",
+            "schemeNotFound": "Farbschema nicht gefunden",
+            "regenerateConfigFailed": "Konfiguration konnte nicht neu generiert werden",
+            "invalidRequestData": "Ungültige Anforderungsdaten",
+            "recordNotFound": "Datensatz nicht gefunden"
         },
         "logs": {
-            "startGenerating": "Generiere Farbschema für Hex: {hex}{regenerate}",
+            "startGenerating": "Farbschema für Hex: {hex}{regenerate} wird generiert",
             "forceRegenerate": " (Neugenerierung erzwingen)",
-            "schemeRetry": "Wiederhole {theory}...",
-            "startAiRequest": "Starte AI-Farbanalyseanfrage...",
-            "aiRequestSuccess": "AI-Anfrage erfolgreich, erhalte Antwortinhalt...",
-            "aiResponseValid": "AI-Antwortvalidierung erfolgreich",
-            "generateHtmlPath": "generateHtmlExample Pfad: {path}",
+            "schemeRetry": "{theory} wird wiederholt...",
+            "startAiRequest": "KI-Farbanalyseanfrage wird gestartet...",
+            "aiRequestSuccess": "KI-Anfrage erfolgreich, Antwortinhalt wird abgerufen...",
+            "aiResponseValid": "KI-Antwortvalidierung erfolgreich",
+            "generateHtmlPath": "generateHtmlExample-Pfad: {path}",
             "savingToDatabase": "Speichern in Datenbank fehlgeschlagen:",
             "generateColorFailed": "Farbschema konnte nicht generiert werden:",
             "fetchUsersFailed": "Farbschemata konnten nicht abgerufen werden:",
             "fetchUsersListFailed": "Benutzerliste konnte nicht abgerufen werden:",
             "updateUserStatusFailed": "Benutzerstatus konnte nicht aktualisiert werden:",
-            "createExampleFailed": "Unvollständige Parameter zum Erstellen eines Beispiels:",
-            "uploadExampleFailed": "{theory}-Beispiel-HTML konnte nicht hochgeladen werden:",
+            "createExampleFailed": "Unvollständige Parameter zum Erstellen eines Beispiels erforderlich:",
+            "uploadExampleFailed": "Hochladen des {theory}-Beispiel-HTML fehlgeschlagen:",
             "createExampleGeneralFailed": "{theory}-Beispiel konnte nicht erstellt werden:",
             "generateDefaultHtmlFailed": "Standard-HTML konnte nicht generiert werden:",
-            "startAnalyzing": "Starte Farbanalyse",
-            "requestingAi": "Fordere AI-Farbanalyse an...",
-            "parsingAiResponse": "Parse AI-Antwortdaten...",
+            "startAnalyzing": "Farbanalyse wird gestartet",
+            "requestingAi": "KI-Farbanalyse wird angefordert...",
+            "parsingAiResponse": "KI-Antwortdaten werden analysiert...",
             "basicAnalysisComplete": "Grundlegende Farbanalyse abgeschlossen",
-            "generatingExamples": "Generiere Farbschemabeispiele...",
-            "sendStreamUpdateFailed": "Senden des Stream-Updates fehlgeschlagen:",
+            "generatingExamples": "Farbschemabeispiele werden generiert...",
+            "sendStreamUpdateFailed": "Stream-Update konnte nicht gesendet werden:",
             "unknownError": "Unbekannter Fehler",
-            "openaiUrlNotConfigured": "OPENAI_URL-Umgebungsvariable nicht konfiguriert",
-            "aiRequestFailed": "AI-Anfrage fehlgeschlagen ({status}): {error}",
-            "aiEmptyChoices": "AI hat ein leeres Choices-Array zurückgegeben",
-            "aiIncorrectFormat": "AI hat Inhalt im falschen Format zurückgegeben",
-            "aiInvalidJson": "AI hat Inhalt zurückgegeben, der kein gültiges JSON ist",
-            "aiRequestError": "Fehler während der AI-Anfrage",
+            "openaiUrlNotConfigured": "Umgebungsvariable OPENAI_URL nicht konfiguriert",
+            "aiRequestFailed": "KI-Anfrage fehlgeschlagen ({status}): {error}",
+            "aiEmptyChoices": "KI hat ein leeres Auswahlarray zurückgegeben",
+            "aiIncorrectFormat": "KI hat Inhalt in falschem Format zurückgegeben",
+            "aiInvalidJson": "Von KI zurückgegebener Inhalt ist kein gültiges JSON",
+            "aiRequestError": "Fehler während der KI-Anfrage aufgetreten",
             "aiResponsePreview": "Vorschau des Antwortinhalts:",
-            "aiDataFormatError": "AI hat Datenformatfehler zurückgegeben, JSON kann nicht geparst werden",
-            "aiResponseError": "AI-Anfrage hat Fehler zurückgegeben:",
-            "aiStructureIncorrect": "AI hat eine falsche Datenstruktur zurückgegeben",
-            "aiParseJsonFailed": "AI-zurückgegebener Inhalt kann nicht als JSON geparst werden",
-            "aiMissingColorSchemes": "AI hat Daten zurückgegeben, denen notwendige Farbschemainformationen fehlen",
-            "aiAnalysisFailed": "AI-Analyse fehlgeschlagen, Benutzer direkt informieren:",
-            "aiGeneralError": "AI ist auf ein Problem gestoßen, bitte versuchen Sie es später erneut",
+            "aiDataFormatError": "Von KI zurückgegebenes Datenformat ist fehlerhaft, JSON kann nicht analysiert werden",
+            "aiResponseError": "KI-Anfrage hat einen Fehler zurückgegeben:",
+            "aiStructureIncorrect": "Von KI zurückgegebene Datenstruktur ist falsch",
+            "aiParseJsonFailed": "Von KI zurückgegebener Inhalt kann nicht als JSON analysiert werden",
+            "aiMissingColorSchemes": "In den von der KI zurückgegebenen Daten fehlen notwendige Farbschemainformationen",
+            "aiAnalysisFailed": "KI-Analyse fehlgeschlagen, Benutzer wird direkt informiert:",
+            "aiGeneralError": "Bei der KI ist ein Problem aufgetreten, bitte versuchen Sie es später erneut",
             "previewProxyError": "Vorschau-Proxy-Fehler:",
             "uploadToStorageFailed": "Hochladen in den Speicher fehlgeschlagen:",
             "downloadContentError": "Fehler beim Herunterladen des Inhalts:",
@@ -502,7 +631,15 @@
             "defaultColorDisplay": "Farbanzeige",
             "defaultApplicationScene": "Geeignet für verschiedene UI-Design-Szenarien",
             "defaultAdvantages": "Bietet ein gutes visuelles Erlebnis",
-            "defaultExampleButton": "Beispiel-Button"
+            "defaultExampleButton": "Beispiel-Schaltfläche",
+            "startRegeneratingConfig": "Konfiguration wird neu generiert - Hex: {hex}, Typ: {configType}, Theorie: {theory}",
+            "updateColorRecordFailed": "Farbdatensatz konnte nicht aktualisiert werden",
+            "createTailwindConfigFailed": "Tailwind-Konfiguration konnte nicht erstellt werden",
+            "createBootstrap5CustomVariablesFailed": "Benutzerdefinierte Bootstrap 5-Variablen konnten nicht erstellt werden",
+            "createTailwindConfigGeneralFailed": "Tailwind-Konfiguration für {theory} konnte nicht erstellt werden",
+            "createBootstrap5CustomVariablesGeneralFailed": "Benutzerdefinierte Bootstrap 5-Variablen für {theory} konnten nicht erstellt werden",
+            "tailwindRetry": "Tailwind-Konfiguration wird erneut generiert - {theory}",
+            "bootstrap5Retry": "Bootstrap 5-Konfiguration wird erneut generiert - {theory}"
         },
         "success": {
             "schemeGenerated": "Farbschema erfolgreich generiert",
@@ -511,8 +648,8 @@
         }
     },
     "examplePage": {
-        "title": "Farbschema-Beispiele",
-        "fetchError": "Fehler beim Laden der Farbschema-Beispiele",
+        "title": "Farbschemabeispiele",
+        "fetchError": "Fehler beim Abrufen der Farbschemabeispiele",
         "basedOn": "Basierend auf",
         "prevButton": "Vorheriges Schema",
         "nextButton": "Nächstes Schema",
@@ -522,56 +659,10 @@
         "recommendedRatio": "Empfohlenes Verhältnis",
         "bestFor": "Am besten für",
         "nextColorButton": "Nächste Farbe",
-        "noExamples": "Derzeit sind keine Farbschema-Beispiele verfügbar."
+        "noExamples": "Derzeit sind keine Farbschemabeispiele verfügbar."
     },
     "UserCredits": {
-        "credits": "Credits",
-        "remaining": "Verbleibend",
-        "buyMore": "Mehr kaufen"
-    },
-    "exampleColorSchemes_2": {
-        "loading": "Beispiele werden geladen...",
-        "error": "Beispiele konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-        "tryAnother": "Ein anderes ausprobieren"
-    },
-    "HomePage": {
-        "title": "AI-Farbschema-Generator",
-        "subtitle": "Erstellen Sie atemberaubende Farbpaletten mit KI. Perfekt für Designer, Entwickler und Kreativprofis.",
-        "cta": "Jetzt starten →",
-        "features": {
-            "title": "Leistungsstarke KI-Farbwerkzeuge",
-            "subtitle": "Alles, was Sie brauchen, um das perfekte Farbschema zu erstellen",
-            "description": "Unsere KI-gestützten Tools analysieren Ihre Grundfarbe und generieren eine Vielzahl harmonischer und schöner Farbpaletten für Ihre Projekte.",
-            "analyze": {
-                "name": "Farbanalyse",
-                "description": "Tiefgehende Analyse der Farbeigenschaften, einschließlich Harmonie, Kontrast und Barrierefreiheit."
-            },
-            "generate": {
-                "name": "KI-Generierung",
-                "description": "Generieren Sie verschiedene Arten von Farbschemata, wie komplementäre, analoge, triadische und mehr."
-            },
-            "preview": {
-                "name": "Echtzeit-Vorschau",
-                "description": "Sehen Sie sofort eine Vorschau Ihrer Farbschemata auf verschiedenen UI-Komponenten und Layouts."
-            },
-            "export": {
-                "name": "Export-Formate",
-                "description": "Exportieren Sie Ihre Farbpaletten in mehreren Formaten wie CSS, SASS und Tailwind CSS."
-            },
-            "download": {
-                "name": "Schemata herunterladen",
-                "description": "Laden Sie Ihre Farbschemata als Dateien herunter, um sie einfach in Ihren Arbeitsablauf zu integrieren."
-            }
-        },
-        "credits": {
-            "title": "Lassen Sie sich nie die Inspiration ausgehen",
-            "description": "Kaufen Sie zusätzliche Credits, um weiterhin atemberaubende Farbschemata ohne Unterbrechung zu generieren.",
-            "cta": "Credits kaufen"
-        },
-        "showcase": {
-            "title": "Showcase",
-            "subtitle": "Sehen Sie, was möglich ist",
-            "description": "Entdecken Sie von unserer Community erstellte Farbschemata und lassen Sie sich für Ihr nächstes Projekt inspirieren."
-        }
+        "title": "Meine Credits",
+        "unlimited": "Unbegrenzt"
     }
 }

@@ -105,4 +105,56 @@ export async function saveColorGeneration(prisma: PrismaClient, hex: string, use
             }
         });
     }
+}
+
+export async function saveBasicAnalysis(prisma: PrismaClient, hex: string, userId: string, responseData: any) {
+    const responseDataStr = JSON.stringify(responseData);
+
+    // 检查是否存在，可能在生成过程中已经被其他请求创建
+    const existingColorCheck = await findExistingColor(prisma, hex, userId);
+
+    if (existingColorCheck) {
+        // 如果存在则更新基础分析部分
+        await prisma.aiColor.update({
+            where: { id: existingColorCheck.id },
+            data: {
+                aiJson: responseDataStr,
+                updatedAt: new Date()
+            }
+        });
+    } else {
+        // 不存在则创建新记录
+        await prisma.aiColor.create({
+            data: {
+                hex: hex.toLowerCase(),
+                aiJson: responseDataStr,
+                userId: userId
+            }
+        });
+    }
+}
+
+export async function updateSchemeData(prisma: PrismaClient, hex: string, userId: string, updateData: any) {
+    // 查找现有记录
+    const existingColor = await findExistingColor(prisma, hex, userId);
+
+    if (existingColor) {
+        // 如果存在则更新
+        await prisma.aiColor.update({
+            where: { id: existingColor.id },
+            data: {
+                ...updateData,
+                updatedAt: new Date()
+            }
+        });
+    } else {
+        // 如果不存在则创建新记录
+        await prisma.aiColor.create({
+            data: {
+                hex: hex.toLowerCase(),
+                userId: userId,
+                ...updateData
+            }
+        });
+    }
 } 

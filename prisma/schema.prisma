@@ -98,24 +98,36 @@ model Payment {
 }
 
 model AiColor {
-  id          String   @id @default(cuid())
-  hex         String
-  aiJson      String   @db.Text
-  exampleComp String?
-  exampleAnal String?
-  exampleTria String?
-  exampleMono String?
-  exampleSpCo String?
+  id            String   @id @default(cuid())
+  hex           String
+  aiJson        String   @db.Text
+  exampleComp   String?
+  exampleAnal   String?
+  exampleTria   String?
+  exampleMono   String?
+  exampleSpCo   String?
   // 添加预览图片URL字段
-  previewComp String? // 互补色预览图片
-  previewAnal String? // 类似色预览图片  
-  previewTria String? // 三角色预览图片
-  previewMono String? // 单色预览图片
-  previewSpCo String? // 分割互补色预览图片
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  previewComp   String? // 互补色预览图片
+  previewAnal   String? // 类似色预览图片  
+  previewTria   String? // 三角色预览图片
+  previewMono   String? // 单色预览图片
+  previewSpCo   String? // 分割互补色预览图片
+  // 添加Tailwind配置URL字段
+  tailwindComp  String?
+  tailwindAnal  String?
+  tailwindTria  String?
+  tailwindMono  String?
+  tailwindSpCo  String?
+  // 添加Bootstrap配置URL字段
+  bootstrapComp String?
+  bootstrapAnal String?
+  bootstrapTria String?
+  bootstrapMono String?
+  bootstrapSpCo String?
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   // 创建用户ID和hex组合的唯一索引，确保每个用户的每个颜色值只有一条记录
   @@unique([userId, hex])
