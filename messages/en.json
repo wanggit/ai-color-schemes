@@ -216,7 +216,11 @@
             "previous": "Previous",
             "next": "Next",
             "pageInfo": "Page {current} of {total}"
-        }
+        },
+        "copy": "Copy",
+        "copySuccess": "Copied to clipboard!",
+        "copyError": "Failed to copy",
+        "configFetchError": "Failed to fetch config (Status: {status})."
     },
     "generatePage": {
         "h1": "AI Color Palette Generator",

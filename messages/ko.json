@@ -216,7 +216,11 @@
             "previous": "이전",
             "next": "다음",
             "pageInfo": "총 {total}페이지 중 {current}페이지"
-        }
+        },
+        "copy": "복사",
+        "copySuccess": "클립보드에 복사되었습니다!",
+        "copyError": "복사 실패",
+        "configFetchError": "구성 파일을 가져오지 못했습니다 (상태: {status})."
     },
     "generatePage": {
         "h1": "AI 색상 팔레트 생성기",

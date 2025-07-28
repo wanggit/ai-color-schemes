@@ -216,7 +216,11 @@
             "previous": "前へ",
             "next": "次へ",
             "pageInfo": "全{total}ページ中{current}ページ"
-        }
+        },
+        "copy": "コピー",
+        "copySuccess": "クリップボードにコピーしました！",
+        "copyError": "コピーに失敗しました",
+        "configFetchError": "設定の取得に失敗しました (ステータス: {status})。"
     },
     "generatePage": {
         "h1": "AIカラーパレットジェネレーター",
