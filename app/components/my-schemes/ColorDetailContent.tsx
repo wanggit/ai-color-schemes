@@ -48,6 +48,17 @@ type AiColor = {
     previewTria?: string | null;
     previewMono?: string | null;
     previewSpCo?: string | null;
+    // 添加 Tailwind 和 Bootstrap 配置字段
+    tailwindComp?: string | null;
+    tailwindAnal?: string | null;
+    tailwindTria?: string | null;
+    tailwindMono?: string | null;
+    tailwindSpCo?: string | null;
+    bootstrapComp?: string | null;
+    bootstrapAnal?: string | null;
+    bootstrapTria?: string | null;
+    bootstrapMono?: string | null;
+    bootstrapSpCo?: string | null;
     userId: string;
     createdAt: string;
     updatedAt: string;
@@ -196,6 +207,7 @@ export default function ColorDetailContent({ colorData, translations }: ColorDet
                                                 isGeneratingExamples={{}} // Not generating on this page
                                                 regenerateExample={() => { }} // No regeneration on this page
                                                 getSchemeKey={getSchemeKey}
+                                                colorRecord={parsedColorData}
                                                 hex={parsedColorData.hex}
                                                 onSchemeUpdate={async (updatedScheme) => {
                                                     // 更新本地状态

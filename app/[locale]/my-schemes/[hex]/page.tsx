@@ -25,6 +25,8 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
         notFound();
     }
 
+    console.log('colorData', colorData);
+
     return (
         <ColorDetailContent
             colorData={JSON.stringify(colorData)}

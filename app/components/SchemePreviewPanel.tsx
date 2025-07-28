@@ -17,6 +17,37 @@ type ColorScheme = {
     bootstrap5CustomVariables?: string;
 };
 
+// 从 ColorDetailContent 复制 AiColor 类型以确保类型安全
+type AiColor = {
+    id: string;
+    hex: string;
+    aiJson: string;
+    exampleComp?: string | null;
+    exampleAnal?: string | null;
+    exampleTria?: string | null;
+    exampleMono?: string | null;
+    exampleSpCo?: string | null;
+    previewComp?: string | null;
+    previewAnal?: string | null;
+    previewTria?: string | null;
+    previewMono?: string | null;
+    previewSpCo?: string | null;
+    tailwindComp?: string | null;
+    tailwindAnal?: string | null;
+    tailwindTria?: string | null;
+    tailwindMono?: string | null;
+    tailwindSpCo?: string | null;
+    bootstrapComp?: string | null;
+    bootstrapAnal?: string | null;
+    bootstrapTria?: string | null;
+    bootstrapMono?: string | null;
+    bootstrapSpCo?: string | null;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+
 type SchemePreviewPanelProps = {
     scheme: ColorScheme;
     previewMode: "desktop" | "mobile";
@@ -27,6 +58,7 @@ type SchemePreviewPanelProps = {
     regenerateExample: (scheme: ColorScheme) => void;
     getSchemeKey: (theory: string) => string;
     hex: string;
+    colorRecord: AiColor; // 新增属性
     onSchemeUpdate: (updatedScheme: ColorScheme) => void;
 };
 
@@ -40,6 +72,7 @@ export default function SchemePreviewPanel({
     regenerateExample,
     getSchemeKey,
     hex,
+    colorRecord,
     onSchemeUpdate
 }: SchemePreviewPanelProps) {
     const t = useTranslations('components.schemePreview');
@@ -53,6 +86,11 @@ export default function SchemePreviewPanel({
     // 跟踪图片加载错误状态
     const [imageLoadError, setImageLoadError] = useState<{ [key: string]: boolean }>({});
 
+    // 用于存储从URL加载的代码
+    const [tailwindCode, setTailwindCode] = useState<string | null>(null);
+    const [bootstrapCode, setBootstrapCode] = useState<string | null>(null);
+    const [isLoadingCode, setIsLoadingCode] = useState(true);
+
     // 当有新的预览图片URL时，重置图片加载错误状态并切换到预览模式
     useEffect(() => {
         const key = getSchemeKey(scheme.theory);
@@ -60,6 +98,54 @@ export default function SchemePreviewPanel({
             setViewMode('preview');
         }
     }, [previewUrls, scheme.theory, getSchemeKey, imageLoadError]);
+
+    // 从URL加载Tailwind和Bootstrap代码
+    useEffect(() => {
+        const getCodeKey = (theory: string, type: 'tailwind' | 'bootstrap'): keyof AiColor | null => {
+            const keyMap: { [key: string]: keyof AiColor } = {
+                "Complementary": type === 'tailwind' ? "tailwindComp" : "bootstrapComp",
+                "Analogous": type === 'tailwind' ? "tailwindAnal" : "bootstrapAnal",
+                "Triadic": type === 'tailwind' ? "tailwindTria" : "bootstrapTria",
+                "Monochromatic": type === 'tailwind' ? "tailwindMono" : "bootstrapMono",
+                "Split-Complementary": type === 'tailwind' ? "tailwindSpCo" : "bootstrapSpCo",
+            };
+            return keyMap[theory] || null;
+        }
+
+        const fetchCode = async () => {
+            setIsLoadingCode(true);
+            const tailwindKey = getCodeKey(scheme.theory, 'tailwind');
+            const bootstrapKey = getCodeKey(scheme.theory, 'bootstrap');
+
+            const fetchAndSetCode = async (key: keyof AiColor | null, setCode: (code: string | null) => void) => {
+                if (key && colorRecord[key]) {
+                    try {
+                        const response = await fetch(colorRecord[key] as string);
+                        if (response.ok) {
+                            setCode(await response.text());
+                        } else {
+                            setCode(null);
+                        }
+                    } catch (error) {
+                        console.error(`Failed to fetch config for ${key}`, error);
+                        setCode(null);
+                    }
+                } else {
+                    setCode(null);
+                }
+            };
+
+            await Promise.all([
+                fetchAndSetCode(tailwindKey, setTailwindCode),
+                fetchAndSetCode(bootstrapKey, setBootstrapCode)
+            ]);
+
+            setIsLoadingCode(false);
+        };
+
+        fetchCode();
+    }, [scheme.theory, colorRecord]);
+
 
     // 重新生成配置文件的函数
     const regenerateConfig = async (configType: 'tailwind' | 'bootstrap') => {
@@ -85,8 +171,10 @@ export default function SchemePreviewPanel({
                 const updatedScheme = { ...scheme };
                 if (configType === 'tailwind') {
                     updatedScheme.tailwindConfig = data.config;
+                    setTailwindCode(data.config); // 直接更新显示的代码
                 } else if (configType === 'bootstrap') {
                     updatedScheme.bootstrap5CustomVariables = data.config;
+                    setBootstrapCode(data.config); // 直接更新显示的代码
                 }
 
                 // 通知父组件更新scheme
@@ -286,37 +374,34 @@ export default function SchemePreviewPanel({
             </div>
 
             {/* Code Snippets */}
-            {(() => {
-                console.log('🔍 调试信息:', {
-                    hasTailwindConfig: !!scheme.tailwindConfig,
-                    tailwindConfigLength: scheme.tailwindConfig?.length,
-                    hasBootstrapConfig: !!scheme.bootstrap5CustomVariables,
-                    bootstrapConfigLength: scheme.bootstrap5CustomVariables?.length,
-                    schemeTheory: scheme.theory
-                });
-                return null;
-            })()}
+            {isLoadingCode ? (
+                <div className="bg-gray-50 h-24 flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+                </div>
+            ) : (
+                <>
+                    {tailwindCode && (
+                        <CodeSnippet
+                            language="javascript"
+                            code={tailwindCode}
+                            fileName="tailwind.config.js"
+                            title="Tailwind CSS Config"
+                            onRegenerate={() => regenerateConfig('tailwind')}
+                            isRegenerating={regeneratingConfigs.tailwind}
+                        />
+                    )}
 
-            {scheme.tailwindConfig && (
-                <CodeSnippet
-                    language="javascript"
-                    code={scheme.tailwindConfig}
-                    fileName="tailwind.config.js"
-                    title="Tailwind CSS Config"
-                    onRegenerate={() => regenerateConfig('tailwind')}
-                    isRegenerating={regeneratingConfigs.tailwind}
-                />
-            )}
-
-            {scheme.bootstrap5CustomVariables && (
-                <CodeSnippet
-                    language="scss"
-                    code={scheme.bootstrap5CustomVariables}
-                    fileName="_custom-variables.scss"
-                    title="Bootstrap 5 Custom Variables"
-                    onRegenerate={() => regenerateConfig('bootstrap')}
-                    isRegenerating={regeneratingConfigs.bootstrap}
-                />
+                    {bootstrapCode && (
+                        <CodeSnippet
+                            language="scss"
+                            code={bootstrapCode}
+                            fileName="_custom-variables.scss"
+                            title="Bootstrap 5 Custom Variables"
+                            onRegenerate={() => regenerateConfig('bootstrap')}
+                            isRegenerating={regeneratingConfigs.bootstrap}
+                        />
+                    )}
+                </>
             )}
 
         </div>
