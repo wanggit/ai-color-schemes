@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import GradientBackground from '@/app/components/GradientBackground';
+import CodeModal from '@/app/components/my-schemes/CodeModal';
 import html2canvas from 'html2canvas';
 
 // Define types for the data
@@ -17,16 +18,24 @@ type Scheme = {
     url: string;
 };
 
+type ColorDetail = {
+    id: string;
+    hex: string;
+    [key: string]: any; // for other properties like tailwindComp, bootstrapAnal etc.
+};
+
 type ColorData = {
     id: string;
     hex: string;
     schemes: Scheme[];
     total: number;
     currentPage: number;
+    color: ColorDetail;
 };
 
 export default function ExamplePage() {
     const t = useTranslations('examplePage');
+    const tMySchemes = useTranslations('mySchemes');
     const [colorData, setColorData] = useState<ColorData | null>(null);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -37,6 +46,11 @@ export default function ExamplePage() {
     const [iframeHeight, setIframeHeight] = useState(900); // 默认高度
     const [iframeLoading, setIframeLoading] = useState(true);
     const [isSharing, setIsSharing] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalLoading, setIsModalLoading] = useState(false);
+    const [modalContent, setModalContent] = useState('');
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalLanguage, setModalLanguage] = useState('');
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
     useEffect(() => {
@@ -52,6 +66,7 @@ export default function ExamplePage() {
                 if (data.error) {
                     throw new Error(data.error);
                 }
+                console.log("example Data", data);
                 setColorData(data);
                 setSchemeIndex(0);
             } catch (err: any) {
@@ -206,6 +221,56 @@ export default function ExamplePage() {
         }
     };
 
+    const handleShowCode = async (type: 'tailwind' | 'bootstrap') => {
+        if (!currentScheme || !colorData?.color) return;
+
+        const theoryMap: { [key: string]: string } = {
+            'Complementary': 'Comp',
+            'Analogous': 'Anal',
+            'Triadic': 'Tria',
+            'Monochromatic': 'Mono',
+            'Split-Complementary': 'SpCo'
+        };
+
+        const theoryAbbr = theoryMap[currentScheme.theory];
+        if (!theoryAbbr) {
+            console.error(`Unknown theory: ${currentScheme.theory}`);
+            return;
+        };
+
+        const key = `${type}${theoryAbbr}`;
+        const url = colorData.color[key];
+
+        if (!url) {
+            console.error(`No URL found for key: ${key}`);
+            return;
+        }
+
+        setIsModalOpen(true);
+        setIsModalLoading(true);
+        setModalContent('');
+        setModalTitle(type === 'tailwind' ? 'Tailwind CSS' : 'Bootstrap');
+        setModalLanguage(type === 'tailwind' ? 'javascript' : 'scss');
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to fetch code');
+            }
+            const code = await response.text();
+            setModalContent(code);
+        } catch (error) {
+            console.error('Failed to load code:', error);
+            setModalContent(t('loadError'));
+        } finally {
+            setIsModalLoading(false);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
     const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
         const iframe = event.currentTarget;
         try {
@@ -245,6 +310,20 @@ export default function ExamplePage() {
         }
     };
 
+    const theoryMap: { [key: string]: string } = {
+        'Complementary': 'Comp',
+        'Analogous': 'Anal',
+        'Triadic': 'Tria',
+        'Monochromatic': 'Mono',
+        'Split-Complementary': 'SpCo'
+    };
+    const theoryAbbr = currentScheme ? theoryMap[currentScheme.theory] : undefined;
+    const tailwindUrlKey = theoryAbbr ? `tailwind${theoryAbbr}` : undefined;
+    const bootstrapUrlKey = theoryAbbr ? `bootstrap${theoryAbbr}` : undefined;
+    const hasTailwindUrl = tailwindUrlKey && colorData?.color?.[tailwindUrlKey];
+    const hasBootstrapUrl = bootstrapUrlKey && colorData?.color?.[bootstrapUrlKey];
+
+
     return (
         <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 text-white">
             <GradientBackground />
@@ -277,6 +356,19 @@ export default function ExamplePage() {
                                     </button>
                                 </div>
                                 <div className="flex items-center space-x-2">
+                                    <button onClick={() => handleShowCode('tailwind')} disabled={!hasTailwindUrl} className="px-4 py-2 bg-sky-600 text-white rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-sky-700 flex items-center gap-2">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 35 24">
+                                            <path d="M17.183 0C12.6 0 9.737 2.291 8.59 6.873c1.719-2.29 3.723-3.15 6.014-2.577 1.307.326 2.242 1.274 3.275 2.324 1.685 1.71 3.635 3.689 7.894 3.689 4.582 0 7.445-2.291 8.591-6.872-1.718 2.29-3.723 3.15-6.013 2.576-1.308-.326-2.243-1.274-3.276-2.324C23.39 1.98 21.44 0 17.183 0ZM8.59 10.309C4.01 10.309 1.145 12.6 0 17.182c1.718-2.291 3.723-3.15 6.013-2.577 1.308.326 2.243 1.274 3.276 2.324 1.685 1.71 3.635 3.689 7.894 3.689 4.582 0 7.445-2.29 8.59-6.872-1.718 2.29-3.722 3.15-6.013 2.577-1.307-.327-2.242-1.276-3.276-2.325-1.684-1.71-3.634-3.689-7.893-3.689Z"></path>
+                                        </svg>
+                                        <span>TailwindCSS</span>
+                                    </button>
+                                    <button onClick={() => handleShowCode('bootstrap')} disabled={!hasBootstrapUrl} className="px-4 py-2 bg-purple-600 text-white rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700 flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 94"
+                                            role="img" className="w-5 h-5">
+                                            <path fillRule="evenodd" clipRule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path>
+                                        </svg>
+                                        <span>Bootstrap</span>
+                                    </button>
                                     <button onClick={handlePrevScheme} disabled={schemeIndex === 0} className="px-4 py-2 bg-purple-600 rounded-md disabled:bg-gray-500/50 disabled:cursor-not-allowed transition-colors hover:bg-purple-700">
                                         {t('prevButton')}
                                     </button>
@@ -354,6 +446,16 @@ export default function ExamplePage() {
                     <p className="text-center text-xl mt-10">{t('noExamples')}</p>
                 )}
             </div>
+            {isModalOpen && (
+                <CodeModal
+                    onClose={handleCloseModal}
+                    title={modalTitle}
+                    language={modalLanguage}
+                    content={modalContent}
+                    isLoading={isModalLoading}
+                    t={tMySchemes}
+                />
+            )}
         </div>
     );
 } 

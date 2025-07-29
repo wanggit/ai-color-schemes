@@ -263,6 +263,7 @@ export async function GET(request: NextRequest) {
       schemes,
       total,
       currentPage: page,
+      color: color,
     };
 
     return NextResponse.json(responseData);
