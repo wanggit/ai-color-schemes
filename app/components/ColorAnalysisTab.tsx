@@ -44,6 +44,13 @@ interface ColorAnalysisTabProps {
 
 export default function ColorAnalysisTab({ colorAnalysis }: ColorAnalysisTabProps) {
   const t = useTranslations('components.colorAnalysis');
+
+  // 防御性编程：确保 colorAnalysis 和其嵌套属性存在
+  if (!colorAnalysis || !colorAnalysis.colorAnalysis) {
+    // 可以返回一个加载指示器或 null
+    return <div>{t('loading')}</div>;
+  }
+
   return (
     <div className="flex flex-row w-full">
       <div className="space-y-6 pr-6">

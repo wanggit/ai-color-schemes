@@ -752,7 +752,36 @@ export default function GenerateClientNew() {
                                             const currentScheme = aiResponse?.colorAnalysis?.colorSchemes?.find(
                                                 scheme => scheme.theory === activeTab
                                             );
-                                            if (currentScheme) {
+                                            if (currentScheme && aiResponse?.colorAnalysis) {
+                                                // 从 aiResponse 创建一个临时的 colorRecord
+                                                const tempColorRecord = {
+                                                    id: '', // 默认值
+                                                    hex: aiResponse.colorAnalysis.hexValue,
+                                                    aiJson: JSON.stringify(aiResponse),
+                                                    exampleComp: null,
+                                                    exampleAnal: null,
+                                                    exampleTria: null,
+                                                    exampleMono: null,
+                                                    exampleSpCo: null,
+                                                    previewComp: null,
+                                                    previewAnal: null,
+                                                    previewTria: null,
+                                                    previewMono: null,
+                                                    previewSpCo: null,
+                                                    tailwindComp: null,
+                                                    tailwindAnal: null,
+                                                    tailwindTria: null,
+                                                    tailwindMono: null,
+                                                    tailwindSpCo: null,
+                                                    bootstrapComp: null,
+                                                    bootstrapAnal: null,
+                                                    bootstrapTria: null,
+                                                    bootstrapMono: null,
+                                                    bootstrapSpCo: null,
+                                                    userId: '', // 默认值
+                                                    createdAt: new Date().toISOString(), // 默认值
+                                                    updatedAt: new Date().toISOString() // 默认值
+                                                };
                                                 return (
                                                     <div className="flex flex-col gap-8">
                                                         <div>
@@ -761,6 +790,7 @@ export default function GenerateClientNew() {
                                                         <div>
                                                             <SchemePreviewPanel
                                                                 scheme={currentScheme}
+                                                                colorRecord={tempColorRecord}
                                                                 previewMode={previewMode}
                                                                 setPreviewMode={setPreviewMode}
                                                                 exampleUrls={exampleUrls}
@@ -925,18 +955,18 @@ export default function GenerateClientNew() {
                                                             )}
                                                             {log.attempt && log.maxAttempts && (
                                                                 <div className="text-xs opacity-70 mt-1">
-                                                                    重试进度: {log.attempt}/{log.maxAttempts}
+                                                                    retry progress: {log.attempt}/{log.maxAttempts}
                                                                 </div>
                                                             )}
                                                             {log.error && (
                                                                 <div className="text-xs opacity-70 mt-1 font-mono bg-red-100 dark:bg-red-900/30 p-1 rounded">
-                                                                    <div className="font-semibold">错误详情:</div>
+                                                                    <div className="font-semibold">Error Details:</div>
                                                                     <div className="break-all">{log.error}</div>
                                                                 </div>
                                                             )}
                                                             {log.rawResponse && (
                                                                 <details className="text-xs opacity-70 mt-1">
-                                                                    <summary className="cursor-pointer font-semibold">查看原始响应</summary>
+                                                                    <summary className="cursor-pointer font-semibold">View Raw Response</summary>
                                                                     <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded mt-1 font-mono break-all max-h-32 overflow-y-auto">
                                                                         {log.rawResponse}
                                                                     </div>

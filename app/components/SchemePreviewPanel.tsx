@@ -1,7 +1,8 @@
 import { TbDeviceDesktop, TbDeviceMobile, TbReload, TbDownload } from "react-icons/tb";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslations } from 'next-intl';
 import CodeSnippet from './CodeSnippet';
+import html2canvas from 'html2canvas';
 
 // 定义颜色方案类型
 type ColorScheme = {
@@ -86,6 +87,11 @@ export default function SchemePreviewPanel({
     // 跟踪图片加载错误状态
     const [imageLoadError, setImageLoadError] = useState<{ [key: string]: boolean }>({});
 
+    // 新增用于分享功能的状态和引用
+    const [isSharing, setIsSharing] = useState(false);
+    const [iframeLoading, setIframeLoading] = useState(true);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+
     // 用于存储从URL加载的代码
     const [tailwindCode, setTailwindCode] = useState<string | null>(null);
     const [bootstrapCode, setBootstrapCode] = useState<string | null>(null);
@@ -114,8 +120,6 @@ export default function SchemePreviewPanel({
 
         const fetchCode = async () => {
             setIsLoadingCode(true);
-            const tailwindKey = getCodeKey(scheme.theory, 'tailwind');
-            const bootstrapKey = getCodeKey(scheme.theory, 'bootstrap');
 
             const fetchAndSetCode = async (key: keyof AiColor | null, setCode: (code: string | null) => void) => {
                 if (key && colorRecord[key]) {
@@ -131,20 +135,31 @@ export default function SchemePreviewPanel({
                         setCode(null);
                     }
                 } else {
-                    setCode(null);
+                    setCode(null); // No URL in colorRecord
                 }
             };
 
-            await Promise.all([
-                fetchAndSetCode(tailwindKey, setTailwindCode),
-                fetchAndSetCode(bootstrapKey, setBootstrapCode)
-            ]);
+            // Logic for Tailwind
+            if (scheme.tailwindConfig) {
+                setTailwindCode(scheme.tailwindConfig);
+            } else {
+                const tailwindKey = getCodeKey(scheme.theory, 'tailwind');
+                await fetchAndSetCode(tailwindKey, setTailwindCode);
+            }
+
+            // Logic for Bootstrap
+            if (scheme.bootstrap5CustomVariables) {
+                setBootstrapCode(scheme.bootstrap5CustomVariables);
+            } else {
+                const bootstrapKey = getCodeKey(scheme.theory, 'bootstrap');
+                await fetchAndSetCode(bootstrapKey, setBootstrapCode);
+            }
 
             setIsLoadingCode(false);
         };
 
         fetchCode();
-    }, [scheme.theory, colorRecord]);
+    }, [scheme.theory, colorRecord, scheme.tailwindConfig, scheme.bootstrap5CustomVariables]);
 
 
     // 重新生成配置文件的函数
@@ -202,6 +217,82 @@ export default function SchemePreviewPanel({
         return `/api/colors/preview?url=${encodeURIComponent(originalUrl)}`;
     }, [exampleUrls, getSchemeKey, scheme.theory]);
 
+    // 当 proxyUrl 变化时，重置 iframe 加载状态
+    useEffect(() => {
+        if (proxyUrl) {
+            setIframeLoading(true);
+        }
+    }, [proxyUrl]);
+
+
+    const handleShare = async () => {
+        const key = getSchemeKey(scheme.theory);
+        const currentPreviewUrl = previewUrls[key];
+        const description = scheme.description || `Check out this amazing color scheme based on ${hex}!`;
+        const isShowingImage = viewMode !== 'iframe' && currentPreviewUrl && !imageLoadError[key];
+
+        setIsSharing(true);
+
+        try {
+            let imageUrl: string;
+
+            if (isShowingImage && currentPreviewUrl) {
+                // 如果正在显示预生成的图片，直接使用其URL
+                imageUrl = currentPreviewUrl;
+            } else {
+                // 如果是 iframe 模式，则截图
+                if (!iframeRef.current) {
+                    throw new Error('Iframe is not available.');
+                }
+                const iframeDocument = iframeRef.current.contentDocument;
+                if (!iframeDocument) {
+                    throw new Error('Could not access iframe content.');
+                }
+                const body = iframeDocument.body;
+
+                const canvas = await html2canvas(body, {
+                    useCORS: true,
+                    allowTaint: true,
+                    scale: 2,
+                    height: body.scrollHeight,
+                    windowHeight: body.scrollHeight,
+                    scrollY: -window.scrollY,
+                });
+
+                const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/png'));
+
+                if (!blob) {
+                    throw new Error('Failed to create blob from canvas.');
+                }
+
+                const filename = `color-scheme-${hex}-${scheme.theory}-${Date.now()}.png`;
+                const response = await fetch(`/api/colors/upload-image?filename=${filename}`, {
+                    method: 'POST',
+                    body: blob,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to upload image.');
+                }
+
+                const newBlob = await response.json();
+                imageUrl = newBlob.url;
+            }
+
+            const pinterestUrl = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                window.location.href
+            )}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(description)}`;
+
+            window.open(pinterestUrl, '_blank', 'noopener,noreferrer');
+
+        } catch (error) {
+            console.error('Sharing failed:', error);
+            alert('Failed to share image. Please try again.');
+        } finally {
+            setIsSharing(false);
+        }
+    };
+
     return (
         <div className="mt-6">
             <div className="flex justify-between items-center mb-4">
@@ -236,6 +327,30 @@ export default function SchemePreviewPanel({
                         }
                         return null;
                     })()}
+
+
+                    {/* 分享到 Pinterest 按钮 */}
+                    <button
+                        onClick={handleShare}
+                        disabled={isSharing || (viewMode === 'iframe' && iframeLoading)}
+                        className="px-3 py-1.5 bg-white text-gray-700 font-semibold border border-gray-300 rounded-md disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors hover:bg-gray-100 flex items-center text-xs"
+                        title="Share to Pinterest"
+                    >
+                        {isSharing ? (
+                            <>
+                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span style={{ whiteSpace: 'nowrap' }}>Sharing...</span>
+                            </>
+                        ) : (
+                            <>
+                                <img src="/pinterest-social-media-svgrepo-com.png" alt="Pinterest" width="16" height="16" className="mr-2" />
+                                <span style={{ whiteSpace: 'nowrap' }}>Share</span>
+                            </>
+                        )}
+                    </button>
 
                     {/* 下载链接 */}
                     {exampleUrls[getSchemeKey(scheme.theory)] && (
@@ -356,10 +471,12 @@ export default function SchemePreviewPanel({
                             // 显示iframe（没有图片、图片加载失败或用户选择实时模式）
                             return (
                                 <iframe
+                                    ref={iframeRef}
                                     src={proxyUrl}
                                     className={`w-full ${previewMode === "mobile" ? "h-[600px]" : "h-[800px]"}`}
                                     title={`${scheme.theory} Example`}
                                     sandbox="allow-scripts allow-same-origin"
+                                    onLoad={() => setIframeLoading(false)}
                                 ></iframe>
                             );
                         }
