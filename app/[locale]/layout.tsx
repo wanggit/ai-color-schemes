@@ -234,7 +234,7 @@ export default async function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <NextIntlClientProvider messages={pick(messages, ['HomePage', 'generatePage', 'examplePage', 'common', 'header', 'auth', 'components', 'login', 'pricing', 'mySchemes', 'schemeInfo', 'pages'])}>
+                <NextIntlClientProvider messages={pick(messages, ['HomePage', 'generatePage', 'examplePage', 'common', 'header', 'auth', 'components', 'login', 'pricing', 'mySchemes', 'schemeInfo', 'pages', 'HowToUse'])}>
                     <Suspense fallback={null}>
                         <Analytics />
                     </Suspense>

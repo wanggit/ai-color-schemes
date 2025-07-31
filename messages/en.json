@@ -74,7 +74,8 @@
             "mySchemes": "Color Schemes Gallery",
             "billing": "Billing",
             "login": "Login",
-            "logout": "Logout"
+            "logout": "Logout",
+            "howToUse": "How To Use"
         },
         "credits": "Credits",
         "discord": "Join our Discord community"
@@ -669,5 +670,45 @@
     "UserCredits": {
         "title": "My Credits",
         "unlimited": "Unlimited"
+    },
+    "HowToUse": {
+        "title": "How to Use AI Colors",
+        "section1": {
+            "title": "Generate a Color Scheme",
+            "description": "Our website allows you to generate multiple color schemes from a single color value. Simply input a color, and the AI will create a variety of palettes for you."
+        },
+        "section2": {
+            "title": "View Color Information",
+            "item1": "Color Meaning",
+            "item2": "Emotional Associations",
+            "item3": "Cultural Differences (East vs. West)",
+            "item4": "Color Scheme Best Practices",
+            "item5": "Five Color Schemes: Complementary, Analogous, Triadic, Monochromatic, and Split Complementary",
+            "item6": "Real-time logs of the AI's generation process"
+        },
+        "section3": {
+            "title": "Detailed Scheme Information",
+            "item1": "Scheme Description",
+            "item2": "Best UI Applications",
+            "item3": "Advantages of the Scheme",
+            "item4": "Recommended Color Ratios",
+            "item5": "Best Application Types"
+        },
+        "section4": {
+            "title": "Scheme Examples",
+            "description": "Visualize how the color scheme looks in a real-world example."
+        },
+        "section5": {
+            "title": "Tailwind CSS Configuration",
+            "description": "You can directly copy the Tailwind CSS configuration file and apply it to your projects."
+        },
+        "section6": {
+            "title": "Bootstrap Configuration",
+            "description": "You can also copy the Bootstrap configuration file for use in your projects."
+        },
+        "section7": {
+            "title": "Explore Examples",
+            "description": "Check out the 'Examples' page to see excellent pre-generated color scheme examples."
+        }
     }
 }
