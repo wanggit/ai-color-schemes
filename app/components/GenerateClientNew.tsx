@@ -824,7 +824,8 @@ export default function GenerateClientNew() {
                                 </div>
 
                                 {/* 右侧：AI信息显示窗口 - 绝对定位在屏幕最右侧 */}
-                                {!(isGenerated && currentStep === 'complete') && (
+                                {/* {!(isGenerated && currentStep === 'complete') && ( */}
+                                {!isGenerated && (
                                     <div className="fixed right-0 top-12 h-screen w-1/5 p-4 z-10">
                                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 h-full flex flex-col">
                                             <div className="flex justify-between items-center mb-4 flex-shrink-0">
