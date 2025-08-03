@@ -10,7 +10,6 @@ import { streamText } from 'ai';
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
-    console.log("[API_HIT] /api/colors/basic-analysis POST received a request.");
     try {
         const i18n = await ApiI18nHandler.create(request);
 
@@ -93,7 +92,7 @@ async function generateBasicAnalysisStream(
     prisma: PrismaClient
 ) {
     // Vercel生产环境日志: 记录函数入口和参数
-    console.log("[STREAM_START] generateBasicAnalysisStream called.", { hex, userId });
+    console.warn("[STREAM_START] generateBasicAnalysisStream called.", { hex, userId });
 
     try {
         // 发送开始消息
