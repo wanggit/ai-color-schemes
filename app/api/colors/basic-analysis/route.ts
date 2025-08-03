@@ -10,6 +10,7 @@ import { streamText } from 'ai';
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
+    console.log("[API_HIT] /api/colors/basic-analysis POST received a request.");
     try {
         const i18n = await ApiI18nHandler.create(request);
 
