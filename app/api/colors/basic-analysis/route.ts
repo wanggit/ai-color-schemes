@@ -129,7 +129,7 @@ async function generateBasicAnalysisStream(
         // 使用 Vercel AI SDK 进行流式生成
         let fullResponse = '';
 
-        const messages = [
+        const messages: Array<{ role: 'system' | 'user'; content: string }> = [
             {
                 role: 'system',
                 content: COLOR_ANALYSIS_SYSTEM_PROMPT
@@ -143,13 +143,27 @@ async function generateBasicAnalysisStream(
         // Vercel生产环境日志: 记录发送给AI的请求
         console.log("[AI_REQUEST] Calling streamText with messages.", { userId, hex });
 
+        let textStream;
+        try {
+            const streamResult = await streamText({
+                model: gpt4oModel,
+                messages: messages,
+                temperature: 0.7,
+                maxTokens: 2000,
+            });
+            textStream = streamResult.textStream;
+        } catch (aiError) {
+            console.error("[AI_ERROR] streamText call itself failed.", {
+                userId,
+                hex,
+                errorMessage: aiError instanceof Error ? aiError.message : String(aiError),
+                errorStack: aiError instanceof Error ? aiError.stack : undefined,
+                error: aiError,
+            });
+            // 抛出错误，让外层catch处理，并终止函数
+            throw new Error('AI service call failed.');
+        }
 
-        const { textStream } = await streamText({
-            model: gpt4oModel,
-            messages: messages,
-            temperature: 0.7,
-            maxTokens: 2000,
-        });
 
         // 处理流式响应
         for await (const delta of textStream) {
@@ -162,6 +176,14 @@ async function generateBasicAnalysisStream(
                 progress: 50
             });
         }
+
+        // Vercel生产环境日志: 记录从AI流中获取的完整响应
+        console.log("[AI_RESPONSE] Full response from AI stream.", {
+            userId,
+            hex,
+            responseLength: fullResponse.length,
+            responsePrefix: fullResponse.substring(0, 500) + (fullResponse.length > 500 ? "..." : ""),
+        });
 
         // 发送解析完成消息
         await sendStreamUpdate(writer, encoder, {

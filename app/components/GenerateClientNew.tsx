@@ -445,11 +445,21 @@ export default function GenerateClientNew() {
         setActiveTab("analysis");
 
         try {
+            // Vercel生产环境日志: 记录函数入口和参数
+            console.log("[CLIENT_INFO] handleGenerate called.", { colorToGenerate, forceRegenerate, sessionId: session?.user?.id });
+
             // 步骤1: 基础颜色分析（流式）
             addAILog({ type: 'info', message: t('aiLogs.step1.title') });
             addAILog({ type: 'info', message: t('aiLogs.step1.analyzingColor', { color: colorToGenerate }) });
             setCurrentStep('basic');
             setIsStreaming(true);
+
+            // Vercel生产环境日志: 准备发送请求
+            const requestBody = {
+                hex: colorToGenerate,
+                regenerate: forceRegenerate
+            };
+            console.log("[CLIENT_REQUEST] Sending request to /api/colors/basic-analysis", { requestBody });
 
             const basicResponse = await fetch("/api/colors/basic-analysis", {
                 method: "POST",
@@ -457,15 +467,22 @@ export default function GenerateClientNew() {
                     "Content-Type": "application/json",
                     "Accept-Language": locale,
                 },
-                body: JSON.stringify({
-                    hex: colorToGenerate,
-                    regenerate: forceRegenerate
-                }),
+                body: JSON.stringify(requestBody),
             });
 
+            // Vercel生产环境日志: 收到响应
+            console.log("[CLIENT_RESPONSE] Received response from /api/colors/basic-analysis", { status: basicResponse.status, statusText: basicResponse.statusText });
+
             if (!basicResponse.ok) {
-                const errorData = await basicResponse.json();
+                const errorData = await basicResponse.json().catch(() => ({ error: 'Failed to parse error response' }));
                 const errorMessage = errorData.error || '生成失败';
+
+                // Vercel生产环境日志: API返回错误
+                console.error("[CLIENT_ERROR] API request failed.", {
+                    status: basicResponse.status,
+                    errorMessage,
+                    errorData,
+                });
 
                 if (basicResponse.status === 403) {
                     const lowerMessage = errorMessage.toLowerCase();
@@ -503,7 +520,11 @@ export default function GenerateClientNew() {
                         const parsed = JSON.parse(line);
                         handleStreamUpdate(parsed);
                     } catch (e) {
-                        console.error("JSON parsing error:", e, "on line:", line);
+                        // Vercel生产环境日志: 流式响应JSON解析失败
+                        console.error("[CLIENT_ERROR] Failed to parse stream JSON line.", {
+                            line,
+                            error: e instanceof Error ? e.message : String(e)
+                        });
                     }
                 }
             }
@@ -512,6 +533,13 @@ export default function GenerateClientNew() {
             addAILog({ type: 'info', message: t('aiLogs.step1.analysisComplete') });
 
         } catch (error: any) {
+            // Vercel生产环境日志: 捕获到意外错误
+            console.error("[CLIENT_FATAL] Unhandled error in handleGenerate.", {
+                errorMessage: error.message,
+                errorStack: error.stack,
+                error,
+            });
+
             setIsError(true);
             addAILog({ type: 'error', message: t('aiLogs.error.generationProcess') });
             addAILog({ type: 'error', message: t('aiLogs.error.errorType', { type: error.name || 'Unknown' }) });
@@ -528,7 +556,7 @@ export default function GenerateClientNew() {
 
     const handleStreamUpdate = (update: any) => {
         if (update.type === 'progress') {
-            addAILog({ type: 'progress', message: update.message });
+            addAILog({ type: 'progress', message: t(update.message || 'aiLogs.stream.unknownProgress') });
         } else if (update.type === 'stream_content') {
             setStreamingContent(prev => prev + (update.content || ''));
             // 减少流式内容的日志频率，避免日志过多
@@ -538,7 +566,7 @@ export default function GenerateClientNew() {
         } else if (update.type === 'retry') {
             addAILog({
                 type: 'retry',
-                message: update.message,
+                message: t(update.message || 'aiLogs.stream.retrying', { attempt: update.attempt, maxAttempts: update.maxAttempts }),
                 attempt: update.attempt,
                 maxAttempts: update.maxAttempts
             });
@@ -571,11 +599,17 @@ export default function GenerateClientNew() {
         } else if (update.type === 'error') {
             setIsError(true);
 
+            // 优先使用原始的、未经翻译的message字段，如果它存在的话
+            const finalMessage = update.message && !update.message.includes('.')
+                ? update.message
+                : t(update.message || 'aiLogs.error.unknown', { error: update.error });
+
+
             // 检测是否是JSON格式错误
-            const isJsonError = update.message && (
-                update.message.includes('JSON') ||
-                update.message.includes('parse') ||
-                update.message.includes('format')
+            const isJsonError = finalMessage && (
+                finalMessage.toLowerCase().includes('json') ||
+                finalMessage.toLowerCase().includes('parse') ||
+                finalMessage.toLowerCase().includes('format')
             );
 
             if (isJsonError) {
@@ -585,8 +619,8 @@ export default function GenerateClientNew() {
 
             addAILog({
                 type: 'error',
-                message: update.message,
-                error: update.error,
+                message: finalMessage,
+                error: update.error ? (t(update.error) || update.error) : 'No details',
                 rawResponse: update.rawResponse
             });
         }
