@@ -52,7 +52,12 @@ export async function POST(request: NextRequest) {
         // 异步处理流式生成
         generateBasicAnalysisStream(hex, writer, encoder, userId, i18n, prisma)
             .catch(error => {
-                console.error(i18n.log("basicAnalysisFailed"), error);
+                // Vercel生产环境日志: 异步流处理中未捕获的错误
+                console.error("[STREAM_ERROR] Unhandled error in async generateBasicAnalysisStream process.", {
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    errorStack: error instanceof Error ? error.stack : undefined,
+                    error,
+                });
             });
 
         return new Response(stream.readable, {
@@ -65,7 +70,12 @@ export async function POST(request: NextRequest) {
 
     } catch (error) {
         const fallbackI18n = new (await import("@/lib/api-i18n")).ApiI18nHandler('en');
-        console.error(fallbackI18n.log("basicAnalysisFailed"), error);
+        // Vercel生产环境日志
+        console.error("[API_ERROR] /api/colors/basic-analysis: Unhandled error in POST handler.", {
+            errorMessage: error instanceof Error ? error.message : String(error),
+            errorStack: error instanceof Error ? error.stack : undefined,
+            error,
+        });
         return NextResponse.json(
             { error: fallbackI18n.error("internalServerError") },
             { status: 500 }
@@ -81,6 +91,9 @@ async function generateBasicAnalysisStream(
     i18n: ApiI18nHandler,
     prisma: PrismaClient
 ) {
+    // Vercel生产环境日志: 记录函数入口和参数
+    console.log("[STREAM_START] generateBasicAnalysisStream called.", { hex, userId });
+
     try {
         // 发送开始消息
         await sendStreamUpdate(writer, encoder, {
@@ -116,18 +129,24 @@ async function generateBasicAnalysisStream(
         // 使用 Vercel AI SDK 进行流式生成
         let fullResponse = '';
 
+        const messages = [
+            {
+                role: 'system',
+                content: COLOR_ANALYSIS_SYSTEM_PROMPT
+            },
+            {
+                role: 'user',
+                content: `Please analyze the color ${hex} and generate a complete color analysis report. IMPORTANT: All your responses, including thinking process, analysis, and output must be in English only.`
+            }
+        ];
+
+        // Vercel生产环境日志: 记录发送给AI的请求
+        console.log("[AI_REQUEST] Calling streamText with messages.", { userId, hex });
+
+
         const { textStream } = await streamText({
             model: gpt4oModel,
-            messages: [
-                {
-                    role: 'system',
-                    content: COLOR_ANALYSIS_SYSTEM_PROMPT
-                },
-                {
-                    role: 'user',
-                    content: `Please analyze the color ${hex} and generate a complete color analysis report. IMPORTANT: All your responses, including thinking process, analysis, and output must be in English only.`
-                }
-            ],
+            messages: messages,
             temperature: 0.7,
             maxTokens: 2000,
         });
@@ -160,7 +179,6 @@ async function generateBasicAnalysisStream(
         while (retryCount <= maxRetries) {
             try {
                 // 清理响应内容
-                console.log("fullResponse", fullResponse);
                 let cleanedResponse = fullResponse.trim();
                 if (cleanedResponse.startsWith('```json')) {
                     cleanedResponse = cleanedResponse.substring(7, cleanedResponse.length - 3);
@@ -168,14 +186,19 @@ async function generateBasicAnalysisStream(
                 if (cleanedResponse.endsWith('```')) {
                     cleanedResponse = cleanedResponse.substring(0, cleanedResponse.length - 3);
                 }
-                console.log("cleanedResponse", cleanedResponse);
                 parsedResponse = JSON.parse(cleanedResponse);
                 break; // 成功解析，跳出循环
             } catch (error) {
                 retryCount++;
-                // 详细日志输出AI原始内容
-                console.error('AI原始输出无法解析为JSON:', fullResponse);
-                console.error(i18n.log("aiParseJsonFailed"), `Attempt ${retryCount}/${maxRetries + 1}`, error);
+                // Vercel生产环境日志: JSON解析失败
+                console.error("[JSON_PARSE_ERROR] Failed to parse AI response.", {
+                    userId,
+                    hex,
+                    attempt: `${retryCount}/${maxRetries + 1}`,
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    rawResponse: fullResponse,
+                    error,
+                });
 
                 if (retryCount <= maxRetries) {
                     // 发送重试消息
@@ -224,7 +247,12 @@ async function generateBasicAnalysisStream(
                             });
                         }
                     } catch (retryError) {
-                        console.error('Retry request failed:', retryError);
+                        console.error('[AI_RETRY_ERROR] Retry request to fix JSON failed:', {
+                            userId,
+                            hex,
+                            errorMessage: retryError instanceof Error ? retryError.message : String(retryError),
+                            error: retryError
+                        });
                         // 继续下一次重试
                     }
                 } else {
@@ -248,6 +276,9 @@ async function generateBasicAnalysisStream(
             progress: 80
         });
 
+        // Vercel生产环境日志: 准备将解析后的数据存入数据库
+        console.log("[DB_SAVE] Saving basic analysis to database.", { userId, hex, dataSize: JSON.stringify(parsedResponse).length });
+
         // 保存基础分析到数据库
         await saveBasicAnalysis(prisma, hex, userId, parsedResponse);
 
@@ -263,7 +294,14 @@ async function generateBasicAnalysisStream(
         await writer.close();
 
     } catch (error) {
-        console.error(i18n.log("basicAnalysisFailed"), error);
+        // Vercel生产环境日志: 流式生成过程中发生未捕获的错误
+        console.error("[STREAM_ERROR] Unhandled error in generateBasicAnalysisStream.", {
+            userId,
+            hex,
+            errorMessage: error instanceof Error ? error.message : String(error),
+            errorStack: error instanceof Error ? error.stack : undefined,
+            error,
+        });
 
         // 发送错误消息
         await sendStreamUpdate(writer, encoder, {
@@ -294,4 +332,4 @@ async function sendStreamUpdate(
         console.error('Failed to send stream update:', error);
         return false;
     }
-} 
+}
