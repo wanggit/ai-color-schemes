@@ -192,7 +192,8 @@ async function generateBasicAnalysisStream(
             type: 'progress',
             step: 'parsing_complete',
             message: i18n.log('api.basicAnalysis.parsingComplete'),
-            progress: 70
+            progress: 70,
+            fullResponse: fullResponse
         });
 
         // 解析AI响应
