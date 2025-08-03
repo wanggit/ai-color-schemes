@@ -152,7 +152,8 @@ export default function GenerateClientNew() {
             };
             console.log('📤 发送请求数据:', requestData);
 
-            const response = await fetch('/api/colors/example', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+            const response = await fetch(`${apiUrl}/api/colors/example`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),
@@ -193,7 +194,8 @@ export default function GenerateClientNew() {
     // 重新生成配置
     const regenerateConfig = async (scheme: ColorScheme, configType: 'tailwind' | 'bootstrap') => {
         try {
-            const response = await fetch('/api/colors/regenerate-config', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+            const response = await fetch(`${apiUrl}/api/colors/regenerate-config`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -461,7 +463,8 @@ export default function GenerateClientNew() {
             };
             console.log("[CLIENT_REQUEST] Sending request to /api/colors/basic-analysis", { requestBody });
 
-            const basicResponse = await fetch("/api/colors/basic-analysis", {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+            const basicResponse = await fetch(`${apiUrl}/api/colors/basic-analysis`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -582,7 +585,8 @@ export default function GenerateClientNew() {
                     hasColorAnalysis: !!update.data.colorAnalysis,
                     hasColorSchemes: !!(update.data.colorAnalysis && update.data.colorAnalysis.colorSchemes),
                     schemesCount: update.data.colorAnalysis?.colorSchemes?.length || 0
-                })}`
+                })
+                    }`
             });
 
             if (update.data.colorAnalysis && update.data.colorAnalysis.colorSchemes) {
@@ -901,7 +905,7 @@ export default function GenerateClientNew() {
                                                                 return (
                                                                     <div
                                                                         className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                                                                        style={{ width: `${progress}%` }}
+                                                                        style={{ width: `${progress} % ` }}
                                                                     />
                                                                 );
                                                             })()}
@@ -931,7 +935,7 @@ export default function GenerateClientNew() {
                                                                     key={task}
                                                                     onClick={() => status[task] === 'error' && retryTask(theory, task)}
                                                                     disabled={status[task] !== 'error'}
-                                                                    className={`px-2 py-1 text-xs rounded ${status[task] === 'completed'
+                                                                    className={`px - 2 py - 1 text - xs rounded ${status[task] === 'completed'
                                                                         ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                                                                         : status[task] === 'generating'
                                                                             ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
@@ -957,7 +961,7 @@ export default function GenerateClientNew() {
                                                     aiLogs.map((log, index) => (
                                                         <div
                                                             key={index}
-                                                            className={`text-sm p-2 rounded ${log.type === 'success'
+                                                            className={`text - sm p - 2 rounded ${log.type === 'success'
                                                                 ? 'bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-200 border-l-4 border-green-400'
                                                                 : log.type === 'error'
                                                                     ? 'bg-red-50 text-red-800 dark:bg-red-900/20 dark:text-red-200 border-l-4 border-red-400'

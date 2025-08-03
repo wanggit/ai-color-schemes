@@ -332,6 +332,19 @@
                 "setBootstrapConfig": "重试已设置Bootstrap配置",
                 "success": "✓ 重试成功: {theory} {task}"
             }
+        },
+        "api": {
+            "logs": {
+                "api": {
+                    "basicAnalysis": {
+                        "savingToDb": "保存到数据库...",
+                        "parsingComplete": "AI响应解析完成",
+                        "parsingResponse": "解析AI响应...",
+                        "requestingAI": "请求AI分析...",
+                        "start": "开始基本颜色分析..."
+                    }
+                }
+            }
         }
     },
     "components": {

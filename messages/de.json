@@ -328,6 +328,19 @@
                 "setBootstrapConfig": "Bootstrap-Konfiguration bei Wiederholung festgelegt",
                 "success": "✓ Wiederholung erfolgreich: {theory} {task}"
             }
+        },
+        "api": {
+            "logs": {
+                "api": {
+                    "basicAnalysis": {
+                        "savingToDb": "In Datenbank speichern...",
+                        "parsingComplete": "AI-Antwort analysiert",
+                        "parsingResponse": "AI-Antwort analysiert...",
+                        "requestingAI": "AI-Analyse anfordern...",
+                        "start": "Grundlegende Farbanalyse wird gestartet..."
+                    }
+                }
+            }
         }
     },
     "components": {

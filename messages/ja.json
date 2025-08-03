@@ -332,6 +332,19 @@
                 "setBootstrapConfig": "再試行でBootstrap構成を設定しました",
                 "success": "✓ 再試行成功：{theory} {task}"
             }
+        },
+        "api": {
+            "logs": {
+                "api": {
+                    "basicAnalysis": {
+                        "savingToDb": "データベースに保存中...",
+                        "parsingComplete": "AI応答の解析完了",
+                        "parsingResponse": "AI応答の解析中...",
+                        "requestingAI": "AI分析を要求中...",
+                        "start": "基本色分析を開始中..."
+                    }
+                }
+            }
         }
     },
     "components": {

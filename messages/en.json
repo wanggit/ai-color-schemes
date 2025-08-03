@@ -332,6 +332,19 @@
                 "setBootstrapConfig": "Retry has set Bootstrap config",
                 "success": "✓ Retry successful: {theory} {task}"
             }
+        },
+        "api": {
+            "logs": {
+                "api": {
+                    "basicAnalysis": {
+                        "savingToDb": "Saving to database...",
+                        "parsingComplete": "AI response parsing complete",
+                        "parsingResponse": "Parsing AI response...",
+                        "requestingAI": "Requesting AI analysis...",
+                        "start": "Starting basic color analysis..."
+                    }
+                }
+            }
         }
     },
     "components": {

@@ -332,6 +332,19 @@
                 "setBootstrapConfig": "재시도하여 Bootstrap 구성을 설정했습니다",
                 "success": "✓ 재시도 성공: {theory} {task}"
             }
+        },
+        "api": {
+            "logs": {
+                "api": {
+                    "basicAnalysis": {
+                        "savingToDb": "데이터베이스에 저장 중...",
+                        "parsingComplete": "AI 응답 분석 완료",
+                        "parsingResponse": "AI 응답 분석 중...",
+                        "requestingAI": "AI 분석 요청 중...",
+                        "start": "기본 색상 분석 시작 중..."
+                    }
+                }
+            }
         }
     },
     "components": {
