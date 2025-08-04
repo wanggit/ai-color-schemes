@@ -7,7 +7,7 @@ import { COLOR_ANALYSIS_SYSTEM_PROMPT } from "../constants";
 import { gpt4oModel } from '@/lib/ai-provider';
 import { streamText } from 'ai';
 
-export const dynamic = 'force-dynamic'; // 强制动态渲染，禁用缓存
+export const dynamic = 'force-dynamic';
 
 const prisma = new PrismaClient();
 
