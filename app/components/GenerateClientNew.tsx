@@ -474,7 +474,11 @@ export default function GenerateClientNew() {
             });
 
             // Vercel生产环境日志: 收到响应
-            console.log("[CLIENT_RESPONSE] Received response from /api/colors/basic-analysis", { status: basicResponse.status, statusText: basicResponse.statusText });
+            console.log("[CLIENT_RESPONSE] Received response from /api/colors/basic-analysis", {
+                status: basicResponse.status,
+                statusText: basicResponse.statusText,
+                basicResponse: basicResponse
+            });
 
             if (!basicResponse.ok) {
                 const errorData = await basicResponse.json().catch(() => ({ error: 'Failed to parse error response' }));
@@ -499,37 +503,39 @@ export default function GenerateClientNew() {
                 return;
             }
 
-            // 处理流式响应
-            const reader = basicResponse.body?.getReader();
-            if (!reader) {
-                throw new Error('Cannot read response stream');
-            }
+            // 处理JSON响应
+            const responseData = await basicResponse.json();
 
-            let buffer = "";
-            const decoder = new TextDecoder();
+            // Vercel生产环境日志: 收到完整响应数据
+            console.log("[CLIENT_RESPONSE] Received complete response data from /api/colors/basic-analysis", {
+                hasData: !!responseData,
+                dataSize: JSON.stringify(responseData).length
+            });
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
+            // 立即更新aiResponse状态
+            setAiResponse(responseData);
+            addAILog({ type: 'success', message: t('aiLogs.stream.baseDataReceived') });
 
-                const chunk = decoder.decode(value, { stream: true });
-                buffer += chunk;
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || "";
+            // 调试：显示数据结构
+            addAILog({
+                type: 'info', message: `${JSON.stringify({
+                    hasData: !!responseData,
+                    hasColorAnalysis: !!responseData.colorAnalysis,
+                    hasColorSchemes: !!(responseData.colorAnalysis && responseData.colorAnalysis.colorSchemes),
+                    schemesCount: responseData.colorAnalysis?.colorSchemes?.length || 0
+                })
+                    }`
+            });
 
-                for (const line of lines) {
-                    if (line.trim() === "") continue;
-                    try {
-                        const parsed = JSON.parse(line);
-                        handleStreamUpdate(parsed);
-                    } catch (e) {
-                        // Vercel生产环境日志: 流式响应JSON解析失败
-                        console.error("[CLIENT_ERROR] Failed to parse stream JSON line.", {
-                            line,
-                            error: e instanceof Error ? e.message : String(e)
-                        });
-                    }
-                }
+            if (responseData.colorAnalysis && responseData.colorAnalysis.colorSchemes) {
+                addAILog({ type: 'info', message: t('aiLogs.stream.foundSchemes', { count: responseData.colorAnalysis.colorSchemes.length }) });
+
+                // 立即开始配色方案生成
+                setTimeout(() => {
+                    generateColorSchemes(responseData);
+                }, 100);
+            } else {
+                addAILog({ type: 'error', message: t('aiLogs.error.baseDataFormat') });
             }
 
             setIsStreaming(false);
@@ -557,78 +563,7 @@ export default function GenerateClientNew() {
         }
     };
 
-    const handleStreamUpdate = (update: any) => {
-        if (update.type === 'progress') {
-            addAILog({ type: 'progress', message: t(update.message || 'aiLogs.stream.unknownProgress') });
-        } else if (update.type === 'stream_content') {
-            setStreamingContent(prev => prev + (update.content || ''));
-            // 减少流式内容的日志频率，避免日志过多
-            if (update.content && update.content.length > 50) {
-                addAILog({ type: 'stream_content', message: t('aiLogs.stream.generatingContent'), content: update.content.substring(0, 50) + '...' });
-            }
-        } else if (update.type === 'retry') {
-            addAILog({
-                type: 'retry',
-                message: t(update.message || 'aiLogs.stream.retrying', { attempt: update.attempt, maxAttempts: update.maxAttempts }),
-                attempt: update.attempt,
-                maxAttempts: update.maxAttempts
-            });
-        } else if (update.type === 'complete' && update.data) {
-            // 立即更新aiResponse状态
-            setAiResponse(update.data);
-            addAILog({ type: 'success', message: t('aiLogs.stream.baseDataReceived') });
 
-            // 调试：显示数据结构
-            addAILog({
-                type: 'info', message: `${JSON.stringify({
-                    hasData: !!update.data,
-                    hasColorAnalysis: !!update.data.colorAnalysis,
-                    hasColorSchemes: !!(update.data.colorAnalysis && update.data.colorAnalysis.colorSchemes),
-                    schemesCount: update.data.colorAnalysis?.colorSchemes?.length || 0
-                })
-                    }`
-            });
-
-            if (update.data.colorAnalysis && update.data.colorAnalysis.colorSchemes) {
-                addAILog({ type: 'info', message: t('aiLogs.stream.foundSchemes', { count: update.data.colorAnalysis.colorSchemes.length }) });
-
-                // 立即开始配色方案生成，不等待状态更新
-                setTimeout(() => {
-                    generateColorSchemes(update.data);
-                }, 100);
-            } else {
-                addAILog({ type: 'error', message: t('aiLogs.error.baseDataFormat') });
-                setIsError(true);
-            }
-        } else if (update.type === 'error') {
-            setIsError(true);
-
-            // 优先使用原始的、未经翻译的message字段，如果它存在的话
-            const finalMessage = update.message && !update.message.includes('.')
-                ? update.message
-                : t(update.message || 'aiLogs.error.unknown', { error: update.error });
-
-
-            // 检测是否是JSON格式错误
-            const isJsonError = finalMessage && (
-                finalMessage.toLowerCase().includes('json') ||
-                finalMessage.toLowerCase().includes('parse') ||
-                finalMessage.toLowerCase().includes('format')
-            );
-
-            if (isJsonError) {
-                setIsJsonFormatError(true);
-                addAILog({ type: 'error', message: t('aiLogs.error.jsonFormat') });
-            }
-
-            addAILog({
-                type: 'error',
-                message: finalMessage,
-                error: update.error ? (t(update.error) || update.error) : 'No details',
-                rawResponse: update.rawResponse
-            });
-        }
-    };
 
     const retryTask = async (theory: string, task: string) => {
         if (!aiResponse || !aiResponse.colorAnalysis || !aiResponse.colorAnalysis.colorSchemes) {
